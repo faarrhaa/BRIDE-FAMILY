@@ -59,6 +59,11 @@ body{
 @keyframes endingDrift{0%{transform:translateY(20px) scale(.8);opacity:0}15%{opacity:.6}85%{opacity:.6}100%{transform:translateY(-120px) scale(.3);opacity:0}}
 
 .fade-section{opacity:0;animation:fadeUp 1s cubic-bezier(.215,.61,.355,1) forwards;}
+@keyframes slideFromLeft{from{opacity:0;transform:translateX(-140px);}to{opacity:1;transform:translateX(0);}}
+@keyframes slideFromRight{from{opacity:0;transform:translateX(140px);}to{opacity:1;transform:translateX(0);}}
+.slide-name{opacity:0;}
+.slide-name.slide-left{animation:slideFromLeft 1s cubic-bezier(.215,.61,.355,1) forwards;}
+.slide-name.slide-right{animation:slideFromRight 1s cubic-bezier(.215,.61,.355,1) forwards;}
 .petal{position:absolute;width:8px;height:13px;border-radius:50% 50% 50% 50%/60% 60% 40% 40%;opacity:0;animation:petalDrift linear infinite;pointer-events:none;}
 .confetti-piece{position:fixed;width:8px;height:8px;border-radius:2px;animation:confettiFall linear forwards;pointer-events:none;z-index:9998;}
 
@@ -929,11 +934,11 @@ body{
     </div>
 
     <div style="position:relative;display:inline-block;">
-      <h1 class="fade-section name-shimmer" id="name-nada" data-text="Nada" style="font-family:'Pinyon Script',cursive;font-size:clamp(72px,16vw,120px);color:var(--dark);line-height:1;animation-delay:.1s;cursor:default;text-shadow:0 2px 8px rgba(184,134,11,.15);"></h1>
+      <h1 class="name-shimmer slide-name" id="name-nada" data-text="Nada" style="font-family:'Pinyon Script',cursive;font-size:clamp(72px,16vw,120px);color:var(--dark);line-height:1;cursor:default;text-shadow:0 2px 8px rgba(184,134,11,.15);">Nada</h1>
     </div>
     <div class="fade-section" style="font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(30px,6vw,48px);color:var(--gold);animation-delay:.18s;">&amp;</div>
     <div style="position:relative;display:inline-block;">
-      <h1 class="fade-section name-shimmer" id="name-ahmed" data-text="Ahmed" style="font-family:'Pinyon Script',cursive;font-size:clamp(72px,16vw,120px);color:var(--dark);line-height:1;animation-delay:.26s;cursor:default;text-shadow:0 2px 8px rgba(184,134,11,.15);"></h1>
+      <h1 class="name-shimmer slide-name" id="name-ahmed" data-text="Ahmed" style="font-family:'Pinyon Script',cursive;font-size:clamp(72px,16vw,120px);color:var(--dark);line-height:1;cursor:default;text-shadow:0 2px 8px rgba(184,134,11,.15);">Ahmed</h1>
     </div>
 
     <div class="fade-section" style="animation-delay:.34s;margin:12px 0 22px;">
@@ -1660,34 +1665,17 @@ function openEnvelope(){
   },700);
 }
 
-/* ═══ TYPEWRITER NAME REVEAL ═══ */
-function typeWriterEffect(el,text,speed,callback){
-  el.textContent='';
-  const cursor=document.createElement('span');
-  cursor.className='typing-cursor';
-  el.appendChild(cursor);
-  let i=0;
-  (function step(){
-    if(i<text.length){
-      cursor.insertAdjacentText('beforebegin',text.charAt(i));
-      i++;
-      setTimeout(step,speed);
-    } else {
-      setTimeout(()=>{cursor.remove();if(callback)callback();},650);
-    }
-  })();
-}
+/* ═══ SLIDE-IN NAME REVEAL ═══ */
 function typeNames(){
   const nada=document.getElementById('name-nada');
   const ahmed=document.getElementById('name-ahmed');
   if(!nada||!ahmed)return;
-  const nadaText=nada.getAttribute('data-text')||'';
-  const ahmedText=ahmed.getAttribute('data-text')||'';
   setTimeout(()=>{
-    typeWriterEffect(nada,nadaText,140,()=>{
-      typeWriterEffect(ahmed,ahmedText,140);
-    });
+    nada.classList.add('slide-left');
   },350);
+  setTimeout(()=>{
+    ahmed.classList.add('slide-right');
+  },500);
 }
 
 /* ═══ CINEMATIC COUNTDOWN ═══ */
