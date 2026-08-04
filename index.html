@@ -7,7 +7,7 @@
 <meta name="description" content="You are cordially invited to the wedding of Nada & Ahmed on September 18, 2026 at Four Seasons Hotel San Stefano."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
-<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400;1,600&family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,600&family=Pinyon+Script&family=Great+Vibes&display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,600&family=Pinyon+Script&family=Great+Vibes&display=swap" rel="stylesheet"/>
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
 :root{
@@ -20,6 +20,7 @@ html{scroll-behavior:smooth;}
 
 body{
   font-family:'Cormorant Garamond',Georgia,serif;
+  font-weight:500;
   background:#1a0e00;
   overflow-x:hidden;
   position:relative;
@@ -128,11 +129,23 @@ body{
 #envelope-screen{min-height:100vh;min-height:100dvh;background:linear-gradient(160deg,var(--cream) 0%,var(--cream2) 50%,var(--ivory) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;position:relative;overflow:hidden;padding:20px;}
 #env-wrap{animation:floatEnv 4s ease-in-out infinite;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;z-index:2;width:100%;height:100%;max-width:100vw;}
 #env-wrap.closing{animation:envClose .65s cubic-bezier(.4,0,.6,1) forwards!important;}
-#envelope-svg{width:min(92vw, calc(78vh * 1.4545));height:auto;max-height:78vh;filter:drop-shadow(0 8px 32px rgba(184,134,11,.35));}
+#envelope-photo-wrap{position:relative;display:inline-flex;align-items:flex-end;justify-content:center;}
+#envelope-photo{width:min(88vw, 78vh);height:auto;max-height:78vh;object-fit:contain;filter:drop-shadow(0 8px 32px rgba(184,134,11,.35));}
+#envelope-click-label{position:absolute;bottom:8%;left:50%;transform:translateX(-50%);color:var(--gold);font-family:'Cinzel',serif;font-size:clamp(11px,1.8vh,14px);letter-spacing:5px;text-transform:uppercase;text-shadow:0 1px 6px rgba(255,255,255,.85),0 0 2px rgba(255,255,255,.6);animation:shimmerGold 2.5s ease-in-out infinite;white-space:nowrap;pointer-events:none;}
+
+#light-beam{position:absolute;left:50%;top:50%;width:30px;height:30px;transform:translate(-50%,-50%) scale(0);border-radius:50%;background:radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,250,230,.95) 25%, rgba(255,236,179,.5) 50%, rgba(255,236,179,0) 72%);opacity:0;pointer-events:none;z-index:5;filter:blur(1px);}
+#light-beam.beaming{animation:beamGrow 2.5s cubic-bezier(.45,0,.55,1) forwards;}
+@keyframes beamGrow{0%{transform:translate(-50%,-50%) scale(0);opacity:0;}20%{opacity:1;}100%{transform:translate(-50%,-50%) scale(70);opacity:1;}}
+
+#white-flash{position:fixed;inset:0;background:#fffdf6;opacity:0;z-index:99999;pointer-events:none;}
+#white-flash.flash-in{animation:flashIn 1.6s ease-in forwards;}
+#white-flash.flash-out{animation:flashOut 1s ease-out forwards;}
+@keyframes flashIn{from{opacity:0;}to{opacity:1;}}
+@keyframes flashOut{from{opacity:1;}to{opacity:0;}}
 
 @media (max-width:768px){
   #envelope-screen{padding:0;}
-  #envelope-svg{width:auto;height:min(92dvh, calc(96vw / 1.4545));max-width:96vw;max-height:92dvh;}
+  #envelope-photo{width:auto;height:min(88dvh, 96vw);max-width:96vw;max-height:88dvh;}
 }
 
 /* ── SCROLL / DATE REVEAL ── */
@@ -547,7 +560,7 @@ body{
 .prog-title{
   font-family:'Playfair Display',serif;
   font-size:clamp(15px,2.6vw,18px);
-  color:var(--dark);font-weight:400;
+  color:var(--dark);font-weight:600;
   font-style:italic;
   margin-bottom:5px;line-height:1.3;
 }
@@ -661,6 +674,7 @@ body{
 .guest-name-item .guest-text{
   font-family:'Cormorant Garamond',Georgia,serif;
   font-size:15px;
+  font-weight:700;
   color:var(--text);
   letter-spacing:.5px;
 }
@@ -968,31 +982,22 @@ body{
 </audio>
 <button id="music-btn" onclick="toggleMusic()" title="Toggle music" aria-label="Toggle background music">🔇</button>
 
+<div id="white-flash"></div>
+
 <!-- ══ ENVELOPE ══ -->
 <div id="envelope-screen" onclick="openEnvelope()" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')openEnvelope()">
   <div id="stars-env"></div>
   <div id="shooting-stars-container"></div>
   <div id="petals-env"></div>
   <div id="env-wrap">
-    <svg id="envelope-svg" viewBox="0 0 320 220">
-      <rect x="10" y="60" width="300" height="150" rx="6" fill="#fdf8ee" stroke="#b8860b" stroke-width="1.5"/>
-      <rect x="18" y="68" width="284" height="134" rx="4" fill="none" stroke="#b8860b" stroke-width=".5" opacity=".5"/>
-      <path d="M10 60 L160 148 L310 60 Z" fill="#f5ead0" stroke="#b8860b" stroke-width="1"/>
-      <path d="M10 210 L160 138 L310 210" fill="none" stroke="#b8860b" stroke-width=".8" opacity=".5"/>
-      <circle cx="18" cy="68" r="5" fill="#8b1a2f"/><circle cx="18" cy="68" r="2.5" fill="#c9324c"/>
-      <circle cx="302" cy="68" r="5" fill="#8b1a2f"/><circle cx="302" cy="68" r="2.5" fill="#c9324c"/>
-      <circle cx="18" cy="202" r="5" fill="#8b1a2f"/><circle cx="18" cy="202" r="2.5" fill="#c9324c"/>
-      <circle cx="302" cy="202" r="5" fill="#8b1a2f"/><circle cx="302" cy="202" r="2.5" fill="#c9324c"/>
-      <circle cx="10" cy="60" r="4" fill="#f0e8d0" stroke="#b8860b" stroke-width="1"/>
-      <circle cx="310" cy="60" r="4" fill="#f0e8d0" stroke="#b8860b" stroke-width="1"/>
-      <circle cx="160" cy="155" r="24" fill="#b8860b"/>
-      <circle cx="160" cy="155" r="20" fill="#8b6914"/>
-      <text x="160" y="161" text-anchor="middle" font-size="12" fill="#fdf8ee" font-family="Cormorant Garamond,Georgia,serif" font-style="italic" font-weight="600">N &amp; A</text>
-    </svg>
+    <div id="envelope-photo-wrap">
+      <div id="light-beam"></div>
+      <img id="envelope-photo" src="env.png" alt="Wedding envelope" onerror="if(this.src.indexOf('env.png')>-1){this.src='env.jpg';}else if(this.src.indexOf('env.jpg')>-1){this.src='env.jpeg';}else{this.onerror=null;}">
+      <div id="envelope-click-label">✦ Click to open ✦</div>
+    </div>
 
     <div style="margin-top:clamp(14px,3vh,28px);text-align:center;">
       <div style="font-family:'Cinzel',serif;font-size:clamp(18px,3.5vh,26px);color:var(--dark);letter-spacing:6px;">Nada &amp; Ahmed</div>
-      <div style="margin-top:clamp(18px,3vh,32px);color:var(--gold);font-family:'Cinzel',serif;font-size:clamp(11px,1.6vh,13px);letter-spacing:5px;text-transform:uppercase;animation:shimmerGold 2.5s ease-in-out infinite;">✦ Click to open ✦</div>
     </div>
   </div>
 </div>
@@ -1824,7 +1829,11 @@ function openEnvelope(){
   if(envelopeOpened) return;
   envelopeOpened=true;
   const wrap=document.getElementById('env-wrap');wrap.style.animation='none';wrap.offsetHeight;
-  wrap.classList.add('closing');spawnConfetti();
+  wrap.classList.add('closing');
+
+  /* Light beam grows from envelope */
+  const beam=document.getElementById('light-beam');
+  beam.classList.add('beaming');
 
   /* Start music */
   bgm.volume=0;
@@ -1836,12 +1845,25 @@ function openEnvelope(){
     const btn=document.getElementById('music-btn');btn.style.display='flex';btn.textContent='🔇';muted=true;musicStarted=false;
   });
 
+  /* Screen brightens to full white as the beam expands */
+  const flash=document.getElementById('white-flash');
+  setTimeout(()=>{ flash.classList.add('flash-in'); },900);
+
+  /* Once fully white (~2.5s in), swap to the invitation underneath, then fade the white away */
   setTimeout(()=>{
     document.getElementById('envelope-screen').style.display='none';
     document.getElementById('invitation').style.display='block';
     startCountdown();renderWishes();initCinematicEnding();typeNames();
     autoScrollInvitation();
-  },700);
+    spawnConfetti();
+    flash.classList.remove('flash-in');
+    flash.classList.add('flash-out');
+  },2500);
+
+  setTimeout(()=>{
+    flash.classList.remove('flash-out');
+    flash.style.opacity='0';
+  },3500);
 }
 
 /* ═══ AUTO-SCROLL THROUGH INVITATION ═══ */
