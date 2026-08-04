@@ -16,7 +16,7 @@
   --dark:#2c1a00;--dark2:#3d2600;--brown:#5a3800;
   --ruby:#8b1a2f;--text:#3a2200;
 }
-html{scroll-behavior:smooth;}
+html{scroll-behavior:auto;}
 
 body{
   font-family:'Cormorant Garamond',Georgia,serif;
@@ -114,6 +114,29 @@ body{
 .confetti-piece{position:fixed;width:8px;height:8px;border-radius:2px;animation:confettiFall linear forwards;pointer-events:none;z-index:9998;}
 
 .gold-divider{height:1px;background:linear-gradient(90deg,transparent,var(--gold2),transparent);margin:0;}
+
+/* ── RING & RIBBON DIVIDER ── */
+.ring-divider{display:flex;align-items:center;justify-content:center;margin:0;padding:6px 0;}
+.ring-divider svg{width:100%;max-width:220px;height:auto;display:block;}
+.ring-divider .rd-line{stroke:var(--gold2);stroke-width:1;opacity:.85;}
+.ring-divider .rd-ring{fill:none;stroke:url(#rdGoldGrad);stroke-width:2.6;}
+.ring-divider .rd-ring-shadow{fill:none;stroke:rgba(58,34,0,.18);stroke-width:2.6;}
+.ring-divider .rd-ribbon{fill:var(--cream);stroke:var(--gold2);stroke-width:.6;}
+.ring-divider .rd-ribbon-shade{fill:rgba(184,134,11,.12);}
+.ring-divider .rd-knot{fill:var(--cream2);stroke:var(--gold2);stroke-width:.6;}
+
+/* ── FLOATING RINGS THROUGH INVITATION ── */
+#floating-rings-layer{position:fixed;inset:0;z-index:4;pointer-events:none;overflow:hidden;opacity:0;transition:opacity 1.2s ease;}
+#floating-rings-layer.show{opacity:1;}
+.floating-ring{position:absolute;opacity:0;animation:floatRingDrift linear infinite;}
+.floating-ring svg{width:100%;height:100%;display:block;}
+@keyframes floatRingDrift{
+  0%{transform:translateY(0) translateX(0) rotate(var(--rstart,0deg));opacity:0;}
+  8%{opacity:var(--ropac,.55);}
+  50%{transform:translateY(-52vh) translateX(var(--rdx,24px)) rotate(var(--rmid,25deg));}
+  92%{opacity:var(--ropac,.55);}
+  100%{transform:translateY(-108vh) translateX(calc(var(--rdx,24px) * 2)) rotate(var(--rend,55deg));opacity:0;}
+}
 #venue-bg{position:absolute;inset:0;background-size:cover;background-position:center;z-index:0;}
 #venue-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,15,42,.55) 0%,rgba(18,12,38,.5) 45%,rgba(15,10,32,.7) 100%);z-index:1;}
 #venue-petals{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:2;}
@@ -963,7 +986,7 @@ body{
   .wi-caption-title { font-size: 9px; letter-spacing: 2px; }
 }
 
-@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;}.petal,.confetti-piece,#shooting-stars-container,.ending-stars>div,.ending-particles>div,#venue-petals>div{display:none!important;}}
+@media(prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms!important;animation-iteration-count:1!important;transition-duration:0.01ms!important;}.petal,.confetti-piece,#shooting-stars-container,.ending-stars>div,.ending-particles>div,#venue-petals>div,.floating-ring{display:none!important;}}
 </style>
 </head>
 <body>
@@ -971,6 +994,18 @@ body{
 <div id="page-bg"></div>
 <div id="page-overlay"></div>
 <div class="grain"></div>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="rdGoldGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#f5e2a0"/>
+      <stop offset="45%" stop-color="#d4a843"/>
+      <stop offset="100%" stop-color="#b8860b"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<div id="floating-rings-layer"></div>
 
 <div id="loading-screen">
   <div style="text-align:center;">
@@ -1128,7 +1163,22 @@ body{
     <div style="margin-top:24px;"><a class="save-date-btn" href="#" onclick="saveDate(event)">📅 &nbsp; Save the Date</a></div>
   </section>
 
-  <div class="gold-divider"></div>
+  <div class="ring-divider">
+<svg viewBox="0 0 220 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <line class="rd-line" x1="0" y1="27" x2="76" y2="27"/>
+  <line class="rd-line" x1="144" y1="27" x2="220" y2="27"/>
+  <path class="rd-ribbon-shade" d="M104,20 C98,28 92,34 85,42 L92,45 L100,36 C104,31 107,25 109,20 Z"/>
+  <path class="rd-ribbon-shade" d="M116,20 C122,28 128,34 135,42 L128,45 L120,36 C116,31 113,25 111,20 Z"/>
+  <path class="rd-ribbon" d="M106,19 C100,27 94,33 87,41 L93,44 L101,35 C105,30 108,24 110,19 Z"/>
+  <path class="rd-ribbon" d="M114,19 C120,27 126,33 133,41 L127,44 L119,35 C115,30 112,24 110,19 Z"/>
+  <circle class="rd-ring-shadow" cx="103" cy="27" r="11"/>
+  <circle class="rd-ring" cx="118" cy="27" r="11"/>
+  <circle class="rd-ring" cx="103" cy="27" r="11"/>
+  <path class="rd-ribbon" d="M110,17 C101,9 90,11 91,19 C92,25 101,24 110,18 Z"/>
+  <path class="rd-ribbon" d="M110,17 C119,9 130,11 129,19 C128,25 119,24 110,18 Z"/>
+  <circle class="rd-knot" cx="110" cy="18" r="3.4"/>
+</svg>
+</div>
 
   <!-- ═══ QURAN VERSE ═══ -->
   <section style="text-align:center;padding:44px 24px;">
@@ -1136,7 +1186,22 @@ body{
     <p style="font-family:'Cinzel',serif;font-size:12px;color:var(--gold);margin-top:14px;letter-spacing:4px;">— القرآن ٣٠:٢١</p>
   </section>
 
-  <div class="gold-divider"></div>
+  <div class="ring-divider">
+<svg viewBox="0 0 220 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <line class="rd-line" x1="0" y1="27" x2="76" y2="27"/>
+  <line class="rd-line" x1="144" y1="27" x2="220" y2="27"/>
+  <path class="rd-ribbon-shade" d="M104,20 C98,28 92,34 85,42 L92,45 L100,36 C104,31 107,25 109,20 Z"/>
+  <path class="rd-ribbon-shade" d="M116,20 C122,28 128,34 135,42 L128,45 L120,36 C116,31 113,25 111,20 Z"/>
+  <path class="rd-ribbon" d="M106,19 C100,27 94,33 87,41 L93,44 L101,35 C105,30 108,24 110,19 Z"/>
+  <path class="rd-ribbon" d="M114,19 C120,27 126,33 133,41 L127,44 L119,35 C115,30 112,24 110,19 Z"/>
+  <circle class="rd-ring-shadow" cx="103" cy="27" r="11"/>
+  <circle class="rd-ring" cx="118" cy="27" r="11"/>
+  <circle class="rd-ring" cx="103" cy="27" r="11"/>
+  <path class="rd-ribbon" d="M110,17 C101,9 90,11 91,19 C92,25 101,24 110,18 Z"/>
+  <path class="rd-ribbon" d="M110,17 C119,9 130,11 129,19 C128,25 119,24 110,18 Z"/>
+  <circle class="rd-knot" cx="110" cy="18" r="3.4"/>
+</svg>
+</div>
 
   <!-- ═══ CINEMATIC COUNTDOWN ═══ -->
   <section style="text-align:center;padding:56px 24px;">
@@ -1164,7 +1229,22 @@ body{
     </div>
   </section>
 
-  <div class="gold-divider"></div>
+  <div class="ring-divider">
+<svg viewBox="0 0 220 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <line class="rd-line" x1="0" y1="27" x2="76" y2="27"/>
+  <line class="rd-line" x1="144" y1="27" x2="220" y2="27"/>
+  <path class="rd-ribbon-shade" d="M104,20 C98,28 92,34 85,42 L92,45 L100,36 C104,31 107,25 109,20 Z"/>
+  <path class="rd-ribbon-shade" d="M116,20 C122,28 128,34 135,42 L128,45 L120,36 C116,31 113,25 111,20 Z"/>
+  <path class="rd-ribbon" d="M106,19 C100,27 94,33 87,41 L93,44 L101,35 C105,30 108,24 110,19 Z"/>
+  <path class="rd-ribbon" d="M114,19 C120,27 126,33 133,41 L127,44 L119,35 C115,30 112,24 110,19 Z"/>
+  <circle class="rd-ring-shadow" cx="103" cy="27" r="11"/>
+  <circle class="rd-ring" cx="118" cy="27" r="11"/>
+  <circle class="rd-ring" cx="103" cy="27" r="11"/>
+  <path class="rd-ribbon" d="M110,17 C101,9 90,11 91,19 C92,25 101,24 110,18 Z"/>
+  <path class="rd-ribbon" d="M110,17 C119,9 130,11 129,19 C128,25 119,24 110,18 Z"/>
+  <circle class="rd-knot" cx="110" cy="18" r="3.4"/>
+</svg>
+</div>
 
   <!-- VENUE PARALLAX & MAP -->
   <section id="venue-section" class="reveal-section" style="position:relative;min-height:500px;overflow:hidden;display:flex;align-items:center;justify-content:center;border:none;padding:0;">
@@ -1185,7 +1265,22 @@ body{
     </div>
   </section>
 
-  <div class="gold-divider"></div>
+  <div class="ring-divider">
+<svg viewBox="0 0 220 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <line class="rd-line" x1="0" y1="27" x2="76" y2="27"/>
+  <line class="rd-line" x1="144" y1="27" x2="220" y2="27"/>
+  <path class="rd-ribbon-shade" d="M104,20 C98,28 92,34 85,42 L92,45 L100,36 C104,31 107,25 109,20 Z"/>
+  <path class="rd-ribbon-shade" d="M116,20 C122,28 128,34 135,42 L128,45 L120,36 C116,31 113,25 111,20 Z"/>
+  <path class="rd-ribbon" d="M106,19 C100,27 94,33 87,41 L93,44 L101,35 C105,30 108,24 110,19 Z"/>
+  <path class="rd-ribbon" d="M114,19 C120,27 126,33 133,41 L127,44 L119,35 C115,30 112,24 110,19 Z"/>
+  <circle class="rd-ring-shadow" cx="103" cy="27" r="11"/>
+  <circle class="rd-ring" cx="118" cy="27" r="11"/>
+  <circle class="rd-ring" cx="103" cy="27" r="11"/>
+  <path class="rd-ribbon" d="M110,17 C101,9 90,11 91,19 C92,25 101,24 110,18 Z"/>
+  <path class="rd-ribbon" d="M110,17 C119,9 130,11 129,19 C128,25 119,24 110,18 Z"/>
+  <circle class="rd-knot" cx="110" cy="18" r="3.4"/>
+</svg>
+</div>
 
   <!-- ═══ OUR STORY ═══ -->
   <section id="story-section" style="text-align:center;padding:48px 24px;">
@@ -1199,7 +1294,22 @@ body{
     </div>
   </section>
 
-  <div class="gold-divider"></div>
+  <div class="ring-divider">
+<svg viewBox="0 0 220 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <line class="rd-line" x1="0" y1="27" x2="76" y2="27"/>
+  <line class="rd-line" x1="144" y1="27" x2="220" y2="27"/>
+  <path class="rd-ribbon-shade" d="M104,20 C98,28 92,34 85,42 L92,45 L100,36 C104,31 107,25 109,20 Z"/>
+  <path class="rd-ribbon-shade" d="M116,20 C122,28 128,34 135,42 L128,45 L120,36 C116,31 113,25 111,20 Z"/>
+  <path class="rd-ribbon" d="M106,19 C100,27 94,33 87,41 L93,44 L101,35 C105,30 108,24 110,19 Z"/>
+  <path class="rd-ribbon" d="M114,19 C120,27 126,33 133,41 L127,44 L119,35 C115,30 112,24 110,19 Z"/>
+  <circle class="rd-ring-shadow" cx="103" cy="27" r="11"/>
+  <circle class="rd-ring" cx="118" cy="27" r="11"/>
+  <circle class="rd-ring" cx="103" cy="27" r="11"/>
+  <path class="rd-ribbon" d="M110,17 C101,9 90,11 91,19 C92,25 101,24 110,18 Z"/>
+  <path class="rd-ribbon" d="M110,17 C119,9 130,11 129,19 C128,25 119,24 110,18 Z"/>
+  <circle class="rd-knot" cx="110" cy="18" r="3.4"/>
+</svg>
+</div>
 
   <!-- ═══ EVENING PROGRAM ═══ -->
   <section class="program-section">
@@ -1261,7 +1371,22 @@ body{
     </div>
   </section>
 
-  <div class="gold-divider"></div>
+  <div class="ring-divider">
+<svg viewBox="0 0 220 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <line class="rd-line" x1="0" y1="27" x2="76" y2="27"/>
+  <line class="rd-line" x1="144" y1="27" x2="220" y2="27"/>
+  <path class="rd-ribbon-shade" d="M104,20 C98,28 92,34 85,42 L92,45 L100,36 C104,31 107,25 109,20 Z"/>
+  <path class="rd-ribbon-shade" d="M116,20 C122,28 128,34 135,42 L128,45 L120,36 C116,31 113,25 111,20 Z"/>
+  <path class="rd-ribbon" d="M106,19 C100,27 94,33 87,41 L93,44 L101,35 C105,30 108,24 110,19 Z"/>
+  <path class="rd-ribbon" d="M114,19 C120,27 126,33 133,41 L127,44 L119,35 C115,30 112,24 110,19 Z"/>
+  <circle class="rd-ring-shadow" cx="103" cy="27" r="11"/>
+  <circle class="rd-ring" cx="118" cy="27" r="11"/>
+  <circle class="rd-ring" cx="103" cy="27" r="11"/>
+  <path class="rd-ribbon" d="M110,17 C101,9 90,11 91,19 C92,25 101,24 110,18 Z"/>
+  <path class="rd-ribbon" d="M110,17 C119,9 130,11 129,19 C128,25 119,24 110,18 Z"/>
+  <circle class="rd-knot" cx="110" cy="18" r="3.4"/>
+</svg>
+</div>
 
   <!-- ═══ YOUR TABLE ASSIGNMENT ═══ -->
   <section class="seating-section">
@@ -1375,7 +1500,22 @@ body{
     <img src="Table1.png" alt="Your Table — Table 1 Highlighted, zoomed" style="max-width:100%;max-height:100%;border-radius:10px;border:1px solid rgba(184,134,11,.4);box-shadow:0 20px 60px rgba(0,0,0,0.5);touch-action:pinch-zoom;" />
   </div>
 
-  <div class="gold-divider"></div>
+  <div class="ring-divider">
+<svg viewBox="0 0 220 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <line class="rd-line" x1="0" y1="27" x2="76" y2="27"/>
+  <line class="rd-line" x1="144" y1="27" x2="220" y2="27"/>
+  <path class="rd-ribbon-shade" d="M104,20 C98,28 92,34 85,42 L92,45 L100,36 C104,31 107,25 109,20 Z"/>
+  <path class="rd-ribbon-shade" d="M116,20 C122,28 128,34 135,42 L128,45 L120,36 C116,31 113,25 111,20 Z"/>
+  <path class="rd-ribbon" d="M106,19 C100,27 94,33 87,41 L93,44 L101,35 C105,30 108,24 110,19 Z"/>
+  <path class="rd-ribbon" d="M114,19 C120,27 126,33 133,41 L127,44 L119,35 C115,30 112,24 110,19 Z"/>
+  <circle class="rd-ring-shadow" cx="103" cy="27" r="11"/>
+  <circle class="rd-ring" cx="118" cy="27" r="11"/>
+  <circle class="rd-ring" cx="103" cy="27" r="11"/>
+  <path class="rd-ribbon" d="M110,17 C101,9 90,11 91,19 C92,25 101,24 110,18 Z"/>
+  <path class="rd-ribbon" d="M110,17 C119,9 130,11 129,19 C128,25 119,24 110,18 Z"/>
+  <circle class="rd-knot" cx="110" cy="18" r="3.4"/>
+</svg>
+</div>
 
   <!-- ═══ DRESS CODE · WARDROBE ═══ -->
   <section class="dress-code-section">
@@ -1542,7 +1682,22 @@ body{
 
   </section>
 
-  <div class="gold-divider"></div>
+  <div class="ring-divider">
+<svg viewBox="0 0 220 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <line class="rd-line" x1="0" y1="27" x2="76" y2="27"/>
+  <line class="rd-line" x1="144" y1="27" x2="220" y2="27"/>
+  <path class="rd-ribbon-shade" d="M104,20 C98,28 92,34 85,42 L92,45 L100,36 C104,31 107,25 109,20 Z"/>
+  <path class="rd-ribbon-shade" d="M116,20 C122,28 128,34 135,42 L128,45 L120,36 C116,31 113,25 111,20 Z"/>
+  <path class="rd-ribbon" d="M106,19 C100,27 94,33 87,41 L93,44 L101,35 C105,30 108,24 110,19 Z"/>
+  <path class="rd-ribbon" d="M114,19 C120,27 126,33 133,41 L127,44 L119,35 C115,30 112,24 110,19 Z"/>
+  <circle class="rd-ring-shadow" cx="103" cy="27" r="11"/>
+  <circle class="rd-ring" cx="118" cy="27" r="11"/>
+  <circle class="rd-ring" cx="103" cy="27" r="11"/>
+  <path class="rd-ribbon" d="M110,17 C101,9 90,11 91,19 C92,25 101,24 110,18 Z"/>
+  <path class="rd-ribbon" d="M110,17 C119,9 130,11 129,19 C128,25 119,24 110,18 Z"/>
+  <circle class="rd-knot" cx="110" cy="18" r="3.4"/>
+</svg>
+</div>
 
   <!-- ═══ VOICE NOTE ═══ -->
   <section class="voice-note-section">
@@ -1569,7 +1724,22 @@ body{
     </div>
   </section>
 
-  <div class="gold-divider"></div>
+  <div class="ring-divider">
+<svg viewBox="0 0 220 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <line class="rd-line" x1="0" y1="27" x2="76" y2="27"/>
+  <line class="rd-line" x1="144" y1="27" x2="220" y2="27"/>
+  <path class="rd-ribbon-shade" d="M104,20 C98,28 92,34 85,42 L92,45 L100,36 C104,31 107,25 109,20 Z"/>
+  <path class="rd-ribbon-shade" d="M116,20 C122,28 128,34 135,42 L128,45 L120,36 C116,31 113,25 111,20 Z"/>
+  <path class="rd-ribbon" d="M106,19 C100,27 94,33 87,41 L93,44 L101,35 C105,30 108,24 110,19 Z"/>
+  <path class="rd-ribbon" d="M114,19 C120,27 126,33 133,41 L127,44 L119,35 C115,30 112,24 110,19 Z"/>
+  <circle class="rd-ring-shadow" cx="103" cy="27" r="11"/>
+  <circle class="rd-ring" cx="118" cy="27" r="11"/>
+  <circle class="rd-ring" cx="103" cy="27" r="11"/>
+  <path class="rd-ribbon" d="M110,17 C101,9 90,11 91,19 C92,25 101,24 110,18 Z"/>
+  <path class="rd-ribbon" d="M110,17 C119,9 130,11 129,19 C128,25 119,24 110,18 Z"/>
+  <circle class="rd-knot" cx="110" cy="18" r="3.4"/>
+</svg>
+</div>
 
   <section style="text-align:center;padding:56px 24px;">
     <p class="tagline" style="color:var(--gold);margin-bottom:10px;">A Message for You</p>
@@ -1588,7 +1758,22 @@ body{
     </div>
   </section>
 
-  <div class="gold-divider"></div>
+  <div class="ring-divider">
+<svg viewBox="0 0 220 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <line class="rd-line" x1="0" y1="27" x2="76" y2="27"/>
+  <line class="rd-line" x1="144" y1="27" x2="220" y2="27"/>
+  <path class="rd-ribbon-shade" d="M104,20 C98,28 92,34 85,42 L92,45 L100,36 C104,31 107,25 109,20 Z"/>
+  <path class="rd-ribbon-shade" d="M116,20 C122,28 128,34 135,42 L128,45 L120,36 C116,31 113,25 111,20 Z"/>
+  <path class="rd-ribbon" d="M106,19 C100,27 94,33 87,41 L93,44 L101,35 C105,30 108,24 110,19 Z"/>
+  <path class="rd-ribbon" d="M114,19 C120,27 126,33 133,41 L127,44 L119,35 C115,30 112,24 110,19 Z"/>
+  <circle class="rd-ring-shadow" cx="103" cy="27" r="11"/>
+  <circle class="rd-ring" cx="118" cy="27" r="11"/>
+  <circle class="rd-ring" cx="103" cy="27" r="11"/>
+  <path class="rd-ribbon" d="M110,17 C101,9 90,11 91,19 C92,25 101,24 110,18 Z"/>
+  <path class="rd-ribbon" d="M110,17 C119,9 130,11 129,19 C128,25 119,24 110,18 Z"/>
+  <circle class="rd-knot" cx="110" cy="18" r="3.4"/>
+</svg>
+</div>
 
   <!-- ═══ WISHES WALL ═══ -->
   <section id="wishes-section" style="text-align:center; padding-top: 72px;">
@@ -1610,7 +1795,22 @@ body{
     <div class="wishes-board" id="wishes-board"></div>
   </section>
 
-  <div class="gold-divider"></div>
+  <div class="ring-divider">
+<svg viewBox="0 0 220 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <line class="rd-line" x1="0" y1="27" x2="76" y2="27"/>
+  <line class="rd-line" x1="144" y1="27" x2="220" y2="27"/>
+  <path class="rd-ribbon-shade" d="M104,20 C98,28 92,34 85,42 L92,45 L100,36 C104,31 107,25 109,20 Z"/>
+  <path class="rd-ribbon-shade" d="M116,20 C122,28 128,34 135,42 L128,45 L120,36 C116,31 113,25 111,20 Z"/>
+  <path class="rd-ribbon" d="M106,19 C100,27 94,33 87,41 L93,44 L101,35 C105,30 108,24 110,19 Z"/>
+  <path class="rd-ribbon" d="M114,19 C120,27 126,33 133,41 L127,44 L119,35 C115,30 112,24 110,19 Z"/>
+  <circle class="rd-ring-shadow" cx="103" cy="27" r="11"/>
+  <circle class="rd-ring" cx="118" cy="27" r="11"/>
+  <circle class="rd-ring" cx="103" cy="27" r="11"/>
+  <path class="rd-ribbon" d="M110,17 C101,9 90,11 91,19 C92,25 101,24 110,18 Z"/>
+  <path class="rd-ribbon" d="M110,17 C119,9 130,11 129,19 C128,25 119,24 110,18 Z"/>
+  <circle class="rd-knot" cx="110" cy="18" r="3.4"/>
+</svg>
+</div>
 
   <!-- ═══ RSVP ═══ -->
   <section id="rsvp-section" class="rsvp-section-wrap">
@@ -1622,7 +1822,22 @@ body{
       <div style="font-family:'Great Vibes',cursive;font-size:clamp(28px,6vw,42px);color:var(--dark);margin-bottom:12px;">Nada &amp; Ahmed</div>
       <div style="font-family:'Cinzel',serif;font-size:clamp(10px,2vw,13px);color:var(--gold);letter-spacing:3px;margin-bottom:20px;">18 · SEPTEMBER · 2026</div>
       <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(13px,2.5vw,16px);color:var(--brown);margin-bottom:20px;">Four Seasons Hotel San Stefano, Alexandria</div>
-      <div class="gold-divider" style="max-width:120px;margin:0 auto 20px;"></div>
+      <div class="ring-divider" style="max-width:120px;margin:0 auto 20px;">
+<svg viewBox="0 0 220 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
+  <line class="rd-line" x1="0" y1="27" x2="76" y2="27"/>
+  <line class="rd-line" x1="144" y1="27" x2="220" y2="27"/>
+  <path class="rd-ribbon-shade" d="M104,20 C98,28 92,34 85,42 L92,45 L100,36 C104,31 107,25 109,20 Z"/>
+  <path class="rd-ribbon-shade" d="M116,20 C122,28 128,34 135,42 L128,45 L120,36 C116,31 113,25 111,20 Z"/>
+  <path class="rd-ribbon" d="M106,19 C100,27 94,33 87,41 L93,44 L101,35 C105,30 108,24 110,19 Z"/>
+  <path class="rd-ribbon" d="M114,19 C120,27 126,33 133,41 L127,44 L119,35 C115,30 112,24 110,19 Z"/>
+  <circle class="rd-ring-shadow" cx="103" cy="27" r="11"/>
+  <circle class="rd-ring" cx="118" cy="27" r="11"/>
+  <circle class="rd-ring" cx="103" cy="27" r="11"/>
+  <path class="rd-ribbon" d="M110,17 C101,9 90,11 91,19 C92,25 101,24 110,18 Z"/>
+  <path class="rd-ribbon" d="M110,17 C119,9 130,11 129,19 C128,25 119,24 110,18 Z"/>
+  <circle class="rd-knot" cx="110" cy="18" r="3.4"/>
+</svg>
+</div>
       <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(14px,2.5vw,17px);color:var(--text);margin-bottom:24px;line-height:1.7;">Your gracious presence would make our celebration truly complete.</p>
       <div style="max-width:320px;margin:0 auto 16px;text-align:left;">
         <label style="font-family:'Cinzel',serif;font-size:11px;color:var(--text);letter-spacing:2px;font-weight:bold;display:block;margin-bottom:6px;">YOUR NAME</label>
@@ -1746,6 +1961,33 @@ buildStory();
     const sz=Math.random()*2+.5,s=document.createElement('div');
     s.style.cssText=`position:absolute;width:${sz}px;height:${sz}px;border-radius:50%;background:#b8860b;left:${Math.random()*100}%;top:${Math.random()*100}%;opacity:${Math.random()*.3+.05};animation:starTwinkle ${2+Math.random()*4}s ${Math.random()*4}s ease-in-out infinite;`;
     c.appendChild(s);
+  }
+})();
+
+/* ═══ FLOATING RINGS THROUGH INVITATION ═══ */
+(function(){
+  const c=document.getElementById('floating-rings-layer');
+  const ringSVG=(op)=>`<svg viewBox="0 0 60 40" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="24" cy="20" r="11" fill="none" stroke="rgba(58,34,0,.15)" stroke-width="2.4"/>
+    <circle cx="36" cy="20" r="11" fill="none" stroke="url(#rdGoldGrad)" stroke-width="2.4" opacity="${op}"/>
+    <circle cx="24" cy="20" r="11" fill="none" stroke="url(#rdGoldGrad)" stroke-width="2.4" opacity="${op}"/>
+    <path d="M31,11 C25,4 15,6 16,13 C17,19 25,18 32,11 Z" fill="#fdf8ee" stroke="#d4a843" stroke-width=".5" opacity="${op}"/>
+    <path d="M29,11 C35,4 45,6 44,13 C43,19 35,18 28,11 Z" fill="#fdf8ee" stroke="#d4a843" stroke-width=".5" opacity="${op}"/>
+  </svg>`;
+  const count=window.innerWidth<520?7:11;
+  for(let i=0;i<count;i++){
+    const r=document.createElement('div');r.className='floating-ring';
+    const sz=22+Math.random()*20;
+    const dur=16+Math.random()*14;
+    const delay=Math.random()*20;
+    const dx=(Math.random()*40-20).toFixed(0)+'px';
+    const rstart=(Math.random()*30-15).toFixed(0)+'deg';
+    const rmid=(Math.random()*50-10).toFixed(0)+'deg';
+    const rend=(Math.random()*70).toFixed(0)+'deg';
+    const opac=(0.28+Math.random()*0.32).toFixed(2);
+    r.style.cssText=`left:${Math.random()*94}%;top:${100+Math.random()*20}%;width:${sz}px;height:${sz*0.67}px;animation-duration:${dur}s;animation-delay:${delay}s;--rdx:${dx};--rstart:${rstart};--rmid:${rmid};--rend:${rend};--ropac:${opac};`;
+    r.innerHTML=ringSVG(opac);
+    c.appendChild(r);
   }
 })();
 
@@ -1879,6 +2121,7 @@ function openEnvelope(){
   setTimeout(()=>{
     document.getElementById('envelope-screen').style.display='none';
     document.getElementById('invitation').style.display='block';
+    document.getElementById('floating-rings-layer').classList.add('show');
     startCountdown();renderWishes();initCinematicEnding();typeNames();
     autoScrollInvitation();
     spawnConfetti();
@@ -1915,11 +2158,19 @@ function autoScrollInvitation(){
     if(running)return;
     running=true;
     btn.classList.remove('show');
-    function step(){
+    let last=null;
+    function step(ts){
       if(!running)return;
-      const atBottom=(window.innerHeight+window.scrollY)>=(document.documentElement.scrollHeight-2);
+      if(last===null)last=ts;
+      const dt=Math.min(ts-last,50); /* clamp for tab-switch/throttle spikes */
+      last=ts;
+      const scrollEl=(document.scrollingElement||document.documentElement);
+      const maxScroll=scrollEl.scrollHeight-window.innerHeight;
+      const atBottom=scrollEl.scrollTop>=maxScroll-2;
       if(atBottom){stop(true);return;}
-      window.scrollBy({top:speed,left:0,behavior:'auto'});
+      const next=Math.min(scrollEl.scrollTop+speed*(dt/16.6667),maxScroll);
+      scrollEl.scrollTop=next;
+      document.body.scrollTop=next; /* iOS Safari fallback target */
       rafId=requestAnimationFrame(step);
     }
     rafId=requestAnimationFrame(step);
