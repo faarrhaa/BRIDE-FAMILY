@@ -2184,11 +2184,8 @@ function autoScrollInvitation(){
     rafId=requestAnimationFrame(step);
   }
 
-  ['wheel','touchstart','pointerdown','keydown'].forEach(evt=>
+  ['wheel','touchmove'].forEach(evt=>
     window.addEventListener(evt,()=>stop(false),{passive:true})
-  );
-  ['touchstart','pointerdown','click'].forEach(evt=>
-    btn.addEventListener(evt,(e)=>e.stopPropagation(),{passive:true})
   );
   btn.addEventListener('click',start);
 
