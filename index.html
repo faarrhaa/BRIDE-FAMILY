@@ -25,8 +25,8 @@ body{
   position:relative;
 }
 
-#page-bg{position:fixed;inset:0;z-index:0;background:#2c1a00 url('bg.png') center center / cover no-repeat;}
-#page-overlay{position:fixed;inset:0;background:rgba(253,248,238,0.65);backdrop-filter:blur(2px);z-index:1;}
+#page-bg{position:fixed;inset:0;z-index:0;background:#2c1a00 url('bg.jpg') center center / cover no-repeat;pointer-events:none;}
+#page-overlay{position:fixed;inset:0;background:rgba(253,248,238,0.32);z-index:1;pointer-events:none;}
 
 #page-wrap{
   position:relative;z-index:2;
@@ -125,9 +125,15 @@ body{
 .gold-spark{position:absolute;width:5px;height:5px;border-radius:50%;background:var(--gold);pointer-events:none;animation:goldParticle 1.2s ease-out forwards;}
 
 /* ── ENVELOPE SCREEN ── */
-#envelope-screen{min-height:100vh;background:linear-gradient(160deg,var(--cream) 0%,var(--cream2) 50%,var(--ivory) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;position:relative;overflow:hidden;padding:40px 20px;}
-#env-wrap{animation:floatEnv 4s ease-in-out infinite;display:flex;flex-direction:column;align-items:center;position:relative;z-index:2;max-width:90vw;}
+#envelope-screen{min-height:100vh;min-height:100dvh;background:linear-gradient(160deg,var(--cream) 0%,var(--cream2) 50%,var(--ivory) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;position:relative;overflow:hidden;padding:20px;}
+#env-wrap{animation:floatEnv 4s ease-in-out infinite;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;z-index:2;width:100%;height:100%;max-width:100vw;}
 #env-wrap.closing{animation:envClose .65s cubic-bezier(.4,0,.6,1) forwards!important;}
+#envelope-svg{width:min(92vw, calc(78vh * 1.4545));height:auto;max-height:78vh;filter:drop-shadow(0 8px 32px rgba(184,134,11,.35));}
+
+@media (max-width:768px){
+  #envelope-screen{padding:0;}
+  #envelope-svg{width:auto;height:min(92dvh, calc(96vw / 1.4545));max-width:96vw;max-height:92dvh;}
+}
 
 /* ── SCROLL / DATE REVEAL ── */
 .scroll-card{
@@ -213,6 +219,30 @@ body{
 }
 
 .flip-hint{margin-top:10px;font-size:clamp(8px, 2vw, 10px);letter-spacing:3px;color:var(--gold);text-transform:uppercase;font-family:'Cinzel',serif;animation:shimmerGold 2.5s ease-in-out infinite;text-align:center;}
+
+.story-card{width:min(90vw, 360px);margin:0 auto 28px;}
+.story-card .scroll-roller{width:106%;}
+.story-card .scroll-paper{width:96%;max-height:0;padding:0 18px;}
+.story-card.opened .scroll-paper{max-height:420px;padding:34px 18px;}
+.story-title{font-family:'Cinzel',serif;font-size:clamp(12px,2.6vw,15px);color:var(--gold);letter-spacing:2px;text-transform:uppercase;margin-bottom:12px;opacity:0;transform:translateY(10px);transition:opacity 0.6s ease 0.35s,transform 0.6s ease 0.35s;}
+.story-card.opened .story-title{opacity:1;transform:translateY(0);}
+.story-text{font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(14px,3vw,17px);color:var(--text);line-height:1.75;text-align:center;opacity:0;transform:translateY(10px);transition:opacity 0.6s ease 0.45s,transform 0.6s ease 0.45s;}
+.story-card.opened .story-text{opacity:1;transform:translateY(0);}
+
+/* ── OUR STORY: 3D Flip Timeline ── */
+.os-dot{width:44px;height:44px;border-radius:50%;background:var(--dark);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;z-index:1;box-shadow:0 0 0 5px var(--cream),0 0 0 6px var(--gold3);}
+.os-flip-card{flex:1;background:transparent;border:none;box-shadow:none;padding:0;height:190px;perspective:1000px;}
+.os-flip-inner{position:relative;width:100%;height:100%;text-align:center;transition:transform .65s cubic-bezier(.4,0,.2,1);transform-style:preserve-3d;cursor:pointer;}
+.os-flip-card.flipped .os-flip-inner{transform:rotateY(180deg);}
+.os-flip-front,.os-flip-back{position:absolute;inset:0;backface-visibility:hidden;border-radius:10px;border:1px solid var(--gold3);box-shadow:0 4px 15px rgba(44,26,0,.1);display:flex;flex-direction:column;justify-content:center;align-items:center;padding:20px;}
+.os-flip-front{background:var(--ivory);}
+.os-flip-back{background:linear-gradient(135deg,var(--ivory),var(--cream2));transform:rotateY(180deg);}
+@media (max-width:600px){
+  .os-row{flex-direction:column!important;align-items:center!important;}
+  .os-row .os-spacer{display:none!important;}
+  .os-dot{display:none!important;margin:0 auto!important;}
+  .os-flip-card{margin:0!important;width:100%!important;}
+}
 
 /* ── CINEMATIC COUNTDOWN ── */
 .cinematic-timeline-wrapper{display:flex;align-items:center;gap:16px;width:100%;max-width:480px;margin:30px auto;}
@@ -944,7 +974,7 @@ body{
   <div id="shooting-stars-container"></div>
   <div id="petals-env"></div>
   <div id="env-wrap">
-    <svg viewBox="0 0 320 220" style="max-width:90vw; height:auto; filter:drop-shadow(0 8px 32px rgba(184,134,11,.35))">
+    <svg id="envelope-svg" viewBox="0 0 320 220">
       <rect x="10" y="60" width="300" height="150" rx="6" fill="#fdf8ee" stroke="#b8860b" stroke-width="1.5"/>
       <rect x="18" y="68" width="284" height="134" rx="4" fill="none" stroke="#b8860b" stroke-width=".5" opacity=".5"/>
       <path d="M10 60 L160 148 L310 60 Z" fill="#f5ead0" stroke="#b8860b" stroke-width="1"/>
@@ -960,9 +990,9 @@ body{
       <text x="160" y="161" text-anchor="middle" font-size="12" fill="#fdf8ee" font-family="Cormorant Garamond,Georgia,serif" font-style="italic" font-weight="600">N &amp; A</text>
     </svg>
 
-    <div style="margin-top:18px;text-align:center;">
-      <div style="font-family:'Cinzel',serif;font-size:clamp(18px,4vw,20px);color:var(--dark);letter-spacing:6px;">Nada &amp; Ahmed</div>
-      <div style="margin-top:28px;color:var(--gold);font-family:'Cinzel',serif;font-size:11px;letter-spacing:5px;text-transform:uppercase;animation:shimmerGold 2.5s ease-in-out infinite;">✦ Click to open ✦</div>
+    <div style="margin-top:clamp(14px,3vh,28px);text-align:center;">
+      <div style="font-family:'Cinzel',serif;font-size:clamp(18px,3.5vh,26px);color:var(--dark);letter-spacing:6px;">Nada &amp; Ahmed</div>
+      <div style="margin-top:clamp(18px,3vh,32px);color:var(--gold);font-family:'Cinzel',serif;font-size:clamp(11px,1.6vh,13px);letter-spacing:5px;text-transform:uppercase;animation:shimmerGold 2.5s ease-in-out infinite;">✦ Click to open ✦</div>
     </div>
   </div>
 </div>
@@ -1121,6 +1151,20 @@ body{
       <div class="reveal-child reveal-delay-4">
         <a class="save-date-btn" href="https://maps.app.goo.gl/VUh5mxBzmfT9YQGs9" target="_blank" style="margin-top:10px;">🗺️ &nbsp; Get Directions</a>
       </div>
+    </div>
+  </section>
+
+  <div class="gold-divider"></div>
+
+  <!-- ═══ OUR STORY ═══ -->
+  <section id="story-section" style="text-align:center;padding:48px 24px;">
+    <p class="tagline" style="color:var(--gold);margin-bottom:8px;">Written in the stars</p>
+    <h2 style="font-family:'Cinzel',serif;font-size:clamp(20px,4vw,32px);color:var(--dark);margin-bottom:14px;">Our Story</h2>
+    <div style="text-align:center;margin-bottom:44px;">
+      <svg width="140" height="14" viewBox="0 0 140 14"><line x1="0" y1="7" x2="55" y2="7" stroke="var(--gold2)" stroke-width=".8"/><text x="70" y="11" text-anchor="middle" font-size="11" fill="var(--gold)" font-family="serif">♡</text><line x1="85" y1="7" x2="140" y2="7" stroke="var(--gold2)" stroke-width=".8"/></svg>
+    </div>
+    <div style="max-width:700px;margin:0 auto;position:relative;" id="story-container">
+      <div style="position:absolute;left:50%;top:0;bottom:0;width:1px;background:linear-gradient(to bottom,transparent,var(--gold3) 15%,var(--gold3) 85%,transparent);transform:translateX(-.5px);"></div>
     </div>
   </section>
 
@@ -1593,16 +1637,76 @@ body{
 <script>
 /* ═══ LOADING ═══ */
 window.addEventListener('DOMContentLoaded',()=>{
+  /* Background image fallback: prefer bg.jpg (sharp upscaled version),
+     fall back to bg.png if that file isn't present in the folder. */
+  (function(){
+    const probe=new Image();
+    probe.onerror=()=>{
+      document.getElementById('page-bg').style.backgroundImage="url('bg.png')";
+    };
+    probe.src='bg.jpg';
+  })();
+
   const minDelay=2200;const start=Date.now();
+  let hidden=false;
   const hide=()=>{
+    if(hidden)return;hidden=true;
     const elapsed=Date.now()-start;const remaining=Math.max(0,minDelay-elapsed);
     setTimeout(()=>{
       const l=document.getElementById('loading-screen');
-      if(l){l.style.opacity='0';l.style.visibility='hidden';setTimeout(()=>l.remove(),900);}
+      if(l){l.style.pointerEvents='none';l.style.opacity='0';l.style.visibility='hidden';setTimeout(()=>l.remove(),900);}
     },remaining);
   };
   if(document.fonts&&document.fonts.ready){document.fonts.ready.then(hide);}else{hide();}
+  /* Hard safety net: some mobile in-app browsers (WhatsApp/Instagram) never resolve
+     document.fonts.ready, which would leave this fixed full-screen layer blocking
+     all touch/scroll input forever. Force it closed no matter what. */
+  setTimeout(hide,4000);
 });
+
+/* ═══ OUR STORY: 3D Flip Timeline ═══ */
+const story=[
+  {icon:"✨",label:"First Glance",date:"Spring 2022",text:"Two souls crossed paths unexpectedly — a moment that quietly rewrote the rest of their story."},
+  {icon:"💌",label:"First Words",date:"Summer 2022",text:"A conversation that started with hello and never quite found its ending."},
+  {icon:"🌙",label:"Midnight Calls",date:"Autumn 2022",text:"Hours dissolved into minutes. They talked until the stars went to sleep."},
+  {icon:"💍",label:"He Asked",date:"February 2024",text:"Under a canopy of roses and candlelight, Ahmed asked Nada to share in a lifetime of dreams."},
+  {icon:"🕊️",label:"Forever",date:"September 2026",text:"And now, we invite you to witness the beginning of our forever together."},
+];
+function buildStory(){
+  const container=document.getElementById('story-container');
+  if(!container)return;
+  story.forEach((m,i)=>{
+    const isLeft=i%2===0;
+    const row=document.createElement('div');
+    row.className='os-row';
+    row.style.cssText='display:flex;align-items:center;margin-bottom:36px;gap:0;perspective:1000px;';
+
+    const frontHTML=`
+      <div style="font-size:32px;margin-bottom:8px;">${m.icon}</div>
+      <div style="font-size:11px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;font-weight:600;">${m.date}</div>
+      <div style="font-family:'Cinzel',serif;font-size:14px;color:var(--dark);font-weight:bold;">${m.label}</div>
+      <div style="font-size:11px;letter-spacing:1px;color:var(--brown);margin-top:10px;text-transform:uppercase;font-style:italic;">Click to read ♡</div>
+    `;
+    const backHTML=`
+      <div style="font-size:26px;margin-bottom:6px;">${m.icon}</div>
+      <div style="font-family:'Cinzel',serif;font-size:13px;color:var(--dark);margin-bottom:8px;border-bottom:1px dashed var(--gold3);padding-bottom:5px;width:100%;text-align:center;font-weight:bold;">${m.label}</div>
+      <p style="font-style:italic;font-size:14px;color:var(--text);line-height:1.6;margin:0;text-align:center;">${m.text}</p>
+    `;
+    const card=`
+      <div class="os-flip-card" style="${isLeft?'margin-right':'margin-left'}:28px;" onclick="this.classList.toggle('flipped')">
+        <div class="os-flip-inner">
+          <div class="os-flip-front">${frontHTML}</div>
+          <div class="os-flip-back">${backHTML}</div>
+        </div>
+      </div>
+    `;
+    const dot=`<div class="os-dot">${m.icon}</div>`;
+    const spacer=`<div class="os-spacer" style="flex:1;"></div>`;
+    row.innerHTML=isLeft?card+dot+spacer:spacer+dot+card;
+    container.appendChild(row);
+  });
+}
+buildStory();
 
 /* ═══ ENV STARS ═══ */
 (function(){
