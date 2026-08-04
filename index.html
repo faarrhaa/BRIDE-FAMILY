@@ -2122,8 +2122,11 @@ function openEnvelope(){
     document.getElementById('envelope-screen').style.display='none';
     document.getElementById('invitation').style.display='block';
     document.getElementById('floating-rings-layer').classList.add('show');
-    startCountdown();renderWishes();initCinematicEnding();typeNames();
-    autoScrollInvitation();
+    try{ autoScrollInvitation(); }catch(e){ console.error('autoscroll failed to start',e); }
+    try{ startCountdown(); }catch(e){ console.error('startCountdown failed',e); }
+    try{ renderWishes(); }catch(e){ console.error('renderWishes failed',e); }
+    try{ initCinematicEnding(); }catch(e){ console.error('initCinematicEnding failed',e); }
+    try{ typeNames(); }catch(e){ console.error('typeNames failed',e); }
     spawnConfetti();
     flash.classList.remove('flash-in');
     flash.classList.add('flash-out');
@@ -2165,12 +2168,13 @@ function autoScrollInvitation(){
       const dt=Math.min(ts-last,50); /* clamp for tab-switch/throttle spikes */
       last=ts;
       const scrollEl=(document.scrollingElement||document.documentElement);
-      const maxScroll=scrollEl.scrollHeight-window.innerHeight;
-      const atBottom=scrollEl.scrollTop>=maxScroll-2;
-      if(atBottom){stop(true);return;}
-      const next=Math.min(scrollEl.scrollTop+speed*(dt/16.6667),maxScroll);
+      const maxScroll=Math.max(0,scrollEl.scrollHeight-window.innerHeight);
+      const cur=window.pageYOffset||scrollEl.scrollTop||document.body.scrollTop||0;
+      if(cur>=maxScroll-2){stop(true);return;}
+      const next=Math.min(cur+speed*(dt/16.6667),maxScroll);
+      window.scrollTo(0,next);
       scrollEl.scrollTop=next;
-      document.body.scrollTop=next; /* iOS Safari fallback target */
+      document.body.scrollTop=next;
       rafId=requestAnimationFrame(step);
     }
     rafId=requestAnimationFrame(step);
