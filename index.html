@@ -99,7 +99,7 @@ body{
 .hero-photo-corner.br{bottom:4px;right:4px;border-left:none;border-top:none;}
 
 /* ── GALLERY ── */
-.gallery-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px 14px;max-width:560px;margin:0 auto;padding:6px 6px 0;}
+.gallery-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:26px 18px;max-width:640px;margin:0 auto;padding:6px 4px 0;}
 .gallery-item{position:relative;padding:9px;background:linear-gradient(150deg,var(--gold3),var(--gold2),var(--gold));box-shadow:0 10px 26px rgba(0,0,0,.20);border-radius:2px;cursor:zoom-in;transition:transform .25s ease,box-shadow .25s ease;}
 .gallery-item:nth-child(4n+1){transform:rotate(-1.6deg);}
 .gallery-item:nth-child(4n+2){transform:rotate(1.3deg);margin-top:18px;}
@@ -2258,6 +2258,7 @@ function autoScrollInvitation(){
   document.body.appendChild(btn);
 
   let ignoreStopUntil=0;
+  let hasMoved=false; /* becomes true once we've actually advanced the scroll at least once */
 
   function stop(atBottom){
     if(Date.now()<ignoreStopUntil)return;
@@ -2281,7 +2282,16 @@ function autoScrollInvitation(){
       const scrollEl=(document.scrollingElement||document.documentElement);
       const maxScroll=Math.max(0,scrollEl.scrollHeight-window.innerHeight);
       const cur=window.pageYOffset||scrollEl.scrollTop||document.body.scrollTop||0;
-      if(cur>=maxScroll-2){stop(true);return;}
+      /* On a fresh network load (e.g. straight from a GitHub Pages link) images/fonts
+         can still be loading, so the page's real height isn't known yet. Treat a tiny
+         maxScroll as "not ready" rather than "already at the bottom", or the auto-scroll
+         stops itself before it ever starts. */
+      if(maxScroll<80){ rafId=requestAnimationFrame(step); return; }
+      if(cur>=maxScroll-2){
+        if(hasMoved){ stop(true); return; }
+        rafId=requestAnimationFrame(step); return;
+      }
+      hasMoved=true;
       const next=Math.min(cur+speed*(dt/16.6667),maxScroll);
       window.scrollTo(0,next);
       scrollEl.scrollTop=next;
@@ -2296,7 +2306,14 @@ function autoScrollInvitation(){
   );
   btn.addEventListener('click',start);
 
-  setTimeout(start,900); /* small pause so names finish sliding in first */
+  function beginWhenReady(){
+    /* Wait until the page (images, fonts, layout) has actually finished loading before
+       measuring scroll height and starting — this is the part that behaves differently
+       between a locally-cached test and a fresh link opened on an iPhone. */
+    if(document.readyState==='complete'){ setTimeout(start,900); }
+    else{ window.addEventListener('load',()=>setTimeout(start,900),{once:true}); }
+  }
+  beginWhenReady();
 }
 
 /* ═══ SLIDE-IN NAME REVEAL ═══ */
