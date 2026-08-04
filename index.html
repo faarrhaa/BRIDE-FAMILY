@@ -126,12 +126,18 @@ body{
 .gold-spark{position:absolute;width:5px;height:5px;border-radius:50%;background:var(--gold);pointer-events:none;animation:goldParticle 1.2s ease-out forwards;}
 
 /* ── ENVELOPE SCREEN ── */
-#envelope-screen{min-height:100vh;min-height:100dvh;background:linear-gradient(160deg,var(--cream) 0%,var(--cream2) 50%,var(--ivory) 100%);display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;position:relative;overflow:hidden;padding:20px;}
-#env-wrap{animation:floatEnv 4s ease-in-out infinite;display:flex;flex-direction:column;align-items:center;justify-content:center;position:relative;z-index:2;width:100%;height:100%;max-width:100vw;}
+#envelope-screen{min-height:100vh;min-height:100dvh;background:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;cursor:pointer;position:relative;overflow:hidden;padding:0;}
+#env-wrap{position:relative;z-index:2;width:100%;height:100%;}
 #env-wrap.closing{animation:envClose .65s cubic-bezier(.4,0,.6,1) forwards!important;}
-#envelope-photo-wrap{position:relative;display:inline-flex;align-items:flex-end;justify-content:center;}
-#envelope-photo{width:min(88vw, 78vh);height:auto;max-height:78vh;object-fit:contain;filter:drop-shadow(0 8px 32px rgba(184,134,11,.35));}
-#envelope-click-label{position:absolute;bottom:8%;left:50%;transform:translateX(-50%);color:var(--gold);font-family:'Cinzel',serif;font-size:clamp(11px,1.8vh,14px);letter-spacing:5px;text-transform:uppercase;text-shadow:0 1px 6px rgba(255,255,255,.85),0 0 2px rgba(255,255,255,.6);animation:shimmerGold 2.5s ease-in-out infinite;white-space:nowrap;pointer-events:none;}
+#envelope-photo-wrap{position:absolute;inset:0;width:100%;height:100%;}
+#envelope-photo{width:100%;height:100%;object-fit:cover;display:block;}
+#envelope-click-label{position:absolute;bottom:9%;left:50%;transform:translateX(-50%);color:#fdf8ee;font-family:'Cinzel',serif;font-size:clamp(12px,2vh,15px);letter-spacing:5px;text-transform:uppercase;text-shadow:0 1px 8px rgba(0,0,0,.6),0 0 20px rgba(184,134,11,.5);white-space:nowrap;pointer-events:none;opacity:0;clip-path:inset(0 100% 0 0);}
+#envelope-names{position:absolute;top:40%;left:50%;transform:translateX(-50%);font-family:'Great Vibes',cursive;font-size:clamp(30px,7.5vw,56px);color:#3a2712;text-shadow:0 1px 2px rgba(255,255,255,.35),0 3px 10px rgba(0,0,0,.3);white-space:nowrap;pointer-events:none;opacity:0;clip-path:inset(0 100% 0 0);}
+
+#envelope-names.writing{animation:inkWrite 1.9s ease forwards;}
+#envelope-click-label.writing{animation:inkWrite 1.3s ease forwards;}
+#envelope-click-label.shimmer{opacity:1;clip-path:inset(0 0% 0 0);animation:shimmerGold 2.5s ease-in-out infinite;}
+@keyframes inkWrite{0%{clip-path:inset(0 100% 0 0);opacity:0;filter:blur(2px);}12%{opacity:1;}100%{clip-path:inset(0 0% 0 0);opacity:1;filter:blur(0);}}
 
 #light-beam{position:absolute;left:50%;top:50%;width:30px;height:30px;transform:translate(-50%,-50%) scale(0);border-radius:50%;background:radial-gradient(circle, rgba(255,255,255,1) 0%, rgba(255,250,230,.95) 25%, rgba(255,236,179,.5) 50%, rgba(255,236,179,0) 72%);opacity:0;pointer-events:none;z-index:5;filter:blur(1px);}
 #light-beam.beaming{animation:beamGrow 2.5s cubic-bezier(.45,0,.55,1) forwards;}
@@ -143,10 +149,7 @@ body{
 @keyframes flashIn{from{opacity:0;}to{opacity:1;}}
 @keyframes flashOut{from{opacity:1;}to{opacity:0;}}
 
-@media (max-width:768px){
-  #envelope-screen{padding:0;}
-  #envelope-photo{width:auto;height:min(88dvh, 96vw);max-width:96vw;max-height:88dvh;}
-}
+
 
 /* ── SCROLL / DATE REVEAL ── */
 .scroll-card{
@@ -993,14 +996,37 @@ body{
     <div id="envelope-photo-wrap">
       <div id="light-beam"></div>
       <img id="envelope-photo" src="env.png" alt="Wedding envelope" onerror="if(this.src.indexOf('env.png')>-1){this.src='env.jpg';}else if(this.src.indexOf('env.jpg')>-1){this.src='env.jpeg';}else{this.onerror=null;}">
+      <div id="envelope-names">Nada &amp; Ahmed</div>
       <div id="envelope-click-label">✦ Click to open ✦</div>
-    </div>
-
-    <div style="margin-top:clamp(14px,3vh,28px);text-align:center;">
-      <div style="font-family:'Cinzel',serif;font-size:clamp(18px,3.5vh,26px);color:var(--dark);letter-spacing:6px;">Nada &amp; Ahmed</div>
     </div>
   </div>
 </div>
+<script>
+/* Handwritten "ink" reveal for the names + click-to-open, timed to appear once the loading screen is gone */
+(function(){
+  const namesEl=document.getElementById('envelope-names');
+  const clickEl=document.getElementById('envelope-click-label');
+  function startWriting(){
+    setTimeout(()=>namesEl.classList.add('writing'), 500);
+    namesEl.addEventListener('animationend', ()=>{
+      setTimeout(()=>clickEl.classList.add('writing'), 350);
+    }, {once:true});
+    clickEl.addEventListener('animationend', ()=>{
+      clickEl.classList.remove('writing');
+      clickEl.classList.add('shimmer');
+    }, {once:true});
+  }
+  const loader=document.getElementById('loading-screen');
+  if(!loader){ startWriting(); return; }
+  const obs=new MutationObserver(()=>{
+    if(!document.body.contains(document.getElementById('loading-screen'))){
+      obs.disconnect(); startWriting();
+    }
+  });
+  obs.observe(document.body,{childList:true});
+  setTimeout(()=>{ obs.disconnect(); startWriting(); },5000);
+})();
+</script>
 
 <!-- ══ INVITATION ══ -->
 <div id="invitation" style="display:none;">
