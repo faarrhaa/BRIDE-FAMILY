@@ -43,7 +43,7 @@ body{
 
 #loading-screen{position:fixed;inset:0;background:var(--cream);display:flex;justify-content:center;align-items:center;z-index:9999;transition:opacity 1s,visibility 1s;}
 .loading-ring{width:80px;height:80px;border-radius:50%;border:2px solid rgba(184,134,11,.2);border-top-color:var(--gold);margin:0 auto 20px;animation:ringRotate 1.8s linear infinite;}
-.loading-mono{font-family:'Cinzel',serif;font-size:28px;color:var(--gold);font-weight:700;letter-spacing:8px;text-shadow:0 0 20px rgba(184,134,11,.3);}
+.loading-mono{font-family:'Cinzel',serif;font-size:clamp(28px,5.8vw,32px);color:var(--gold);font-weight:700;letter-spacing:8px;text-shadow:0 0 20px rgba(184,134,11,.3);}
 @keyframes ringRotate{to{transform:rotate(360deg)}}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
@@ -109,7 +109,7 @@ body{
 .book-page.left{padding-right:18px;}
 .book-page.right{padding-left:18px;}
 .book-page-photos{position:relative;width:100%;height:100%;}
-.book-page-num{position:absolute;bottom:-4px;font-family:'Cinzel',serif;font-size:11px;letter-spacing:2px;color:var(--gold);opacity:.65;}
+.book-page-num{position:absolute;bottom:-4px;font-family:'Cinzel',serif;font-size:clamp(11px,2.4vw,13px);letter-spacing:2px;color:var(--gold);opacity:.65;}
 .book-page.left .book-page-num{left:6px;}
 .book-page.right .book-page-num{right:6px;}
 .scrap-photo{position:absolute;padding:9px;background:linear-gradient(150deg,var(--gold3),var(--gold2),var(--gold));box-shadow:0 8px 20px rgba(0,0,0,.22);border-radius:2px;cursor:zoom-in;transition:transform .2s ease;width:62%;}
@@ -155,7 +155,7 @@ body{
   55%{opacity:.65;}
   100%{opacity:0;}
 }
-.scrap-nav{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;background:linear-gradient(160deg,var(--ivory),var(--cream2));border:1px solid var(--gold2);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:22px;font-family:'Cinzel',serif;cursor:pointer;box-shadow:0 4px 12px rgba(44,26,0,.15);z-index:70;transition:opacity .3s,transform .2s;}
+.scrap-nav{position:absolute;top:50%;transform:translateY(-50%);width:46px;height:46px;border-radius:50%;background:linear-gradient(160deg,var(--ivory),var(--cream2));border:1px solid var(--gold2);color:var(--gold);display:flex;align-items:center;justify-content:center;font-size:clamp(22px,4.6vw,25px);font-family:'Cinzel',serif;cursor:pointer;box-shadow:0 4px 12px rgba(44,26,0,.15);z-index:70;transition:opacity .3s,transform .2s;}
 .scrap-nav:active{transform:translateY(-50%) scale(.9);}
 .scrap-nav.prev{left:-4px;}
 .scrap-nav.next{right:-4px;}
@@ -166,7 +166,7 @@ body{
 @media(max-width:600px){
   /* Make the album fill nearly the full screen width on mobile, edge to edge */
   .scrapbook{padding:0 4px;}
-  .scrap-nav{width:34px;height:34px;font-size:16px;}
+  .scrap-nav{width:34px;height:34px;font-size:clamp(16px,3.4vw,18px);}
   .scrap-nav.prev{left:2px;}
   .scrap-nav.next{right:2px;}
 }
@@ -330,7 +330,7 @@ body{
 .story-card.opened .story-text{opacity:1;transform:translateY(0);}
 
 /* ── OUR STORY: 3D Flip Timeline ── */
-.os-dot{width:44px;height:44px;border-radius:50%;background:var(--dark);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0;z-index:1;box-shadow:0 0 0 5px var(--cream),0 0 0 6px var(--gold3);}
+.os-dot{width:44px;height:44px;border-radius:50%;background:var(--dark);display:flex;align-items:center;justify-content:center;font-size:clamp(20px,4.2vw,23px);flex-shrink:0;z-index:1;box-shadow:0 0 0 5px var(--cream),0 0 0 6px var(--gold3);}
 .os-flip-card{flex:1;background:transparent;border:none;box-shadow:none;padding:0;height:190px;perspective:1000px;}
 .os-flip-inner{position:relative;width:100%;height:100%;text-align:center;transition:transform .65s cubic-bezier(.4,0,.2,1);transform-style:preserve-3d;cursor:pointer;}
 .os-flip-card.flipped .os-flip-inner{transform:rotateY(180deg);}
@@ -349,7 +349,7 @@ body{
 .cinematic-timeline{flex:1;position:relative;height:40px;display:flex;align-items:center;}
 .timeline-line{position:absolute;width:100%;height:2px;background:rgba(184,134,11,.2);top:50%;transform:translateY(-50%);}
 .timeline-fill{height:100%;background:linear-gradient(90deg,var(--gold2),var(--gold));width:0%;transition:width 1s linear;position:relative;z-index:1;border-radius:2px;}
-.timeline-indicator{position:absolute;color:var(--gold);font-weight:700;font-size:20px;z-index:2;top:50%;left:0%;transform:translate(-50%,-50%);transition:left 1s linear;text-shadow:0 0 12px rgba(184,134,11,.8);}
+.timeline-indicator{position:absolute;color:var(--gold);font-weight:700;font-size:clamp(20px,4.2vw,23px);z-index:2;top:50%;left:0%;transform:translate(-50%,-50%);transition:left 1s linear;text-shadow:0 0 12px rgba(184,134,11,.8);}
 .countdown-label{letter-spacing:3px;color:var(--gold);font-weight:700;font-family:'Cinzel',serif;font-size:clamp(8px,2vw,11px);white-space:nowrap;}
 .days-remaining{margin-top:28px;font-family:'Playfair Display',serif;font-size:clamp(22px,5vw,32px);color:var(--dark);text-align:center;}
 .days-remaining span{color:var(--gold);font-weight:700;}
@@ -479,7 +479,7 @@ body{
 }
 .vn-time{
   font-family:'Cinzel',serif;
-  font-size:12px;
+  font-size:clamp(12px,2.6vw,14px);
   color:var(--gold);font-weight:700;
   letter-spacing:1px;
   text-align:right;
@@ -505,19 +505,19 @@ body{
 /* ── FORMS & MISC ── */
 .letter-container{max-width:480px;margin:32px auto;position:relative;perspective:1000px;}
 .letter-pocket{background:linear-gradient(135deg,var(--brown),var(--dark2));border:1px solid var(--dark2);border-radius:6px;height:140px;position:relative;box-shadow:0 6px 24px rgba(61,38,0,.4);z-index:2;overflow:hidden;display:flex;flex-direction:column;justify-content:center;align-items:center;cursor:pointer;}
-.letter-seal{width:50px;height:50px;border-radius:50%;background:var(--ruby);border:2px dashed rgba(255,255,255,.4);display:flex;justify-content:center;align-items:center;font-size:22px;animation:heartBeat 2.2s infinite;box-shadow:0 0 12px rgba(139,26,47,.4);}
+.letter-seal{width:50px;height:50px;border-radius:50%;background:var(--ruby);border:2px dashed rgba(255,255,255,.4);display:flex;justify-content:center;align-items:center;font-size:clamp(22px,4.6vw,25px);animation:heartBeat 2.2s infinite;box-shadow:0 0 12px rgba(139,26,47,.4);}
 .letter-paper{background:linear-gradient(135deg,var(--ivory),var(--cream));border:1px solid var(--gold2);border-radius:6px;padding:28px 22px;color:var(--text);box-shadow:0 4px 20px rgba(0,0,0,.12);position:absolute;left:10px;right:10px;top:5px;z-index:1;transition:transform .8s cubic-bezier(.175,.885,.32,1.275),opacity .8s;transform:translateY(0);pointer-events:none;opacity:0;}
 .letter-container.open .letter-paper{transform:translateY(-220px);z-index:3;pointer-events:auto;opacity:1;}
 
 .wish-input-container{max-width:480px;margin:0 auto 36px;background:rgba(253,248,238,.8);border:1.5px solid rgba(184,134,11,.4);border-radius:10px;padding:26px;backdrop-filter:blur(6px);}
-.form-control{background:rgba(255,255,255,.7);border:1px solid rgba(184,134,11,.35);color:var(--text);padding:10px 14px;border-radius:6px;width:100%;font-size:15px;font-family:'Cormorant Garamond',serif;outline:none;transition:border-color .3s;}
+.form-control{background:rgba(255,255,255,.7);border:1px solid rgba(184,134,11,.35);color:var(--text);padding:10px 14px;border-radius:6px;width:100%;font-size:clamp(15px,3.2vw,17px);font-family:'Cormorant Garamond',serif;outline:none;transition:border-color .3s;}
 .form-control::placeholder{color:rgba(90,56,0,.45);}
 .form-control:focus{border-color:var(--gold);}
 .wishes-board{display:flex;flex-wrap:wrap;gap:18px;justify-content:center;max-width:860px;margin:0 auto;padding:10px;}
 .wish-card{background:rgba(253,248,238,.88);border:1px solid rgba(184,134,11,.3);border-radius:10px;padding:20px 18px;width:210px;transform:rotate(var(--rot,0deg));box-shadow:0 4px 14px rgba(184,134,11,.12);transition:transform .3s;backdrop-filter:blur(4px);}
 .wish-card:hover{transform:rotate(0deg) scale(1.04);}
-.wish-name{font-family:'Cinzel',serif;color:var(--gold);font-weight:700;font-size:12px;margin-bottom:8px;border-bottom:1px dashed rgba(184,134,11,.3);padding-bottom:5px;}
-.wish-text{font-style:italic;font-size:13px;color:var(--text);line-height:1.6;}
+.wish-name{font-family:'Cinzel',serif;color:var(--gold);font-weight:700;font-size:clamp(12px,2.6vw,14px);margin-bottom:8px;border-bottom:1px dashed rgba(184,134,11,.3);padding-bottom:5px;}
+.wish-text{font-style:italic;font-size:clamp(13px,2.8vw,15px);color:var(--text);line-height:1.6;}
 
 /* ── RSVP IMPROVED ── */
 .rsvp-section-wrap{
@@ -584,7 +584,7 @@ body{
   color:var(--ivory);
 }
 
-.save-date-btn{display:inline-flex;align-items:center;gap:10px;margin-top:24px;padding:13px 34px;font-family:'Cinzel',serif;font-size:13px;letter-spacing:2px;background:transparent;color:var(--gold);font-weight:700;border:1.5px solid var(--gold);border-radius:4px;cursor:pointer;transition:all .3s;text-decoration:none;}
+.save-date-btn{display:inline-flex;align-items:center;gap:10px;margin-top:24px;padding:13px 34px;font-family:'Cinzel',serif;font-size:clamp(13px,2.8vw,15px);letter-spacing:2px;background:transparent;color:var(--gold);font-weight:700;border:1.5px solid var(--gold);border-radius:4px;cursor:pointer;transition:all .3s;text-decoration:none;}
 .save-date-btn:hover{background:var(--gold);color:var(--ivory);}
 
 .closing-section{padding:72px 24px;text-align:center;position:relative;overflow:hidden;}
@@ -739,6 +739,15 @@ body{
   border-radius:8px;
   background:rgba(184,134,11,.04);
   transition:all .3s ease;
+  opacity:0;
+}
+.guest-name-item.gn-revealed{
+  animation:guestNameReveal .8s cubic-bezier(.215,.61,.355,1) forwards;
+}
+@keyframes guestNameReveal{
+  0%{opacity:0;transform:translateY(12px);background:rgba(184,134,11,0);border-color:rgba(184,134,11,0);}
+  55%{opacity:1;transform:translateY(0);}
+  100%{opacity:1;transform:translateY(0);background:rgba(184,134,11,.08);border-color:rgba(184,134,11,.24);}
 }
 .guest-name-item:hover{
   background:rgba(184,134,11,.09);
@@ -752,7 +761,7 @@ body{
   background:rgba(184,134,11,.12);
   border:1px solid rgba(184,134,11,.3);
   display:flex;align-items:center;justify-content:center;
-  font-size:10px;
+  font-size:clamp(10px,2.2vw,12px);
   font-family:'Cinzel',serif;
   font-weight:700;letter-spacing:.5px;
   color:var(--gold);
@@ -760,7 +769,7 @@ body{
 }
 .guest-name-item .guest-text{
   font-family:'Cormorant Garamond',Georgia,serif;
-  font-size:15px;
+  font-size:clamp(15px,3.2vw,17px);
   font-weight:700;
   color:var(--text);
   letter-spacing:.5px;
@@ -1040,7 +1049,7 @@ body{
 
 @media(max-width:480px){
   .prog-entry{grid-template-columns:62px 1px 1fr;}
-  .prog-hour{font-size:10px;}
+  .prog-hour{font-size:clamp(10px,2.2vw,12px);}
   .wardrobe-shell { height: clamp(400px, 115vw, 520px); }
   .wi-figure svg { max-height: clamp(100px, 36vw, 140px); }
   .wi-caption-body { max-width: 110px; font-size: 10px; }
@@ -1073,7 +1082,7 @@ body{
   <div style="text-align:center;">
     <div class="loading-ring"></div>
     <div class="loading-mono">N &amp; A</div>
-    <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:15px;color:var(--gold);font-weight:700;letter-spacing:3px;margin-top:8px;">Nada &amp; Ahmed</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(15px,3.2vw,17px);color:var(--gold);font-weight:700;letter-spacing:3px;margin-top:8px;">Nada &amp; Ahmed</div>
   </div>
 </div>
 
@@ -1242,7 +1251,7 @@ body{
   <!-- ═══ QURAN VERSE ═══ -->
   <section style="text-align:center;padding:44px 24px;">
     <p dir="rtl" style="font-family:'Amiri',serif;font-size:clamp(18px,3vw,24px);color:var(--text);max-width:560px;margin:0 auto;line-height:1.85;">وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُم مِّنْ أَنفُسِكُمْ أَزْوَاجًا لِّتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُم مَّوَدَّةً وَرَحْمَةً</p>
-    <p style="font-family:'Cinzel',serif;font-size:12px;color:var(--gold);font-weight:700;margin-top:14px;letter-spacing:4px;">— القرآن ٣٠:٢١</p>
+    <p style="font-family:'Cinzel',serif;font-size:clamp(12px,2.6vw,14px);color:var(--gold);font-weight:700;margin-top:14px;letter-spacing:4px;">— القرآن ٣٠:٢١</p>
   </section>
 
   <div class="ring-divider">
@@ -1284,7 +1293,7 @@ body{
       <div class="countdown-label">WEDDING DAY</div>
     </div>
     <div>
-      <p style="margin-top:18px;font-style:italic;font-size:16px;color:var(--brown);">Every second brings us closer to forever ♡</p>
+      <p style="margin-top:18px;font-style:italic;font-size:clamp(16px,3.4vw,18px);color:var(--brown);">Every second brings us closer to forever ♡</p>
     </div>
   </section>
 
@@ -1390,15 +1399,15 @@ body{
       <div class="scrap-nav next" id="scrap-next" onclick="turnPage(1)">&#8250;</div>
       <div class="scrap-dots" id="scrap-dots"></div>
     </div>
-    <p style="font-size:13px;color:var(--brown);margin-top:22px;font-style:italic;letter-spacing:1px;">Swipe or tap to turn the page &middot; tap a photo to see it up close</p>
+    <p style="font-size:clamp(13px,2.8vw,15px);color:var(--brown);margin-top:22px;font-style:italic;letter-spacing:1px;">Swipe or tap to turn the page &middot; tap a photo to see it up close</p>
   </section>
 
   <!-- Gallery Lightbox -->
   <div id="gallery-lightbox" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(20,12,0,.94);align-items:center;justify-content:center;padding:24px;cursor:zoom-out;" onclick="if(event.target===this)closeGalleryLightbox()">
-    <div style="position:absolute;top:18px;right:22px;color:var(--ivory);font-size:28px;font-family:'Cinzel',serif;line-height:1;cursor:pointer;" onclick="closeGalleryLightbox()">&times;</div>
-    <div onclick="event.stopPropagation();galleryNav(-1)" style="position:absolute;left:6px;top:50%;transform:translateY(-50%);color:var(--ivory);font-size:34px;font-family:'Cinzel',serif;line-height:1;cursor:pointer;padding:10px;">&#8249;</div>
+    <div style="position:absolute;top:18px;right:22px;color:var(--ivory);font-size:clamp(28px,5.8vw,32px);font-family:'Cinzel',serif;line-height:1;cursor:pointer;" onclick="closeGalleryLightbox()">&times;</div>
+    <div onclick="event.stopPropagation();galleryNav(-1)" style="position:absolute;left:6px;top:50%;transform:translateY(-50%);color:var(--ivory);font-size:clamp(34px,6.8vw,38px);font-family:'Cinzel',serif;line-height:1;cursor:pointer;padding:10px;">&#8249;</div>
     <img id="gallery-lightbox-img" src="" alt="" style="max-width:100%;max-height:100%;border-radius:8px;border:1px solid rgba(184,134,11,.4);box-shadow:0 20px 60px rgba(0,0,0,.5);touch-action:pinch-zoom;" />
-    <div onclick="event.stopPropagation();galleryNav(1)" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);color:var(--ivory);font-size:34px;font-family:'Cinzel',serif;line-height:1;cursor:pointer;padding:10px;">&#8250;</div>
+    <div onclick="event.stopPropagation();galleryNav(1)" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);color:var(--ivory);font-size:clamp(34px,6.8vw,38px);font-family:'Cinzel',serif;line-height:1;cursor:pointer;padding:10px;">&#8250;</div>
   </div>
 
   <div class="ring-divider">
@@ -1506,15 +1515,15 @@ body{
     <div style="display:flex;justify-content:center;">
       <div class="table-badge">
         <div style="text-align:center;">
-          <div style="font-family:'Cinzel',serif;font-size:10px;color:var(--gold);font-weight:700;letter-spacing:4px;text-transform:uppercase;margin-bottom:2px;">Table</div>
-          <div style="font-family:'Cinzel',serif;font-size:42px;color:var(--dark);line-height:1;font-weight:600;">1</div>
+          <div style="font-family:'Cinzel',serif;font-size:clamp(10px,2.2vw,12px);color:var(--gold);font-weight:700;letter-spacing:4px;text-transform:uppercase;margin-bottom:2px;">Table</div>
+          <div style="font-family:'Cinzel',serif;font-size:clamp(42px,7.8vw,46px);color:var(--dark);line-height:1;font-weight:600;">1</div>
         </div>
       </div>
     </div>
 
     <!-- Guest Names -->
     <div style="margin-top:36px;">
-      <p style="font-size:11px;color:var(--gold);font-weight:700;letter-spacing:4px;text-transform:uppercase;margin-bottom:20px;font-family:'Cinzel',serif;">Guests at Your Table</p>
+      <p style="font-size:clamp(11px,2.4vw,13px);color:var(--gold);font-weight:700;letter-spacing:4px;text-transform:uppercase;margin-bottom:20px;font-family:'Cinzel',serif;">Guests at Your Table</p>
       <div class="guest-list">
         <div class="guest-name-item">
           <div class="guest-icon">HA</div>
@@ -1593,17 +1602,17 @@ body{
 
     <!-- Seating Map Image -->
     <div style="margin-top:48px;">
-      <p style="font-size:11px;color:var(--gold);font-weight:700;letter-spacing:4px;text-transform:uppercase;margin-bottom:18px;font-family:'Cinzel',serif;">Venue Seating Plan</p>
+      <p style="font-size:clamp(11px,2.4vw,13px);color:var(--gold);font-weight:700;letter-spacing:4px;text-transform:uppercase;margin-bottom:18px;font-family:'Cinzel',serif;">Venue Seating Plan</p>
       <div class="seating-map-frame" onclick="openSeatingLightbox()" style="cursor:zoom-in;">
         <img src="Table1.png" alt="Your Table — Table 1 Highlighted" />
       </div>
-      <p style="font-size:13px;color:var(--brown);margin-top:16px;font-style:italic;letter-spacing:1px;">Tap the plan to zoom in — your table is highlighted above</p>
+      <p style="font-size:clamp(13px,2.8vw,15px);color:var(--brown);margin-top:16px;font-style:italic;letter-spacing:1px;">Tap the plan to zoom in — your table is highlighted above</p>
     </div>
   </section>
 
   <!-- Seating Map Lightbox -->
   <div id="seating-lightbox" onclick="closeSeatingLightbox()" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(20,12,0,0.92);align-items:center;justify-content:center;padding:24px;cursor:zoom-out;">
-    <div style="position:absolute;top:18px;right:22px;color:var(--ivory);font-size:28px;font-family:'Cinzel',serif;line-height:1;">&times;</div>
+    <div style="position:absolute;top:18px;right:22px;color:var(--ivory);font-size:clamp(28px,5.8vw,32px);font-family:'Cinzel',serif;line-height:1;">&times;</div>
     <img src="Table1.png" alt="Your Table — Table 1 Highlighted, zoomed" style="max-width:100%;max-height:100%;border-radius:10px;border:1px solid rgba(184,134,11,.4);box-shadow:0 20px 60px rgba(0,0,0,0.5);touch-action:pinch-zoom;" />
   </div>
 
@@ -1779,7 +1788,7 @@ body{
             <circle cx="32" cy="32" r="22" stroke="#b8860b" stroke-width=".5" opacity=".25"/>
             <text x="32" y="38" text-anchor="middle" font-family="Cormorant Garamond,Georgia,serif" font-size="18" font-style="italic" font-weight="600" fill="#b8860b" opacity=".8">N &amp; A</text>
           </svg>
-          <div style="font-family:'Cinzel',serif;font-size:9px;letter-spacing:4px;color:rgba(184,134,11,.45);margin-top:6px;">ATTIRE</div>
+          <div style="font-family:'Cinzel',serif;font-size:clamp(9px,2.0vw,11px);letter-spacing:4px;color:rgba(184,134,11,.45);margin-top:6px;">ATTIRE</div>
         </div>
       </div>
 
@@ -1810,7 +1819,7 @@ body{
   <section class="voice-note-section">
     <p class="tagline" style="color:var(--gold);font-weight:700;margin-bottom:10px;">A Personal Touch</p>
     <h2 style="font-family:'Cinzel',serif;font-size:clamp(20px,4vw,32px);color:var(--dark);margin-bottom:12px;">Voice Note</h2>
-    <p style="font-style:italic;font-size:15px;color:var(--brown);margin-bottom:8px;">Listen to a message from us</p>
+    <p style="font-style:italic;font-size:clamp(15px,3.2vw,17px);color:var(--brown);margin-bottom:8px;">Listen to a message from us</p>
 
     <div class="vn-player-wrap">
       <audio id="voice-note" preload="metadata">
@@ -1851,16 +1860,16 @@ body{
   <section style="text-align:center;padding:56px 24px;">
     <p class="tagline" style="color:var(--gold);font-weight:700;margin-bottom:10px;">A Message for You</p>
     <h2 style="font-family:'Cinzel',serif;font-size:clamp(20px,4vw,32px);color:var(--dark);margin-bottom:12px;">Love Letter</h2>
-    <p style="font-style:italic;font-size:15px;color:var(--brown);margin-bottom:28px;">Click the seal to reveal our message to you.</p>
+    <p style="font-style:italic;font-size:clamp(15px,3.2vw,17px);color:var(--brown);margin-bottom:28px;">Click the seal to reveal our message to you.</p>
     <div class="letter-container" id="love-letter-widget">
       <div class="letter-paper">
-        <h3 style="font-family:'Cinzel',serif;color:var(--dark);font-size:17px;margin-bottom:12px;border-bottom:1px dashed var(--gold2);padding-bottom:7px;text-align:left;">Dearest Family &amp; Friends,</h3>
-        <p style="font-style:italic;font-size:15px;color:var(--text);line-height:1.75;margin-bottom:14px;text-align:left;">Having you by our side as we begin our journey together is the greatest blessing we could ask for. Thank you for your love, prayers, and presence on this most beautiful day of our lives. We cannot wait to celebrate and dance the night away with you!</p>
-        <div style="font-family:'Cinzel',serif;font-size:13px;color:var(--gold);text-align:right;font-weight:bold;">— Nada &amp; Ahmed</div>
+        <h3 style="font-family:'Cinzel',serif;color:var(--dark);font-size:clamp(17px,3.6vw,19px);margin-bottom:12px;border-bottom:1px dashed var(--gold2);padding-bottom:7px;text-align:left;">Dearest Family &amp; Friends,</h3>
+        <p style="font-style:italic;font-size:clamp(15px,3.2vw,17px);color:var(--text);line-height:1.75;margin-bottom:14px;text-align:left;">Having you by our side as we begin our journey together is the greatest blessing we could ask for. Thank you for your love, prayers, and presence on this most beautiful day of our lives. We cannot wait to celebrate and dance the night away with you!</p>
+        <div style="font-family:'Cinzel',serif;font-size:clamp(13px,2.8vw,15px);color:var(--gold);text-align:right;font-weight:bold;">— Nada &amp; Ahmed</div>
       </div>
       <div class="letter-pocket" onclick="toggleLoveLetter()">
         <div class="letter-seal">💌</div>
-        <div style="position:absolute;bottom:14px;color:var(--ivory);font-size:10px;letter-spacing:3px;font-family:'Cinzel',serif;text-transform:uppercase;">Click to Read</div>
+        <div style="position:absolute;bottom:14px;color:var(--ivory);font-size:clamp(10px,2.2vw,12px);letter-spacing:3px;font-family:'Cinzel',serif;text-transform:uppercase;">Click to Read</div>
       </div>
     </div>
   </section>
@@ -1886,18 +1895,18 @@ body{
   <section id="wishes-section" style="text-align:center; padding-top: 72px;">
     <p class="tagline" style="color:var(--gold);font-weight:700;margin-bottom:10px;">Digital Guestbook</p>
     <h2 style="font-family:'Cinzel',serif;font-size:clamp(20px,4vw,32px);color:var(--dark);margin-bottom:14px;">Wishes Wall</h2>
-    <p style="font-style:italic;font-size:16px;color:var(--brown);max-width:460px;margin:0 auto 28px;">Leave your warm wishes for Nada &amp; Ahmed below.</p>
+    <p style="font-style:italic;font-size:clamp(16px,3.4vw,18px);color:var(--brown);max-width:460px;margin:0 auto 28px;">Leave your warm wishes for Nada &amp; Ahmed below.</p>
     <div class="wish-input-container">
       <div style="text-align:left;margin-bottom:14px;">
-        <label style="font-family:'Cinzel',serif;font-size:11px;color:var(--text);letter-spacing:2px;font-weight:bold;display:block;margin-bottom:6px;">YOUR NAME</label>
+        <label style="font-family:'Cinzel',serif;font-size:clamp(11px,2.4vw,13px);color:var(--text);letter-spacing:2px;font-weight:bold;display:block;margin-bottom:6px;">YOUR NAME</label>
         <input type="text" id="wish-name-input" class="form-control" placeholder="Enter your name"/>
       </div>
       <div style="text-align:left;margin-bottom:18px;">
-        <label style="font-family:'Cinzel',serif;font-size:11px;color:var(--text);letter-spacing:2px;font-weight:bold;display:block;margin-bottom:6px;">YOUR MESSAGE</label>
+        <label style="font-family:'Cinzel',serif;font-size:clamp(11px,2.4vw,13px);color:var(--text);letter-spacing:2px;font-weight:bold;display:block;margin-bottom:6px;">YOUR MESSAGE</label>
         <textarea id="wish-text-input" class="form-control" rows="3" placeholder="Write a sweet message..."></textarea>
       </div>
       <button class="rsvp-btn" style="margin-top:0;width:100%;padding:13px;" onclick="postWish()">Pin to Wall 📌</button>
-      <p id="wish-error" style="color:var(--gold);font-weight:700;font-size:13px;font-style:italic;margin-top:10px;text-align:center;"></p>
+      <p id="wish-error" style="color:var(--gold);font-weight:700;font-size:clamp(13px,2.8vw,15px);font-style:italic;margin-top:10px;text-align:center;"></p>
     </div>
     <div class="wishes-board" id="wishes-board"></div>
   </section>
@@ -1947,37 +1956,37 @@ body{
 </div>
       <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(14px,2.5vw,17px);color:var(--text);margin-bottom:24px;line-height:1.7;">Your gracious presence would make our celebration truly complete.</p>
       <div style="max-width:320px;margin:0 auto 16px;text-align:left;">
-        <label style="font-family:'Cinzel',serif;font-size:11px;color:var(--text);letter-spacing:2px;font-weight:bold;display:block;margin-bottom:6px;">YOUR NAME</label>
+        <label style="font-family:'Cinzel',serif;font-size:clamp(11px,2.4vw,13px);color:var(--text);letter-spacing:2px;font-weight:bold;display:block;margin-bottom:6px;">YOUR NAME</label>
         <input type="text" id="rsvp-name-input" class="form-control" placeholder="Enter your name"/>
       </div>
-      <p id="rsvp-error" style="color:var(--gold);font-weight:700;font-size:13px;font-style:italic;margin-bottom:10px;text-align:center;"></p>
+      <p id="rsvp-error" style="color:var(--gold);font-weight:700;font-size:clamp(13px,2.8vw,15px);font-style:italic;margin-bottom:10px;text-align:center;"></p>
       <button class="rsvp-btn" onclick="rsvpYes()">Joyfully Accept 💍</button>
       <br/>
       <button class="rsvp-btn-outline" onclick="rsvpNo()">Regretfully Decline</button>
     </div>
 
     <div id="rsvp-confirm" style="display:none;margin-top:28px;">
-      <div style="font-size:44px;margin-bottom:14px;">🎉</div>
-      <p style="font-family:'Cinzel',serif;font-size:20px;color:var(--dark);margin-bottom:8px;">Thank you, <span id="rsvp-confirm-name">friend</span>!</p>
-      <p id="rsvp-confirm-yes-msg" style="font-style:italic;font-size:17px;color:var(--brown);">We can't wait to celebrate with you on September 18th! 💕</p>
-      <p id="rsvp-confirm-no-msg" style="display:none;font-style:italic;font-size:17px;color:var(--brown);">We're sorry you can't make it — you'll be in our hearts on the day. 💛</p>
+      <div style="font-size:clamp(44px,8.0vw,48px);margin-bottom:14px;">🎉</div>
+      <p style="font-family:'Cinzel',serif;font-size:clamp(20px,4.2vw,23px);color:var(--dark);margin-bottom:8px;">Thank you, <span id="rsvp-confirm-name">friend</span>!</p>
+      <p id="rsvp-confirm-yes-msg" style="font-style:italic;font-size:clamp(17px,3.6vw,19px);color:var(--brown);">We can't wait to celebrate with you on September 18th! 💕</p>
+      <p id="rsvp-confirm-no-msg" style="display:none;font-style:italic;font-size:clamp(17px,3.6vw,19px);color:var(--brown);">We're sorry you can't make it — you'll be in our hearts on the day. 💛</p>
     </div>
   </section>
 
   <!-- ═══ CLOSING ═══ -->
   <section class="closing-section">
-    <div style="position:absolute;top:14px;left:16px;font-size:44px;opacity:.12;color:var(--gold);font-weight:700;pointer-events:none;">❀</div>
-    <div style="position:absolute;bottom:14px;right:16px;font-size:44px;opacity:.12;color:var(--gold);font-weight:700;pointer-events:none;">❀</div>
+    <div style="position:absolute;top:14px;left:16px;font-size:clamp(44px,8.0vw,48px);opacity:.12;color:var(--gold);font-weight:700;pointer-events:none;">❀</div>
+    <div style="position:absolute;bottom:14px;right:16px;font-size:clamp(44px,8.0vw,48px);opacity:.12;color:var(--gold);font-weight:700;pointer-events:none;">❀</div>
     <p class="tagline" style="color:var(--gold);font-weight:700;margin-bottom:16px;">We can't wait to see you</p>
     <h2 style="font-family:'Cinzel',serif;font-size:clamp(22px,4vw,36px);color:var(--dark);margin-bottom:20px;">Join Us</h2>
     <p style="font-style:italic;font-size:clamp(15px,2.5vw,18px);color:var(--text);max-width:440px;margin:0 auto 40px;line-height:1.8;">Your presence is the greatest gift you could give us on this most beautiful day of our lives.</p>
     
     <div style="display:inline-block;border:1.5px solid var(--gold2);padding:20px clamp(16px,4vw,44px);border-radius:4px;background:rgba(253,248,238,.5);">
-      <div style="font-family:'Cinzel',serif;font-size:16px;color:var(--dark);margin-bottom:8px;">Nada &amp; Ahmed</div>
+      <div style="font-family:'Cinzel',serif;font-size:clamp(16px,3.4vw,18px);color:var(--dark);margin-bottom:8px;">Nada &amp; Ahmed</div>
       <div style="font-size:clamp(11px,2.5vw,13px);color:var(--gold);font-weight:700;letter-spacing:clamp(1px,1vw,3px);font-family:'Cinzel',serif;white-space:nowrap;">18 · 09 · 2026 &nbsp;·&nbsp; ALEXANDRIA</div>
     </div>
     
-    <div style="margin-top:44px;font-style:italic;font-size:17px;color:var(--brown);letter-spacing:1px;">✦ &nbsp; With all our love &nbsp; ✦</div>
+    <div style="margin-top:44px;font-style:italic;font-size:clamp(17px,3.6vw,19px);color:var(--brown);letter-spacing:1px;">✦ &nbsp; With all our love &nbsp; ✦</div>
   </section>
 
   <!-- ═══ CINEMATIC ENDING ═══ -->
@@ -2049,15 +2058,15 @@ function buildStory(){
     row.style.cssText='display:flex;align-items:center;margin-bottom:36px;gap:0;perspective:1000px;';
 
     const frontHTML=`
-      <div style="font-size:32px;margin-bottom:8px;">${m.icon}</div>
-      <div style="font-size:11px;letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;font-weight:700;">${m.date}</div>
-      <div style="font-family:'Cinzel',serif;font-size:14px;color:var(--dark);font-weight:bold;">${m.label}</div>
-      <div style="font-size:11px;letter-spacing:1px;color:var(--brown);margin-top:10px;text-transform:uppercase;font-style:italic;">Click to read ♡</div>
+      <div style="font-size:clamp(32px,6.4vw,36px);margin-bottom:8px;">${m.icon}</div>
+      <div style="font-size:clamp(11px,2.4vw,13px);letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;font-weight:700;">${m.date}</div>
+      <div style="font-family:'Cinzel',serif;font-size:clamp(14px,3.0vw,16px);color:var(--dark);font-weight:bold;">${m.label}</div>
+      <div style="font-size:clamp(11px,2.4vw,13px);letter-spacing:1px;color:var(--brown);margin-top:10px;text-transform:uppercase;font-style:italic;">Click to read ♡</div>
     `;
     const backHTML=`
-      <div style="font-size:26px;margin-bottom:6px;">${m.icon}</div>
-      <div style="font-family:'Cinzel',serif;font-size:13px;color:var(--dark);margin-bottom:8px;border-bottom:1px dashed var(--gold3);padding-bottom:5px;width:100%;text-align:center;font-weight:bold;">${m.label}</div>
-      <p style="font-style:italic;font-size:14px;color:var(--text);line-height:1.6;margin:0;text-align:center;">${m.text}</p>
+      <div style="font-size:clamp(26px,5.4vw,29px);margin-bottom:6px;">${m.icon}</div>
+      <div style="font-family:'Cinzel',serif;font-size:clamp(13px,2.8vw,15px);color:var(--dark);margin-bottom:8px;border-bottom:1px dashed var(--gold3);padding-bottom:5px;width:100%;text-align:center;font-weight:bold;">${m.label}</div>
+      <p style="font-style:italic;font-size:clamp(14px,3.0vw,16px);color:var(--text);line-height:1.6;margin:0;text-align:center;">${m.text}</p>
     `;
     const card=`
       <div class="os-flip-card" style="${isLeft?'margin-right':'margin-left'}:28px;" onclick="this.classList.toggle('flipped')">
@@ -2595,9 +2604,25 @@ function autoScrollInvitation(){
     rafId=requestAnimationFrame(step);
   }
 
-  ['wheel','touchmove'].forEach(evt=>
-    window.addEventListener(evt,()=>stop(false),{passive:true})
-  );
+  /* Only treat a touch as "user wants to stop the autoscroll" if it actually moves a
+     real distance. On iOS Safari, touchmove fires for even a couple pixels of finger
+     jitter right after the envelope tap — Android's touch stack has a built-in "slop"
+     threshold before it reports movement at all, so this same jitter never fires
+     touchmove there. Without a distance check, iPhone users were stopping their own
+     autoscroll within a fraction of a second of it starting, every time. */
+  let touchStartY=null,touchStartX=null;
+  window.addEventListener('touchstart',e=>{
+    const t=e.touches[0];
+    touchStartY=t?t.clientY:null;
+    touchStartX=t?t.clientX:null;
+  },{passive:true});
+  window.addEventListener('touchmove',e=>{
+    const t=e.touches[0];
+    if(!t||touchStartY===null){ stop(false); return; }
+    const dy=Math.abs(t.clientY-touchStartY),dx=Math.abs(t.clientX-touchStartX);
+    if(Math.hypot(dx,dy)>10) stop(false);
+  },{passive:true});
+  window.addEventListener('wheel',()=>stop(false),{passive:true});
   btn.addEventListener('click',start);
 
   function beginWhenReady(){
@@ -2767,6 +2792,24 @@ function seekVoiceNote(e){
   const pct = (e.clientX - rect.left) / rect.width;
   if(vnAudio.duration) vnAudio.currentTime = pct * vnAudio.duration;
 }
+
+/* ═══ GUEST LIST — staggered reveal, box fills in as each name appears ═══ */
+function initGuestListReveal(){
+  const items=document.querySelectorAll('.guest-name-item');
+  if(!items.length)return;
+  const list=Array.from(items);
+  const obs=new IntersectionObserver((entries)=>{
+    entries.forEach(entry=>{
+      if(!entry.isIntersecting)return;
+      const idx=list.indexOf(entry.target);
+      entry.target.style.animationDelay=(idx*70)+'ms';
+      entry.target.classList.add('gn-revealed');
+      obs.unobserve(entry.target);
+    });
+  },{threshold:0.2,rootMargin:'0px 0px -40px 0px'});
+  list.forEach(it=>obs.observe(it));
+}
+window.addEventListener('invitation-shown',initGuestListReveal);
 
 /* ═══ WISHES ═══ */
 /* wishes[] is populated live from Firestore by the Firebase module script below;
