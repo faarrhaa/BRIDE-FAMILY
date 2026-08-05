@@ -1077,7 +1077,7 @@ body{
   </div>
 </div>
 
-<audio id="bgm" loop preload="auto">
+<audio id="bgm" loop preload="metadata">
   <source src="music.m4a" type="audio/mp4">
 </audio>
 <button id="music-btn" onclick="toggleMusic()" title="Toggle music" aria-label="Toggle background music">🔇</button>
@@ -1813,7 +1813,7 @@ body{
     <p style="font-style:italic;font-size:15px;color:var(--brown);margin-bottom:8px;">Listen to a message from us</p>
 
     <div class="vn-player-wrap">
-      <audio id="voice-note" preload="auto">
+      <audio id="voice-note" preload="metadata">
         <source src="vn.mp3" type="audio/mpeg">
         <source src="vn.m4a" type="audio/mp4">
       </audio>
@@ -2601,11 +2601,16 @@ function autoScrollInvitation(){
   btn.addEventListener('click',start);
 
   function beginWhenReady(){
-    /* Wait until the page (images, fonts, layout) has actually finished loading before
-       measuring scroll height and starting — this is the part that behaves differently
-       between a locally-cached test and a fresh link opened on an iPhone. */
-    if(document.readyState==='complete'){ setTimeout(start,900); }
-    else{ window.addEventListener('load',()=>setTimeout(start,900),{once:true}); }
+    /* Previously this waited for the window 'load' event before starting. On iOS
+       Safari, <audio preload="auto"> (bgm + voice note) can delay 'load' for a long
+       time — sometimes indefinitely on cellular / Low Power Mode — because iOS
+       doesn't eagerly fetch audio the way Android Chrome does. Since 'load' never
+       fired, start() never ran, and because running stayed false the resume arrow
+       never appeared either. By the time this runs, openEnvelope() has already
+       waited 2.5s and swapped the invitation into view, so the layout is already
+       there — no need to gate on 'load' at all. The maxScroll<80 check inside
+       step() already retries safely if layout truly isn't measured yet. */
+    setTimeout(start,900);
   }
   beginWhenReady();
 }
