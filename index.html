@@ -1952,12 +1952,15 @@ body{
       </div>
       <p id="rsvp-error" style="color:var(--gold);font-weight:700;font-size:13px;font-style:italic;margin-bottom:10px;text-align:center;"></p>
       <button class="rsvp-btn" onclick="rsvpYes()">Joyfully Accept 💍</button>
+      <br/>
+      <button class="rsvp-btn-outline" onclick="rsvpNo()">Regretfully Decline</button>
     </div>
 
     <div id="rsvp-confirm" style="display:none;margin-top:28px;">
       <div style="font-size:44px;margin-bottom:14px;">🎉</div>
       <p style="font-family:'Cinzel',serif;font-size:20px;color:var(--dark);margin-bottom:8px;">Thank you, <span id="rsvp-confirm-name">friend</span>!</p>
-      <p style="font-style:italic;font-size:17px;color:var(--brown);">We can't wait to celebrate with you on September 18th! 💕</p>
+      <p id="rsvp-confirm-yes-msg" style="font-style:italic;font-size:17px;color:var(--brown);">We can't wait to celebrate with you on September 18th! 💕</p>
+      <p id="rsvp-confirm-no-msg" style="display:none;font-style:italic;font-size:17px;color:var(--brown);">We're sorry you can't make it — you'll be in our hearts on the day. 💛</p>
     </div>
   </section>
 
@@ -2240,11 +2243,12 @@ function closeSeatingLightbox(){
     // it has already been scrolled past — always show bg1 until it's visible.
     if(!gallerySection.offsetParent){ crossFadeTo('bg.png'); return; }
     const centerY = window.innerHeight * 0.5;
+    const earlyY = window.innerHeight * 0.9; // trigger bg2 sooner, as soon as the gallery starts entering view
     const dressTop = dressSection.getBoundingClientRect().top;
     const galleryTop = gallerySection.getBoundingClientRect().top;
     let target = 'bg.png';
     if(dressTop <= centerY) target = bg3Url;
-    else if(galleryTop <= centerY) target = bg2Url;
+    else if(galleryTop <= earlyY) target = bg2Url;
     crossFadeTo(target);
   }
   window.addEventListener('scroll', ()=>{
@@ -2760,47 +2764,26 @@ function seekVoiceNote(e){
 }
 
 /* ═══ WISHES ═══ */
-let wishes=[];try{wishes=JSON.parse(localStorage.getItem('wishes_na_2026')||'[]');}catch(e){}
+/* wishes[] is populated live from Firestore by the Firebase module script below;
+   this array is kept only as a fallback until the first snapshot arrives. */
+let wishes=[];
 function escapeHTML(str){const d=document.createElement('div');d.textContent=str;return d.innerHTML;}
 
 function renderWishes(){
   const board=document.getElementById('wishes-board');if(!board)return;board.innerHTML='';
+  const list = window.__dbWishes || wishes;
   const defaultWish={name:"Nada & Ahmed",text:"We are so excited to celebrate our love with all of you! Leave your warm wishes right here. 💕"};
   const dCard=document.createElement('div');dCard.className='wish-card';dCard.style.setProperty('--rot','0deg');
   dCard.innerHTML=`<div class="wish-name">${escapeHTML(defaultWish.name)}</div><div class="wish-text">"${escapeHTML(defaultWish.text)}"</div>`;
   board.appendChild(dCard);
-  wishes.forEach((w,i)=>{
+  list.forEach((w,i)=>{
     const card=document.createElement('div');card.className='wish-card';card.style.setProperty('--rot',`${((i*7)%9)-4}deg`);
     card.innerHTML=`<div class="wish-name">${escapeHTML(w.name)}</div><div class="wish-text">"${escapeHTML(w.text)}"</div>`;
     board.appendChild(card);
   });
 }
+window.renderWishes = renderWishes;
 
-function postWish(){
-  const n=document.getElementById('wish-name-input').value.trim();const t=document.getElementById('wish-text-input').value.trim();
-  const err=document.getElementById('wish-error');
-  if(!n||!t){err.textContent='Please enter your name and a message ✦';return;}
-  err.textContent='';wishes.unshift({name:n,text:t});
-  try{localStorage.setItem('wishes_na_2026',JSON.stringify(wishes));}catch(e){}
-  document.getElementById('wish-name-input').value='';document.getElementById('wish-text-input').value='';
-  renderWishes();spawnConfetti();
-}
-
-/* ═══ RSVP ═══ */
-function rsvpYes(){
-  const nameInput=document.getElementById('rsvp-name-input');
-  const err=document.getElementById('rsvp-error');
-  const name=nameInput.value.trim();
-  if(!name){
-    err.textContent='Please enter your name so we know who to expect 💛';
-    nameInput.focus();
-    return;
-  }
-  err.textContent='';
-  document.getElementById('rsvp-confirm-name').textContent=name;
-  const c=document.getElementById('rsvp-confirm');c.style.display='block';c.style.animation='rsvpPop .5s ease both';
-  spawnConfetti();
-}
 
 /* ═══ CINEMATIC ENDING ═══ */
 let endingParticlesInterval=null;
@@ -2826,5 +2809,87 @@ function initCinematicEnding(){
   triggerCinematicEndingParticles();
 }
 </script>
+
+<!-- ═══ FIREBASE (Firestore) — Wishes Wall + RSVP ═══ -->
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.13.2/firebase-app.js";
+import {
+  getFirestore, collection, addDoc, onSnapshot, query, orderBy, serverTimestamp
+} from "https://www.gstatic.com/firebasejs/10.13.2/firebase-firestore.js";
+
+const firebaseConfig = {
+  apiKey: "AIzaSyDpFK5UCdi2ucfOASmIZXKN_iJs-PgMP-k",
+  authDomain: "nada-ahmedwedding.firebaseapp.com",
+  projectId: "nada-ahmedwedding",
+  storageBucket: "nada-ahmedwedding.firebasestorage.app",
+  messagingSenderId: "624139001232",
+  appId: "1:624139001232:web:7eebc8136ea84575ad2715"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+
+/* ── WISHES WALL: live sync ── */
+const wishesCol = collection(db, "wishes");
+const wishesQuery = query(wishesCol, orderBy("createdAt", "desc"));
+
+/* Wishes are stored privately in Firestore but intentionally NOT rendered on the
+   public wall — no onSnapshot listener here, so submitted wishes never populate
+   window.__dbWishes or the wishes-board. */
+
+window.postWish = async function(){
+  const nameInput=document.getElementById('wish-name-input');
+  const textInput=document.getElementById('wish-text-input');
+  const err=document.getElementById('wish-error');
+  const n=nameInput.value.trim();
+  const t=textInput.value.trim();
+  if(!n||!t){ err.textContent='Please enter your name and a message ✦'; return; }
+  err.textContent='Posting…';
+  try{
+    await addDoc(wishesCol, { name:n, text:t, createdAt:serverTimestamp() });
+    nameInput.value=''; textInput.value='';
+    err.textContent='';
+    if(typeof window.spawnConfetti==='function') window.spawnConfetti();
+  }catch(e){
+    console.error('postWish failed', e);
+    err.textContent='Something went wrong — please try again ✦';
+  }
+};
+
+/* ── RSVP: attending / not attending ── */
+const rsvpCol = collection(db, "rsvps");
+
+async function submitRsvp(attending){
+  const nameInput=document.getElementById('rsvp-name-input');
+  const err=document.getElementById('rsvp-error');
+  const name=nameInput.value.trim();
+  if(!name){
+    err.textContent='Please enter your name so we know who to expect 💛';
+    nameInput.focus();
+    return;
+  }
+  err.textContent='Sending…';
+  try{
+    await addDoc(rsvpCol, { name, attending, createdAt:serverTimestamp() });
+    err.textContent='';
+    document.getElementById('rsvp-confirm-name').textContent=name;
+    const yesMsg=document.getElementById('rsvp-confirm-yes-msg');
+    const noMsg=document.getElementById('rsvp-confirm-no-msg');
+    if(yesMsg) yesMsg.style.display = attending ? 'block' : 'none';
+    if(noMsg) noMsg.style.display = attending ? 'none' : 'block';
+    const c=document.getElementById('rsvp-confirm');
+    c.style.display='block';
+    c.style.animation='rsvpPop .5s ease both';
+    if(attending && typeof window.spawnConfetti==='function') window.spawnConfetti();
+  }catch(e){
+    console.error('RSVP failed', e);
+    err.textContent='Something went wrong — please try again ✦';
+  }
+}
+
+window.rsvpYes = function(){ submitRsvp(true); };
+window.rsvpNo  = function(){ submitRsvp(false); };
+</script>
+
 </body>
 </html>
