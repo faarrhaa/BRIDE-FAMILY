@@ -247,64 +247,50 @@ body{
 
 
 
-/* ── SCROLL / DATE REVEAL ── */
+/* ── ELEGANT SQUARE DATE BOXES ── */
 .scroll-card{
-  width:clamp(85px, 26vw, 160px);
+  width:clamp(78px, 24vw, 118px);
+  aspect-ratio:1/1;
   cursor:pointer;
   position:relative;
   margin:0 auto 14px;
-  display:flex;
-  flex-direction:column;
-  align-items:center;
-}
-.scroll-roller{
-  width:115%;
-  height:20px;
-  background:linear-gradient(to bottom, #9e6b3a, #5c3317, #9e6b3a);
-  border-radius:10px;
-  position:relative;
-  z-index:3;
-  box-shadow:0 4px 8px rgba(0,0,0,.4), inset 0 2px 4px rgba(255,255,255,.2);
-  border:1px solid #3d1f0a;
-  flex-shrink: 0;
-}
-.scroll-roller::after{
-  content:'';position:absolute;left:3px;right:3px;top:3px;bottom:3px;
-  background:linear-gradient(to bottom, #f5ead0, #e8d5a3, #f5ead0);
-  border-radius:7px;
-}
-.scroll-paper{
-  width:85%;
-  background:linear-gradient(135deg, #f5ead0, #ede0c8, #f5ead0);
-  border-left:1px solid rgba(139,90,43,.3);
-  border-right:1px solid rgba(139,90,43,.3);
-  box-shadow:inset 0 0 30px rgba(139,90,43,.15);
-  position:relative;
-  z-index:2;
-  max-height:0px;
-  overflow:hidden;
-  transition:max-height 0.8s cubic-bezier(.215,.61,.355,1), padding 0.8s cubic-bezier(.215,.61,.355,1);
+  background:linear-gradient(135deg, #fdf8ee, #f0e2ba 50%, #fdf8ee);
+  border:1px solid var(--gold);
+  box-shadow:0 8px 20px rgba(0,0,0,.35), inset 0 0 0 1px rgba(184,134,11,.2);
   display:flex;
   align-items:center;
   justify-content:center;
-  padding:0px 8px;
 }
-.scroll-card.opened .scroll-paper{
-  max-height:180px;
-  padding:30px 8px;
+.scroll-card::after{
+  content:'';
+  position:absolute;
+  inset:6px;
+  border:1px solid rgba(184,134,11,.5);
+  pointer-events:none;
 }
+.date-corner{
+  position:absolute;
+  width:13px;
+  height:13px;
+  border:1.5px solid var(--gold);
+  z-index:2;
+  pointer-events:none;
+}
+.date-corner.tl{top:3px;left:3px;border-right:none;border-bottom:none;}
+.date-corner.tr{top:3px;right:3px;border-left:none;border-bottom:none;}
+.date-corner.bl{bottom:3px;left:3px;border-right:none;border-top:none;}
+.date-corner.br{bottom:3px;right:3px;border-left:none;border-top:none;}
 .wax-seal{
   position:absolute;
-  top:50%;
-  left:50%;
-  transform:translate(-50%, -50%);
-  width:clamp(40px, 12vw, 64px);
-  height:clamp(40px, 12vw, 64px);
+  inset:0;
+  margin:auto;
+  width:clamp(38px, 11vw, 58px);
+  height:clamp(38px, 11vw, 58px);
   background:radial-gradient(circle at 35% 35%, #d94461, var(--ruby), #5a0f1c);
   border-radius:50%;
   border:2px dashed rgba(255,255,255,.3);
   box-shadow:0 4px 12px rgba(0,0,0,.5), inset 0 -2px 6px rgba(0,0,0,.4);
-  z-index:4;
+  z-index:3;
   display:flex;align-items:center;justify-content:center;
   font-family:'Cinzel',serif;color:rgba(255,255,255,.8);font-size:clamp(7px, 2vw, 9px);letter-spacing:1px;
   text-shadow:0 1px 2px rgba(0,0,0,.6);
@@ -312,7 +298,7 @@ body{
 }
 .scroll-card.opened .wax-seal{
   opacity:0;
-  transform:translate(-50%, -50%) scale(1.5) rotate(20deg);
+  transform:scale(1.5) rotate(20deg);
   pointer-events:none;
 }
 .scroll-text{
@@ -320,14 +306,16 @@ body{
   color:var(--dark);
   line-height:1;
   font-weight:700;
-  font-size:clamp(24px, 8vw, 52px);
+  font-size:clamp(24px, 8vw, 42px);
   opacity:0;
-  transform:translateY(10px);
-  transition:opacity 0.6s ease 0.4s, transform 0.6s ease 0.4s;
+  transform:scale(.85);
+  transition:opacity 0.5s ease 0.15s, transform 0.5s ease 0.15s;
+  position:relative;
+  z-index:1;
 }
 .scroll-card.opened .scroll-text{
   opacity:1;
-  transform:translateY(0);
+  transform:scale(1);
 }
 
 .flip-hint{margin-top:10px;font-size:clamp(8px, 2vw, 10px);letter-spacing:3px;color:var(--gold);font-weight:700;text-transform:uppercase;font-family:'Cinzel',serif;animation:shimmerGold 2.5s ease-in-out infinite;text-align:center;}
@@ -1196,9 +1184,8 @@ body{
       
       <div style="text-align:center;">
         <div class="scroll-card" onclick="this.classList.toggle('opened')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')this.classList.toggle('opened')" aria-label="Reveal Day">
-          <div class="scroll-roller"></div>
-          <div class="scroll-paper"><div class="scroll-text">18</div></div>
-          <div class="scroll-roller"></div>
+          <span class="date-corner tl"></span><span class="date-corner tr"></span><span class="date-corner bl"></span><span class="date-corner br"></span>
+          <div class="scroll-text">18</div>
           <div class="wax-seal">N&amp;A</div>
         </div>
         <div class="flip-hint">Day</div>
@@ -1206,9 +1193,8 @@ body{
 
       <div style="text-align:center;">
         <div class="scroll-card" onclick="this.classList.toggle('opened')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')this.classList.toggle('opened')" aria-label="Reveal Month">
-          <div class="scroll-roller"></div>
-          <div class="scroll-paper"><div class="scroll-text" style="font-size:clamp(20px, 7vw, 46px);">09</div></div>
-          <div class="scroll-roller"></div>
+          <span class="date-corner tl"></span><span class="date-corner tr"></span><span class="date-corner bl"></span><span class="date-corner br"></span>
+          <div class="scroll-text" style="font-size:clamp(20px, 6.5vw, 36px);">09</div>
           <div class="wax-seal">N&amp;A</div>
         </div>
         <div class="flip-hint">Month</div>
@@ -1216,9 +1202,8 @@ body{
 
       <div style="text-align:center;">
         <div class="scroll-card" onclick="this.classList.toggle('opened')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')this.classList.toggle('opened')" aria-label="Reveal Year">
-          <div class="scroll-roller"></div>
-          <div class="scroll-paper"><div class="scroll-text" style="font-size:clamp(20px, 7vw, 46px);">2026</div></div>
-          <div class="scroll-roller"></div>
+          <span class="date-corner tl"></span><span class="date-corner tr"></span><span class="date-corner bl"></span><span class="date-corner br"></span>
+          <div class="scroll-text" style="font-size:clamp(20px, 6.5vw, 36px);">2026</div>
           <div class="wax-seal">N&amp;A</div>
         </div>
         <div class="flip-hint">Year</div>
@@ -1322,7 +1307,7 @@ body{
 
   <!-- VENUE PARALLAX & MAP -->
   <section id="venue-section" class="reveal-section" style="position:relative;min-height:500px;overflow:hidden;display:flex;align-items:center;justify-content:center;border:none;padding:0;">
-    <div id="venue-bg" style="background-image:url('venue.jpg')"></div>
+    <div id="venue-bg"></div>
     <div id="venue-overlay"></div>
     <div id="venue-petals"></div>
     <div id="venue-content">
@@ -2220,6 +2205,14 @@ function closeSeatingLightbox(){
   let bg3Url = 'bg3.png';
   __resolveBgImage('bg2', (url)=>{ bg2Url = url; });
   __resolveBgImage('bg3', (url)=>{ bg3Url = url; });
+
+  // Resolve the venue photo to whichever extension (jpg/jpeg/png) actually exists.
+  const venueBgEl = document.getElementById('venue-bg');
+  if(venueBgEl){
+    __resolveBgImage('venue', (url)=>{
+      venueBgEl.style.backgroundImage = "url('" + url + "')";
+    });
+  }
 
   function crossFadeTo(url){
     if(currentUrl === url) return;
