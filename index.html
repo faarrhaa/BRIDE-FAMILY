@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8"/>
 <meta name="viewport" content="width=device-width,initial-scale=1"/>
-<title>Nada & Ahmed · Wedding Invitation</title>
-<meta name="description" content="You are cordially invited to the wedding of Nada & Ahmed on September 18, 2026 at Four Seasons Hotel San Stefano."/>
+<title>Ahmed & Nada · Wedding Invitation</title>
+<meta name="description" content="You are cordially invited to the wedding of Ahmed & Nada on September 18, 2026 at Four Seasons Hotel San Stefano."/>
 <link rel="preconnect" href="https://fonts.googleapis.com"/>
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
 <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400;1,500;1,600&family=Cinzel:wght@400;600;700&family=Playfair+Display:ital,wght@0,400;0,700;1,400;1,600&family=Pinyon+Script&family=Great+Vibes&display=swap" rel="stylesheet"/>
@@ -100,14 +100,102 @@ body{
 .hero-photo-corner.br{bottom:4px;right:4px;border-left:none;border-top:none;}
 
 /* ── GALLERY / SCRAPBOOK (open two-page spread) ── */
-.scrapbook{position:relative;max-width:820px;margin:0 auto;padding:0 56px;user-select:none;}
+.scrapbook{position:relative;max-width:820px;margin:0 auto;padding:0 56px 34px;user-select:none;}
 .book-frame{position:relative;width:100%;aspect-ratio:8/5;perspective:3200px;}
-.book-cover{position:absolute;inset:0;background:linear-gradient(160deg,var(--cream),var(--cream2));border-radius:10px;box-shadow:0 22px 60px rgba(44,26,0,.30),inset 0 0 0 1px rgba(184,134,11,.2);}
-.book-spine{position:absolute;left:50%;top:2.5%;bottom:2.5%;width:20px;margin-left:-10px;background:linear-gradient(90deg,rgba(44,26,0,.16),rgba(44,26,0,.02) 30%,rgba(44,26,0,.02) 70%,rgba(44,26,0,.16));pointer-events:none;z-index:5;}
+.book-cover{
+  position:absolute;inset:0;border-radius:10px;backdrop-filter:blur(1px);
+  background:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    linear-gradient(90deg, rgba(0,0,0,.32) 0%, rgba(255,255,255,.14) 13%, transparent 32%, transparent 68%, rgba(255,255,255,.1) 87%, rgba(0,0,0,.32) 100%),
+    radial-gradient(ellipse at 25% 15%, rgba(212,168,67,.22), transparent 55%),
+    radial-gradient(ellipse at 85% 90%, rgba(0,0,0,.28), transparent 55%),
+    linear-gradient(160deg,rgba(163,130,86,.62),rgba(138,105,64,.68));
+  background-blend-mode: overlay, normal, normal, normal, normal;
+  box-shadow:0 22px 60px rgba(44,26,0,.30),inset 0 0 0 1px rgba(184,134,11,.25),inset 0 0 46px rgba(44,26,0,.4);
+}
+.book-cover::before{
+  content:'';position:absolute;inset:10px;border-radius:6px;
+  border:2px solid transparent;
+  border-image:linear-gradient(100deg, rgba(212,168,67,.12) 0%, rgba(245,226,160,.85) 14%, rgba(184,134,11,.25) 28%, rgba(212,168,67,.8) 48%, rgba(138,105,64,.18) 64%, rgba(245,226,160,.75) 80%, rgba(184,134,11,.2) 100%) 1;
+  box-shadow:inset 0 0 0 4px rgba(44,26,0,.1);
+  pointer-events:none;
+}
+.book-cover::after{
+  content:'';position:absolute;inset:16px;border-radius:4px;
+  border:1px dashed rgba(212,168,67,.22);
+  pointer-events:none;
+}
+.book-closed{
+  position:absolute;inset:0;z-index:9;border-radius:10px;
+  display:flex;align-items:center;justify-content:center;
+  transform-origin:left center;
+  cursor:pointer;
+  backface-visibility:hidden;-webkit-backface-visibility:hidden;
+  transition:transform 1.15s cubic-bezier(.4,0,.2,1), opacity .6s ease .55s;
+  background:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    linear-gradient(90deg, rgba(0,0,0,.34) 0%, rgba(255,255,255,.14) 13%, transparent 32%, transparent 68%, rgba(255,255,255,.1) 87%, rgba(0,0,0,.34) 100%),
+    radial-gradient(ellipse at 25% 15%, rgba(212,168,67,.25), transparent 55%),
+    radial-gradient(ellipse at 85% 90%, rgba(0,0,0,.32), transparent 55%),
+    linear-gradient(160deg,#7c5c38,#432f14 60%,#5f4322);
+  background-blend-mode: overlay, normal, normal, normal, normal;
+  box-shadow:0 22px 60px rgba(44,26,0,.35), inset 0 0 0 1px rgba(184,134,11,.3), inset 0 0 50px rgba(0,0,0,.42);
+}
+.book-closed::before{
+  content:'';position:absolute;inset:10px;border-radius:6px;
+  border:2px solid transparent;
+  border-image:linear-gradient(100deg, rgba(212,168,67,.12) 0%, rgba(245,226,160,.9) 14%, rgba(184,134,11,.25) 28%, rgba(212,168,67,.85) 48%, rgba(138,105,64,.18) 64%, rgba(245,226,160,.8) 80%, rgba(184,134,11,.22) 100%) 1;
+  pointer-events:none;
+}
+.book-closed::after{
+  content:'';position:absolute;inset:16px;border-radius:4px;
+  border:1px dashed rgba(212,168,67,.22);
+  pointer-events:none;
+}
+.book-closed-monogram{position:relative;z-index:1;text-align:center;pointer-events:none;}
+.book-closed-label{font-family:'Cinzel',serif;font-size:clamp(9px,2vw,11px);letter-spacing:5px;color:rgba(245,226,160,.75);margin-top:8px;text-transform:uppercase;}
+.book-closed-hint{
+  font-family:'Cinzel',serif;font-size:clamp(8px,1.6vw,10px);
+  letter-spacing:4px;color:rgba(212,168,67,.5);
+  margin-top:16px;text-align:center;text-transform:uppercase;
+  animation:shimmerGold 2.5s ease-in-out infinite;
+  transition:opacity .3s;
+}
+.book-frame.open .book-closed{
+  transform:perspective(1400px) rotateY(-100deg);
+  opacity:0;
+  pointer-events:none;
+}
+.book-frame.open ~ .book-closed-hint,
+.scrapbook:has(.book-frame.open) .book-closed-hint{opacity:0;pointer-events:none;}
+  position:absolute;left:50%;bottom:-30px;transform:translateX(-50%);
+  width:82%;height:28px;
+  background:radial-gradient(ellipse at center, rgba(0,0,0,.5), rgba(0,0,0,.2) 55%, transparent 75%);
+  filter:blur(5px);
+  z-index:0;pointer-events:none;
+}
+.book-ribbon{
+  position:absolute;top:0;left:50%;margin-left:-6px;
+  width:12px;height:calc(100% + 36px);z-index:4;pointer-events:none;
+  background:linear-gradient(180deg,#a3182e,var(--ruby) 45%,#6d0f21);
+  box-shadow:0 3px 8px rgba(0,0,0,.4), inset 1px 0 0 rgba(255,255,255,.18), inset -1px 0 0 rgba(0,0,0,.3);
+  clip-path:polygon(0 0,100% 0,100% calc(100% - 18px),50% 100%,0 calc(100% - 18px));
+}
+.book-spine{position:absolute;left:50%;top:2.5%;bottom:2.5%;width:20px;margin-left:-10px;background:linear-gradient(90deg,rgba(44,26,0,.4),rgba(44,26,0,.08) 30%,rgba(44,26,0,.08) 70%,rgba(44,26,0,.4));box-shadow:inset 0 0 12px 2px rgba(0,0,0,.55);pointer-events:none;z-index:5;}
 .book-spread{position:absolute;inset:3% 3%;display:flex;transform-style:preserve-3d;}
-.book-page{position:relative;width:50%;height:100%;padding:10px;}
-.book-page.left{padding-right:18px;}
-.book-page.right{padding-left:18px;}
+.book-page{
+  position:relative;width:50%;height:100%;padding:10px;
+  background:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    radial-gradient(ellipse at 50% 0%, rgba(44,26,0,.08), transparent 60%),
+    linear-gradient(160deg,var(--cream),var(--cream2));
+  background-blend-mode: overlay, normal, normal;
+  box-shadow:inset 0 0 26px rgba(44,26,0,.1);
+}
+.book-page.left{padding-right:18px;border-radius:2px 0 0 2px;}
+.book-page.right{padding-left:18px;border-radius:0 2px 2px 0;}
+.book-page.left::after{content:'';position:absolute;top:6px;bottom:6px;right:0;width:3px;background:linear-gradient(180deg,var(--gold3),var(--gold),var(--gold3));opacity:.55;pointer-events:none;}
+.book-page.right::after{content:'';position:absolute;top:6px;bottom:6px;left:0;width:3px;background:linear-gradient(180deg,var(--gold3),var(--gold),var(--gold3));opacity:.55;pointer-events:none;}
 .book-page-photos{position:relative;width:100%;height:100%;}
 .book-page-num{position:absolute;bottom:-4px;font-family:'Cinzel',serif;font-size:clamp(11px,2.4vw,13px);letter-spacing:2px;color:var(--gold);opacity:.65;}
 .book-page.left .book-page-num{left:6px;}
@@ -128,7 +216,7 @@ body{
 .flip-leaf{position:absolute;top:0;bottom:0;width:50%;transform-style:preserve-3d;z-index:60;pointer-events:none;}
 .flip-leaf.dir-right{left:50%;transform-origin:left center;}
 .flip-leaf.dir-left{left:0;transform-origin:right center;}
-.flip-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:linear-gradient(160deg,var(--cream),var(--cream2));padding:10px;overflow:hidden;}
+.flip-face{position:absolute;inset:0;backface-visibility:hidden;-webkit-backface-visibility:hidden;background:url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),linear-gradient(160deg,var(--cream),var(--cream2));background-blend-mode:overlay,normal;padding:10px;overflow:hidden;}
 .flip-leaf.dir-right .flip-face{border-radius:0 8px 8px 0;padding:10px 10px 10px 18px;}
 .flip-leaf.dir-left .flip-face{border-radius:8px 0 0 8px;padding:10px 18px 10px 10px;}
 .flip-face.back{transform:rotateY(180deg);}
@@ -211,7 +299,7 @@ body{
   100%{transform:translateY(-108vh) translateX(calc(var(--rdx,24px) * 2)) rotate(var(--rend,55deg));opacity:0;}
 }
 #venue-bg{position:absolute;inset:0;background-size:cover;background-position:center;z-index:0;}
-#venue-overlay{position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,15,42,.55) 0%,rgba(18,12,38,.5) 45%,rgba(15,10,32,.7) 100%);z-index:1;}
+#venue-overlay{position:absolute;inset:0;background:transparent;z-index:1;}
 #venue-petals{position:absolute;inset:0;overflow:hidden;pointer-events:none;z-index:2;}
 #venue-content{position:relative;z-index:3;text-align:center;padding:64px 24px;max-width:640px;}
 #venue-section{width:100vw;margin-left:calc(50% - 50vw);margin-right:calc(50% - 50vw);}
@@ -254,52 +342,135 @@ body{
   cursor:pointer;
   position:relative;
   margin:0 auto 14px;
-  background:linear-gradient(135deg, #f0e2c0, #ddc17e 50%, #f0e2c0);
-  border:1px solid var(--gold);
-  box-shadow:0 8px 20px rgba(0,0,0,.35), inset 0 0 0 1px rgba(184,134,11,.2);
+  border-radius:4px;
+  background:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.82' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E"),
+    url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='42' height='42' viewBox='0 0 42 42'%3E%3Cg fill='none' stroke='%238a5c00' stroke-width='0.7'%3E%3Cpath d='M21 2 L40 21 L21 40 L2 21 Z' opacity='0.45'/%3E%3Cpath d='M21 9 L34 21 L21 33 L8 21 Z' opacity='0.4'/%3E%3Ccircle cx='21' cy='21' r='3.4' opacity='0.4'/%3E%3C/g%3E%3C/svg%3E"),
+    radial-gradient(circle at 28% 22%, rgba(255,255,255,.6), transparent 45%),
+    radial-gradient(ellipse at 78% 82%, rgba(90,56,0,.16), transparent 55%),
+    radial-gradient(ellipse at 12% 85%, rgba(90,56,0,.10), transparent 45%),
+    repeating-linear-gradient(135deg, rgba(184,134,11,.09) 0 3px, transparent 3px 9px),
+    linear-gradient(135deg, #f3e6c4, #ddc17e 50%, #eddca8);
+  background-blend-mode: overlay, multiply, normal, normal, normal, multiply, normal;
+  border:2px dashed rgba(184,134,11,.8);
+  box-shadow:0 10px 26px rgba(0,0,0,.42), 0 2px 6px rgba(0,0,0,.3), inset 0 0 0 1px rgba(184,134,11,.3), inset 0 1px 0 rgba(255,255,255,.35), inset 0 0 24px rgba(184,134,11,.2), inset 0 -6px 14px rgba(90,56,0,.18);
   display:flex;
   align-items:center;
   justify-content:center;
+  transition:transform .35s ease, box-shadow .35s ease;
+  mask-image:
+    radial-gradient(circle 7px at 0% 50%, transparent 99%, black 100%),
+    radial-gradient(circle 7px at 100% 50%, transparent 99%, black 100%);
+  mask-composite: intersect;
+  -webkit-mask-image:
+    radial-gradient(circle 7px at 0% 50%, transparent 99%, black 100%),
+    radial-gradient(circle 7px at 100% 50%, transparent 99%, black 100%);
+  -webkit-mask-composite: source-in;
+}
+.scroll-card:hover{transform:translateY(-3px);box-shadow:0 16px 34px rgba(0,0,0,.46), 0 2px 6px rgba(0,0,0,.3), inset 0 0 0 1px rgba(184,134,11,.35), inset 0 1px 0 rgba(255,255,255,.4), inset 0 0 28px rgba(184,134,11,.24), inset 0 -6px 14px rgba(90,56,0,.18);}
+.scroll-shine{position:absolute;inset:0;z-index:2;pointer-events:none;overflow:hidden;border-radius:inherit;}
+.scroll-shine::before{
+  content:'';position:absolute;top:-60%;left:-70%;width:38%;height:220%;
+  background:linear-gradient(78deg, transparent 0%, rgba(255,255,255,.5) 45%, rgba(255,250,222,.8) 50%, rgba(255,255,255,.5) 55%, transparent 100%);
+  transform:rotate(12deg);
+  mix-blend-mode:overlay;
+  animation:scrollShineSweep 6s ease-in-out infinite;
+  animation-delay:var(--shine-delay,0s);
+}
+@keyframes scrollShineSweep{
+  0%,8%{left:-70%;}
+  45%,100%{left:135%;}
+}
+.scroll-tassel{
+  position:absolute;top:-15px;right:6px;z-index:4;pointer-events:none;
+  transform-origin:13px 7px;
+  animation:tasselSway 4.6s ease-in-out infinite;
+  animation-delay:var(--tassel-delay,0s);
+  filter:drop-shadow(0 3px 4px rgba(0,0,0,.35));
+}
+@keyframes tasselSway{0%,100%{transform:rotate(-5deg);}50%{transform:rotate(5deg);}}
+.scroll-card::before{
+  content:'';
+  position:absolute;
+  inset:7px;
+  border:1px solid rgba(184,134,11,.55);
+  border-radius:2px;
+  pointer-events:none;
 }
 .scroll-card::after{
   content:'';
   position:absolute;
-  inset:6px;
-  border:1px solid rgba(184,134,11,.5);
+  inset:12px;
+  border:1px dashed rgba(184,134,11,.4);
   pointer-events:none;
 }
 .date-corner{
   position:absolute;
-  width:13px;
-  height:13px;
+  width:16px;
+  height:16px;
   border:1.5px solid var(--gold);
   z-index:2;
   pointer-events:none;
 }
-.date-corner.tl{top:3px;left:3px;border-right:none;border-bottom:none;}
-.date-corner.tr{top:3px;right:3px;border-left:none;border-bottom:none;}
-.date-corner.bl{bottom:3px;left:3px;border-right:none;border-top:none;}
-.date-corner.br{bottom:3px;right:3px;border-left:none;border-top:none;}
-.wax-seal{
+.date-corner::before{
+  content:'';
   position:absolute;
-  inset:0;
-  margin:auto;
-  width:clamp(38px, 11vw, 58px);
-  height:clamp(38px, 11vw, 58px);
-  background:radial-gradient(circle at 35% 35%, #d94461, var(--ruby), #5a0f1c);
+  width:4px;
+  height:4px;
   border-radius:50%;
-  border:2px dashed rgba(255,255,255,.3);
-  box-shadow:0 4px 12px rgba(0,0,0,.5), inset 0 -2px 6px rgba(0,0,0,.4);
-  z-index:3;
-  display:flex;align-items:center;justify-content:center;
-  font-family:'Cinzel',serif;color:rgba(255,255,255,.8);font-size:clamp(7px, 2vw, 9px);letter-spacing:1px;
-  text-shadow:0 1px 2px rgba(0,0,0,.6);
-  transition:opacity 0.4s ease, transform 0.4s ease;
+  background:var(--gold);
+  box-shadow:0 0 4px rgba(184,134,11,.7);
 }
-.scroll-card.opened .wax-seal{
+.date-corner.tl{top:4px;left:4px;border-right:none;border-bottom:none;}
+.date-corner.tl::before{top:-2px;left:-2px;}
+.date-corner.tr{top:4px;right:4px;border-left:none;border-bottom:none;}
+.date-corner.tr::before{top:-2px;right:-2px;}
+.date-corner.bl{bottom:4px;left:4px;border-right:none;border-top:none;}
+.date-corner.bl::before{bottom:-2px;left:-2px;}
+.date-corner.br{bottom:4px;right:4px;border-left:none;border-top:none;}
+.date-corner.br::before{bottom:-2px;right:-2px;}
+/* ── RUBBER STAMP HANDLE (replaces wax seal) ── */
+.stamp-tool{
+  position:absolute;
+  left:50%;
+  top:-4px;
+  width:clamp(44px, 13vw, 62px);
+  transform:translate(-50%,-98px) rotate(-34deg) scale(.78);
+  transform-origin:50% 88%;
   opacity:0;
-  transform:scale(1.5) rotate(20deg);
   pointer-events:none;
+  z-index:6;
+  filter:drop-shadow(0 8px 10px rgba(0,0,0,.42));
+}
+.scroll-card.stamped .stamp-tool{
+  animation:stampAction 1.05s cubic-bezier(.32,1.4,.4,1) forwards;
+}
+@keyframes stampAction{
+  0%{   transform:translate(-50%,-98px) rotate(-34deg) scale(.78); opacity:0; }
+  14%{  opacity:1; }
+  52%{  transform:translate(-50%,3px) rotate(-3deg) scale(1); opacity:1; }
+  66%{  transform:translate(-50%,-7px) rotate(-11deg) scale(1); opacity:1; }
+  84%{  transform:translate(-50%,-7px) rotate(-11deg) scale(1); opacity:1; }
+  100%{ transform:translate(-50%,-72px) rotate(-27deg) scale(.82); opacity:0; }
+}
+.stamp-impact{
+  position:absolute;
+  left:50%;top:50%;
+  width:70%;height:70%;
+  transform:translate(-50%,-50%) scale(.4);
+  border-radius:50%;
+  border:2px solid rgba(184,134,11,.55);
+  opacity:0;
+  pointer-events:none;
+  z-index:5;
+}
+.scroll-card.stamped .stamp-impact{
+  animation:stampImpact .5s ease-out forwards;
+  animation-delay:.5s;
+}
+@keyframes stampImpact{
+  0%{opacity:.75;transform:translate(-50%,-50%) scale(.4);}
+  100%{opacity:0;transform:translate(-50%,-50%) scale(1.15);}
 }
 .scroll-text{
   font-family:'Playfair Display',serif;
@@ -309,11 +480,12 @@ body{
   font-size:clamp(24px, 8vw, 42px);
   opacity:0;
   transform:scale(.85);
-  transition:opacity 0.5s ease 0.15s, transform 0.5s ease 0.15s;
+  transition:opacity 0.4s ease 0.5s, transform 0.4s ease 0.5s;
   position:relative;
   z-index:1;
+  text-shadow:0 1px 0 rgba(255,255,255,.4);
 }
-.scroll-card.opened .scroll-text{
+.scroll-card.stamped .scroll-text{
   opacity:1;
   transform:scale(1);
 }
@@ -775,23 +947,6 @@ body{
   color:var(--text);
   letter-spacing:.5px;
 }
-.seating-map-frame{
-  max-width:560px;
-  margin:40px auto 0;
-  border:1px solid rgba(184,134,11,.35);
-  border-radius:14px;
-  overflow:hidden;
-  padding:5px;
-  background:linear-gradient(135deg, rgba(184,134,11,.1), rgba(184,134,11,.02));
-  box-shadow:0 12px 48px rgba(0,0,0,.18);
-  transition:transform .3s ease, box-shadow .3s ease;
-}
-.seating-map-frame:hover{
-  transform:scale(1.01);
-  box-shadow:0 16px 56px rgba(0,0,0,.24), 0 0 20px rgba(184,134,11,.12);
-}
-.seating-map-frame img{width:100%;border-radius:10px;display:block;}
-
 /* ── DRESS CODE · WARDROBE ── */
 @keyframes wardrobeReveal{0%{opacity:0;transform:translateY(10px)}100%{opacity:1;transform:translateY(0)}}
 @keyframes silkShimmer{0%,100%{opacity:.07}50%{opacity:.18}}
@@ -1074,6 +1229,21 @@ body{
       <stop offset="45%" stop-color="#d4a843"/>
       <stop offset="100%" stop-color="#b8860b"/>
     </linearGradient>
+    <linearGradient id="stampWoodGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#e9c485"/>
+      <stop offset="45%" stop-color="#b8860b"/>
+      <stop offset="100%" stop-color="#6b4a10"/>
+    </linearGradient>
+    <linearGradient id="stampMetalGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#f5e2a0"/>
+      <stop offset="50%" stop-color="#d4a843"/>
+      <stop offset="100%" stop-color="#8a6a1e"/>
+    </linearGradient>
+    <linearGradient id="stampBaseGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" stop-color="#5a3800"/>
+      <stop offset="55%" stop-color="#3d2600"/>
+      <stop offset="100%" stop-color="#2c1a00"/>
+    </linearGradient>
   </defs>
 </svg>
 
@@ -1083,7 +1253,7 @@ body{
   <div style="text-align:center;">
     <div class="loading-ring"></div>
     <div class="loading-mono">N &amp; A</div>
-    <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(15px,3.2vw,17px);color:var(--gold);font-weight:700;letter-spacing:3px;margin-top:8px;">Nada &amp; Ahmed</div>
+    <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(15px,3.2vw,17px);color:var(--gold);font-weight:700;letter-spacing:3px;margin-top:8px;">Ahmed &amp; Nada</div>
   </div>
 </div>
 
@@ -1103,7 +1273,7 @@ body{
     <div id="envelope-photo-wrap">
       <div id="light-beam"></div>
       <img id="envelope-photo" src="env.png" alt="Wedding envelope" onerror="if(this.src.indexOf('env.png')>-1){this.src='env.jpg';}else if(this.src.indexOf('env.jpg')>-1){this.src='env.jpeg';}else{this.onerror=null;}">
-      <div id="envelope-names">Nada &amp; Ahmed</div>
+      <div id="envelope-names">Ahmed &amp; Nada</div>
       <div id="envelope-click-label">✦ Click to open ✦</div>
     </div>
   </div>
@@ -1152,11 +1322,11 @@ body{
     </div>
 
     <div style="position:relative;display:inline-block;">
-      <h1 class="name-shimmer slide-name" id="name-nada" data-text="Nada" style="font-family:'Pinyon Script',cursive;font-size:clamp(72px,16vw,120px);color:var(--dark);line-height:1;cursor:default;text-shadow:0 2px 8px rgba(184,134,11,.15);">Nada</h1>
+      <h1 class="name-shimmer slide-name" id="name-nada" data-text="Ahmed" style="font-family:'Pinyon Script',cursive;font-size:clamp(72px,16vw,120px);color:var(--dark);line-height:1;cursor:default;text-shadow:0 2px 8px rgba(184,134,11,.15);">Ahmed</h1>
     </div>
     <div class="fade-section" style="font-family:'Playfair Display',serif;font-style:italic;font-size:clamp(30px,6vw,48px);color:var(--gold);font-weight:700;animation-delay:.18s;">&amp;</div>
     <div style="position:relative;display:inline-block;">
-      <h1 class="name-shimmer slide-name" id="name-ahmed" data-text="Ahmed" style="font-family:'Pinyon Script',cursive;font-size:clamp(72px,16vw,120px);color:var(--dark);line-height:1;cursor:default;text-shadow:0 2px 8px rgba(184,134,11,.15);">Ahmed</h1>
+      <h1 class="name-shimmer slide-name" id="name-ahmed" data-text="Nada" style="font-family:'Pinyon Script',cursive;font-size:clamp(72px,16vw,120px);color:var(--dark);line-height:1;cursor:default;text-shadow:0 2px 8px rgba(184,134,11,.15);">Nada</h1>
     </div>
 
     <div class="fade-section" style="animation-delay:.34s;margin:12px 0 22px;">
@@ -1174,7 +1344,7 @@ body{
         <div class="hero-photo-corner bl"></div>
         <div class="hero-photo-corner br"></div>
         <div class="hero-photo-inner">
-          <img src="hero.png" alt="Nada &amp; Ahmed" onerror="if(this.src.indexOf('hero.png')>-1){this.src='hero.jpeg';}else if(this.src.indexOf('hero.jpeg')>-1){this.src='hero.jpg';}else{this.onerror=null;}">
+          <img src="hero.png" alt="Ahmed &amp; Nada" onerror="if(this.src.indexOf('hero.png')>-1){this.src='hero.jpeg';}else if(this.src.indexOf('hero.jpeg')>-1){this.src='hero.jpg';}else{this.onerror=null;}">
         </div>
       </div>
     </div>
@@ -1188,33 +1358,99 @@ body{
 
   <!-- ═══ DATE - 3 ANTIQUE SCROLLS ═══ -->
   <section id="date-reveal-section" style="text-align:center;padding:40px 0;">
-    <p class="tagline" style="color:var(--gold);font-weight:700;margin-bottom:24px;">Break the seal to reveal the date</p>
+    <p class="tagline" style="color:var(--gold);font-weight:700;margin-bottom:24px;">The date, stamped in gold</p>
     
     <div style="display:flex; justify-content:center; gap:clamp(10px, 3vw, 40px); flex-wrap:nowrap; margin:20px 0; align-items: flex-start;">
       
-      <div style="text-align:center;">
-        <div class="scroll-card" onclick="this.classList.toggle('opened')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')this.classList.toggle('opened')" aria-label="Reveal Day">
+      <div style="text-align:center;position:relative;">
+        <div class="scroll-card" onclick="if(!this.classList.contains('stamped'))this.classList.add('stamped')" role="button" tabindex="0" onkeydown="if((event.key==='Enter'||event.key===' ')&amp;&amp;!this.classList.contains('stamped'))this.classList.add('stamped')" aria-label="Reveal Day" style="--shine-delay:0s;">
+          <div class="scroll-shine"></div>
           <span class="date-corner tl"></span><span class="date-corner tr"></span><span class="date-corner bl"></span><span class="date-corner br"></span>
           <div class="scroll-text">18</div>
-          <div class="wax-seal">N&amp;A</div>
+          <div class="stamp-impact" aria-hidden="true"></div>
+          <div class="stamp-tool" aria-hidden="true">
+            <svg viewBox="0 0 60 100" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="30" cy="6" rx="9" ry="4" fill="url(#stampMetalGrad)"/>
+              <path d="M22,7 L38,7 L33,38 L27,38 Z" fill="url(#stampWoodGrad)" stroke="rgba(44,26,0,.35)" stroke-width="0.6"/>
+              <rect x="20" y="36" width="20" height="7" rx="2.5" fill="url(#stampMetalGrad)"/>
+              <rect x="9" y="43" width="42" height="24" rx="4" fill="url(#stampBaseGrad)" stroke="rgba(0,0,0,.3)" stroke-width="0.8"/>
+              <rect x="13" y="60" width="34" height="7" rx="2" fill="#1c1108" stroke="rgba(184,134,11,.4)" stroke-width="0.5"/>
+            </svg>
+          </div>
+        </div>
+        <div class="scroll-tassel" style="--tassel-delay:0s;" aria-hidden="true">
+          <svg width="26" height="58" viewBox="0 0 26 58" fill="none">
+            <circle cx="13" cy="7" r="5" stroke="#d4a843" stroke-width="1.6"/>
+            <path d="M13 12 L13 30" stroke="#d4a843" stroke-width="1.4"/>
+            <path d="M6 30 Q13 26 20 30" stroke="#8b1a2f" stroke-width="2.2" fill="none"/>
+            <path d="M8 32 L7 54" stroke="#d4a843" stroke-width="1.1"/>
+            <path d="M11 32 L10.5 56" stroke="#d4a843" stroke-width="1.1"/>
+            <path d="M13 32 L13 57" stroke="#d4a843" stroke-width="1.1"/>
+            <path d="M15 32 L15.5 56" stroke="#d4a843" stroke-width="1.1"/>
+            <path d="M18 32 L19 54" stroke="#d4a843" stroke-width="1.1"/>
+          </svg>
         </div>
         <div class="flip-hint">Day</div>
       </div>
 
-      <div style="text-align:center;">
-        <div class="scroll-card" onclick="this.classList.toggle('opened')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')this.classList.toggle('opened')" aria-label="Reveal Month">
+      <div style="text-align:center;position:relative;">
+        <div class="scroll-card" onclick="if(!this.classList.contains('stamped'))this.classList.add('stamped')" role="button" tabindex="0" onkeydown="if((event.key==='Enter'||event.key===' ')&amp;&amp;!this.classList.contains('stamped'))this.classList.add('stamped')" aria-label="Reveal Month" style="--shine-delay:1.6s;">
+          <div class="scroll-shine"></div>
           <span class="date-corner tl"></span><span class="date-corner tr"></span><span class="date-corner bl"></span><span class="date-corner br"></span>
           <div class="scroll-text" style="font-size:clamp(20px, 6.5vw, 36px);">09</div>
-          <div class="wax-seal">N&amp;A</div>
+          <div class="stamp-impact" aria-hidden="true"></div>
+          <div class="stamp-tool" aria-hidden="true">
+            <svg viewBox="0 0 60 100" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="30" cy="6" rx="9" ry="4" fill="url(#stampMetalGrad)"/>
+              <path d="M22,7 L38,7 L33,38 L27,38 Z" fill="url(#stampWoodGrad)" stroke="rgba(44,26,0,.35)" stroke-width="0.6"/>
+              <rect x="20" y="36" width="20" height="7" rx="2.5" fill="url(#stampMetalGrad)"/>
+              <rect x="9" y="43" width="42" height="24" rx="4" fill="url(#stampBaseGrad)" stroke="rgba(0,0,0,.3)" stroke-width="0.8"/>
+              <rect x="13" y="60" width="34" height="7" rx="2" fill="#1c1108" stroke="rgba(184,134,11,.4)" stroke-width="0.5"/>
+            </svg>
+          </div>
+        </div>
+        <div class="scroll-tassel" style="--tassel-delay:.9s;" aria-hidden="true">
+          <svg width="26" height="58" viewBox="0 0 26 58" fill="none">
+            <circle cx="13" cy="7" r="5" stroke="#d4a843" stroke-width="1.6"/>
+            <path d="M13 12 L13 30" stroke="#d4a843" stroke-width="1.4"/>
+            <path d="M6 30 Q13 26 20 30" stroke="#8b1a2f" stroke-width="2.2" fill="none"/>
+            <path d="M8 32 L7 54" stroke="#d4a843" stroke-width="1.1"/>
+            <path d="M11 32 L10.5 56" stroke="#d4a843" stroke-width="1.1"/>
+            <path d="M13 32 L13 57" stroke="#d4a843" stroke-width="1.1"/>
+            <path d="M15 32 L15.5 56" stroke="#d4a843" stroke-width="1.1"/>
+            <path d="M18 32 L19 54" stroke="#d4a843" stroke-width="1.1"/>
+          </svg>
         </div>
         <div class="flip-hint">Month</div>
       </div>
 
-      <div style="text-align:center;">
-        <div class="scroll-card" onclick="this.classList.toggle('opened')" role="button" tabindex="0" onkeydown="if(event.key==='Enter'||event.key===' ')this.classList.toggle('opened')" aria-label="Reveal Year">
+      <div style="text-align:center;position:relative;">
+        <div class="scroll-card" onclick="if(!this.classList.contains('stamped'))this.classList.add('stamped')" role="button" tabindex="0" onkeydown="if((event.key==='Enter'||event.key===' ')&amp;&amp;!this.classList.contains('stamped'))this.classList.add('stamped')" aria-label="Reveal Year" style="--shine-delay:3.2s;">
+          <div class="scroll-shine"></div>
           <span class="date-corner tl"></span><span class="date-corner tr"></span><span class="date-corner bl"></span><span class="date-corner br"></span>
           <div class="scroll-text" style="font-size:clamp(20px, 6.5vw, 36px);">2026</div>
-          <div class="wax-seal">N&amp;A</div>
+          <div class="stamp-impact" aria-hidden="true"></div>
+          <div class="stamp-tool" aria-hidden="true">
+            <svg viewBox="0 0 60 100" xmlns="http://www.w3.org/2000/svg">
+              <ellipse cx="30" cy="6" rx="9" ry="4" fill="url(#stampMetalGrad)"/>
+              <path d="M22,7 L38,7 L33,38 L27,38 Z" fill="url(#stampWoodGrad)" stroke="rgba(44,26,0,.35)" stroke-width="0.6"/>
+              <rect x="20" y="36" width="20" height="7" rx="2.5" fill="url(#stampMetalGrad)"/>
+              <rect x="9" y="43" width="42" height="24" rx="4" fill="url(#stampBaseGrad)" stroke="rgba(0,0,0,.3)" stroke-width="0.8"/>
+              <rect x="13" y="60" width="34" height="7" rx="2" fill="#1c1108" stroke="rgba(184,134,11,.4)" stroke-width="0.5"/>
+            </svg>
+          </div>
+        </div>
+        <div class="scroll-tassel" style="--tassel-delay:1.8s;" aria-hidden="true">
+          <svg width="26" height="58" viewBox="0 0 26 58" fill="none">
+            <circle cx="13" cy="7" r="5" stroke="#d4a843" stroke-width="1.6"/>
+            <path d="M13 12 L13 30" stroke="#d4a843" stroke-width="1.4"/>
+            <path d="M6 30 Q13 26 20 30" stroke="#8b1a2f" stroke-width="2.2" fill="none"/>
+            <path d="M8 32 L7 54" stroke="#d4a843" stroke-width="1.1"/>
+            <path d="M11 32 L10.5 56" stroke="#d4a843" stroke-width="1.1"/>
+            <path d="M13 32 L13 57" stroke="#d4a843" stroke-width="1.1"/>
+            <path d="M15 32 L15.5 56" stroke="#d4a843" stroke-width="1.1"/>
+            <path d="M18 32 L19 54" stroke="#d4a843" stroke-width="1.1"/>
+          </svg>
         </div>
         <div class="flip-hint">Year</div>
       </div>
@@ -1317,15 +1553,14 @@ body{
 
   <!-- VENUE PARALLAX & MAP -->
   <section id="venue-section" class="reveal-section" style="position:relative;min-height:500px;overflow:hidden;display:flex;align-items:center;justify-content:center;border:none;padding:0;">
-    <div id="venue-bg"></div>
     <div id="venue-overlay"></div>
     <div id="venue-petals"></div>
     <div id="venue-content">
-      <p class="reveal-child reveal-delay-1 tagline" style="color:#c9a84c;margin-bottom:14px;">Our Celebration Venue</p>
-      <h2 class="reveal-child reveal-delay-2" style="font-family:'Cinzel',serif;font-size:clamp(22px,4vw,40px);color:#f5e8d2;margin-bottom:14px;">Four Seasons Hotel</h2>
-      <p class="reveal-child reveal-delay-2" style="font-style:italic;font-size:clamp(15px,2.5vw,20px);color:#e8d0b8;margin-bottom:8px;">Alexandria, Egypt</p>
-      <div class="reveal-child reveal-delay-3" style="width:60px;height:1px;background:#c9a84c;margin:18px auto;"></div>
-      <p class="reveal-child reveal-delay-3" style="font-size:clamp(13px,2vw,16px);color:#e8c8b0;letter-spacing:clamp(1px, 0.8vw, 3px);margin-bottom:20px;">18 / 9 / 2026 &nbsp;·&nbsp; 6:00 PM</p>
+      <p class="reveal-child reveal-delay-1 tagline" style="color:var(--gold);margin-bottom:14px;">Our Celebration Venue</p>
+      <h2 class="reveal-child reveal-delay-2" style="font-family:'Cinzel',serif;font-weight:700;font-size:clamp(28px,5.5vw,52px);color:var(--dark);margin-bottom:14px;letter-spacing:2px;">Four Seasons Hotel</h2>
+      <p class="reveal-child reveal-delay-2" style="font-style:italic;font-size:clamp(15px,2.5vw,20px);color:var(--brown);margin-bottom:8px;">Alexandria, Egypt</p>
+      <div class="reveal-child reveal-delay-3" style="width:60px;height:1px;background:var(--gold);margin:18px auto;"></div>
+      <p class="reveal-child reveal-delay-3" style="font-size:clamp(13px,2vw,16px);color:var(--brown);letter-spacing:clamp(1px, 0.8vw, 3px);margin-bottom:20px;">18 / 9 / 2026 &nbsp;·&nbsp; 7:00 PM</p>
       
       <!-- Interactive Google maps link -->
       <div class="reveal-child reveal-delay-4">
@@ -1383,19 +1618,33 @@ body{
   <!-- ═══ GALLERY ═══ -->
   <section id="gallery-section" style="text-align:center;padding:48px clamp(6px,3vw,24px);">
     <p class="tagline" style="color:var(--gold);font-weight:700;margin-bottom:8px;">Moments We Cherish</p>
-    <h2 style="font-family:'Cinzel',serif;font-size:clamp(20px,4vw,32px);color:var(--dark);margin-bottom:14px;">Gallery</h2>
+    <h2 style="font-family:'Cinzel',serif;font-size:clamp(20px,4vw,32px);color:var(--dark);margin-bottom:8px;">Gallery</h2>
+    <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(15px,2.8vw,18px);color:var(--brown);max-width:400px;margin:0 auto 14px;">Open the book and relive our story.</p>
     <div style="text-align:center;margin-bottom:36px;">
       <svg width="140" height="14" viewBox="0 0 140 14"><line x1="0" y1="7" x2="55" y2="7" stroke="var(--gold2)" stroke-width=".8"/><text x="70" y="11" text-anchor="middle" font-size="11" fill="var(--gold)" font-family="serif">✦</text><line x1="85" y1="7" x2="140" y2="7" stroke="var(--gold2)" stroke-width=".8"/></svg>
     </div>
     <div class="scrapbook" id="scrapbook">
       <div class="book-frame" id="book-frame">
+        <div class="book-floor-shadow"></div>
         <div class="book-cover"></div>
         <div class="book-spread" id="book-spread">
           <div class="book-page left" id="book-page-left"></div>
           <div class="book-page right" id="book-page-right"></div>
         </div>
         <div class="book-spine"></div>
+        <div class="book-ribbon"></div>
+        <div class="book-closed" id="book-closed" onclick="openBookCover()" role="button" tabindex="0" aria-label="Tap to open our gallery" onkeydown="if(event.key==='Enter'||event.key===' ')openBookCover()">
+          <div class="book-closed-monogram">
+            <svg width="70" height="70" viewBox="0 0 70 70" fill="none">
+              <circle cx="35" cy="35" r="31" stroke="#f5e2a0" stroke-width=".8" opacity=".5"/>
+              <circle cx="35" cy="35" r="24" stroke="#f5e2a0" stroke-width=".5" opacity=".3"/>
+              <text x="35" y="42" text-anchor="middle" font-family="Cormorant Garamond,Georgia,serif" font-size="20" font-style="italic" font-weight="600" fill="#f5e2a0">N &amp; A</text>
+            </svg>
+            <div class="book-closed-label">Our Gallery</div>
+          </div>
+        </div>
       </div>
+      <p class="book-closed-hint" id="book-closed-hint">✦ &nbsp; Tap the cover to open our gallery &nbsp; ✦</p>
       <div class="scrap-nav prev" id="scrap-prev" onclick="turnPage(-1)">&#8249;</div>
       <div class="scrap-nav next" id="scrap-next" onclick="turnPage(1)">&#8250;</div>
       <div class="scrap-dots" id="scrap-dots"></div>
@@ -1451,7 +1700,7 @@ body{
         <div class="prog-thread-col"><div class="prog-jewel"></div><div class="prog-thread"></div></div>
         <div class="prog-content-col">
           <div class="prog-title">Groom &amp; Bride Entrance</div>
-          <div class="prog-desc">Nada and Ahmed make their grand entrance, welcomed by those they hold most dear.</div>
+          <div class="prog-desc">Ahmed and Nada make their grand entrance, welcomed by those they hold most dear.</div>
         </div>
       </div>
       <div class="prog-candle-row">
@@ -1601,21 +1850,7 @@ body{
       </div>
     </div>
 
-    <!-- Seating Map Image -->
-    <div style="margin-top:48px;">
-      <p style="font-size:clamp(11px,2.4vw,13px);color:var(--gold);font-weight:700;letter-spacing:4px;text-transform:uppercase;margin-bottom:18px;font-family:'Cinzel',serif;">Venue Seating Plan</p>
-      <div class="seating-map-frame" onclick="openSeatingLightbox()" style="cursor:zoom-in;">
-        <img src="Table1.png" alt="Your Table — Table 1 Highlighted" />
-      </div>
-      <p style="font-size:clamp(13px,2.8vw,15px);color:var(--brown);margin-top:16px;font-style:italic;letter-spacing:1px;">Tap the plan to zoom in — your table is highlighted above</p>
-    </div>
   </section>
-
-  <!-- Seating Map Lightbox -->
-  <div id="seating-lightbox" onclick="closeSeatingLightbox()" style="display:none;position:fixed;inset:0;z-index:9999;background:rgba(20,12,0,0.92);align-items:center;justify-content:center;padding:24px;cursor:zoom-out;">
-    <div style="position:absolute;top:18px;right:22px;color:var(--ivory);font-size:clamp(28px,5.8vw,32px);font-family:'Cinzel',serif;line-height:1;">&times;</div>
-    <img src="Table1.png" alt="Your Table — Table 1 Highlighted, zoomed" style="max-width:100%;max-height:100%;border-radius:10px;border:1px solid rgba(184,134,11,.4);box-shadow:0 20px 60px rgba(0,0,0,0.5);touch-action:pinch-zoom;" />
-  </div>
 
   <div class="ring-divider">
 <svg viewBox="0 0 220 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -1866,7 +2101,7 @@ body{
       <div class="letter-paper">
         <h3 style="font-family:'Cinzel',serif;color:var(--dark);font-size:clamp(17px,3.6vw,19px);margin-bottom:12px;border-bottom:1px dashed var(--gold2);padding-bottom:7px;text-align:left;">Dearest Family &amp; Friends,</h3>
         <p style="font-style:italic;font-size:clamp(15px,3.2vw,17px);color:var(--text);line-height:1.75;margin-bottom:14px;text-align:left;">Having you by our side as we begin our journey together is the greatest blessing we could ask for. Thank you for your love, prayers, and presence on this most beautiful day of our lives. We cannot wait to celebrate and dance the night away with you!</p>
-        <div style="font-family:'Cinzel',serif;font-size:clamp(13px,2.8vw,15px);color:var(--gold);text-align:right;font-weight:bold;">— Nada &amp; Ahmed</div>
+        <div style="font-family:'Cinzel',serif;font-size:clamp(13px,2.8vw,15px);color:var(--gold);text-align:right;font-weight:bold;">— Ahmed &amp; Nada</div>
       </div>
       <div class="letter-pocket" onclick="toggleLoveLetter()">
         <div class="letter-seal">💌</div>
@@ -1896,7 +2131,7 @@ body{
   <section id="wishes-section" style="text-align:center; padding-top: 72px;">
     <p class="tagline" style="color:var(--gold);font-weight:700;margin-bottom:10px;">Digital Guestbook</p>
     <h2 style="font-family:'Cinzel',serif;font-size:clamp(20px,4vw,32px);color:var(--dark);margin-bottom:14px;">Wishes Wall</h2>
-    <p style="font-style:italic;font-size:clamp(16px,3.4vw,18px);color:var(--brown);max-width:460px;margin:0 auto 28px;">Leave your warm wishes for Nada &amp; Ahmed below.</p>
+    <p style="font-style:italic;font-size:clamp(16px,3.4vw,18px);color:var(--brown);max-width:460px;margin:0 auto 28px;">Leave your warm wishes for Ahmed &amp; Nada below.</p>
     <div class="wish-input-container">
       <div style="text-align:left;margin-bottom:14px;">
         <label style="font-family:'Cinzel',serif;font-size:clamp(11px,2.4vw,13px);color:var(--text);letter-spacing:2px;font-weight:bold;display:block;margin-bottom:6px;">YOUR NAME</label>
@@ -1936,7 +2171,7 @@ body{
     <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(15px,2.5vw,18px);color:var(--brown);max-width:460px;margin:0 auto;">We would be honoured to celebrate with you on this most beautiful day of our lives.</p>
     
     <div class="rsvp-card">
-      <div style="font-family:'Great Vibes',cursive;font-size:clamp(28px,6vw,42px);color:var(--dark);margin-bottom:12px;">Nada &amp; Ahmed</div>
+      <div style="font-family:'Great Vibes',cursive;font-size:clamp(28px,6vw,42px);color:var(--dark);margin-bottom:12px;">Ahmed &amp; Nada</div>
       <div style="font-family:'Cinzel',serif;font-size:clamp(10px,2vw,13px);color:var(--gold);font-weight:700;letter-spacing:3px;margin-bottom:20px;">18 · SEPTEMBER · 2026</div>
       <div style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(13px,2.5vw,16px);color:var(--brown);margin-bottom:20px;">Four Seasons Hotel San Stefano, Alexandria</div>
       <div class="ring-divider" style="max-width:120px;margin:0 auto 20px;">
@@ -1983,7 +2218,7 @@ body{
     <p style="font-style:italic;font-size:clamp(15px,2.5vw,18px);color:var(--text);max-width:440px;margin:0 auto 40px;line-height:1.8;">Your presence is the greatest gift you could give us on this most beautiful day of our lives.</p>
     
     <div style="display:inline-block;border:1.5px solid var(--gold2);padding:20px clamp(16px,4vw,44px);border-radius:4px;background:rgba(253,248,238,.5);">
-      <div style="font-family:'Cinzel',serif;font-size:clamp(16px,3.4vw,18px);color:var(--dark);margin-bottom:8px;">Nada &amp; Ahmed</div>
+      <div style="font-family:'Cinzel',serif;font-size:clamp(16px,3.4vw,18px);color:var(--dark);margin-bottom:8px;">Ahmed &amp; Nada</div>
       <div style="font-size:clamp(11px,2.5vw,13px);color:var(--gold);font-weight:700;letter-spacing:clamp(1px,1vw,3px);font-family:'Cinzel',serif;white-space:nowrap;">18 · 09 · 2026 &nbsp;·&nbsp; ALEXANDRIA</div>
     </div>
     
@@ -2192,16 +2427,6 @@ function spawnGoldSparks(el){
 }
 ['name-nada','name-ahmed'].forEach(id=>{const el=document.getElementById(id);if(el)el.addEventListener('mouseenter',()=>spawnGoldSparks(el));});
 
-/* ═══ SEATING MAP LIGHTBOX ═══ */
-function openSeatingLightbox(){
-  const lb = document.getElementById('seating-lightbox');
-  lb.style.display = 'flex';
-}
-function closeSeatingLightbox(){
-  const lb = document.getElementById('seating-lightbox');
-  lb.style.display = 'none';
-}
-
 /* ═══ SCROLL BACKGROUND CROSSFADE (bg.png → bg2.png → bg3.png) ═══ */
 (function(){
   const gallerySection = document.getElementById('gallery-section');
@@ -2218,14 +2443,6 @@ function closeSeatingLightbox(){
   let bg3Url = 'bg3.png';
   __resolveBgImage('bg2', (url)=>{ bg2Url = url; });
   __resolveBgImage('bg3', (url)=>{ bg3Url = url; });
-
-  // Resolve the venue photo to whichever extension (jpg/jpeg/png) actually exists.
-  const venueBgEl = document.getElementById('venue-bg');
-  if(venueBgEl){
-    __resolveBgImage('venue', (url)=>{
-      venueBgEl.style.backgroundImage = "url('" + url + "')";
-    });
-  }
 
   function crossFadeTo(url){
     if(currentUrl === url) return;
@@ -2279,7 +2496,7 @@ function closeSeatingLightbox(){
         opened = true;
         const cards = dateSection.querySelectorAll('.scroll-card');
         cards.forEach((card, i)=>{
-          setTimeout(()=>card.classList.add('opened'), i * 220);
+          setTimeout(()=>card.classList.add('stamped'), 300 + i * 950);
         });
         dateObserver.disconnect();
       }
@@ -2287,6 +2504,13 @@ function closeSeatingLightbox(){
   }, { threshold: 0.5 });
   dateObserver.observe(dateSection);
 })();
+
+/* ═══ TAP TO OPEN BOOK COVER ═══ */
+function openBookCover(){
+  const bookFrame = document.getElementById('book-frame');
+  if(!bookFrame || bookFrame.classList.contains('open')) return;
+  bookFrame.classList.add('open');
+}
 
 /* ═══ GALLERY — auto-detect p1.jpg, p2.jpg, p3.jpg... sitting next to this file ═══ */
 /* Photos are grouped into two-page spreads (2 photos left, 2 photos right) like a real open album. */
@@ -2688,7 +2912,7 @@ function startCountdown(){
 /* ═══ SAVE DATE ═══ */
 function saveDate(e){
   e.preventDefault();
-  const ics=`BEGIN:VCALENDAR\r\nVERSION:2.0\r\nBEGIN:VEVENT\r\nDTSTART:20260918T190000\r\nDTEND:20260919T000000\r\nSUMMARY:Nada & Ahmed Wedding\r\nLOCATION:Four Seasons Hotel San Stefano, Alexandria, Egypt\r\nEND:VEVENT\r\nEND:VCALENDAR`;
+  const ics=`BEGIN:VCALENDAR\r\nVERSION:2.0\r\nBEGIN:VEVENT\r\nDTSTART:20260918T190000\r\nDTEND:20260919T000000\r\nSUMMARY:Ahmed & Nada Wedding\r\nLOCATION:Four Seasons Hotel San Stefano, Alexandria, Egypt\r\nEND:VEVENT\r\nEND:VCALENDAR`;
   const blob=new Blob([ics],{type:'text/calendar'});const url=URL.createObjectURL(blob);
   const a=document.createElement('a');a.href=url;a.download='nada-ahmed-wedding.ics';
   document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
@@ -2821,7 +3045,7 @@ function escapeHTML(str){const d=document.createElement('div');d.textContent=str
 function renderWishes(){
   const board=document.getElementById('wishes-board');if(!board)return;board.innerHTML='';
   const list = window.__dbWishes || wishes;
-  const defaultWish={name:"Nada & Ahmed",text:"We are so excited to celebrate our love with all of you! Leave your warm wishes right here. 💕"};
+  const defaultWish={name:"Ahmed & Nada",text:"We are so excited to celebrate our love with all of you! Leave your warm wishes right here. 💕"};
   const dCard=document.createElement('div');dCard.className='wish-card';dCard.style.setProperty('--rot','0deg');
   dCard.innerHTML=`<div class="wish-name">${escapeHTML(defaultWish.name)}</div><div class="wish-text">"${escapeHTML(defaultWish.text)}"</div>`;
   board.appendChild(dCard);
