@@ -1464,7 +1464,7 @@ body{
         <line x1="76" y1="11" x2="120" y2="11" stroke="#b8860b" stroke-width=".8"/>
       </svg>
     </div>
-    <div style="font-family:'Cinzel',serif;font-size:clamp(16px,3.5vw,22px);color:var(--dark);letter-spacing:clamp(2px,1.5vw,6px);margin-top:4px;">SEVEN O'CLOCK PM</div>
+    <div style="font-family:'Cinzel',serif;font-size:clamp(16px,3.5vw,22px);color:var(--dark);letter-spacing:clamp(2px,1.5vw,6px);margin-top:4px;">FIVE O'CLOCK PM</div>
     <div style="margin-top:24px;"><a class="save-date-btn" href="#" onclick="saveDate(event)">📅 &nbsp; Save the Date</a></div>
   </section>
 
@@ -1560,7 +1560,7 @@ body{
       <h2 class="reveal-child reveal-delay-2" style="font-family:'Cinzel',serif;font-weight:700;font-size:clamp(28px,5.5vw,52px);color:var(--dark);margin-bottom:14px;letter-spacing:2px;">Four Seasons Hotel</h2>
       <p class="reveal-child reveal-delay-2" style="font-style:italic;font-size:clamp(15px,2.5vw,20px);color:var(--brown);margin-bottom:8px;">Alexandria, Egypt</p>
       <div class="reveal-child reveal-delay-3" style="width:60px;height:1px;background:var(--gold);margin:18px auto;"></div>
-      <p class="reveal-child reveal-delay-3" style="font-size:clamp(13px,2vw,16px);color:var(--brown);letter-spacing:clamp(1px, 0.8vw, 3px);margin-bottom:20px;">18 / 9 / 2026 &nbsp;·&nbsp; 7:00 PM</p>
+      <p class="reveal-child reveal-delay-3" style="font-size:clamp(13px,2vw,16px);color:var(--brown);letter-spacing:clamp(1px, 0.8vw, 3px);margin-bottom:20px;">18 / 9 / 2026 &nbsp;·&nbsp; 5:00 PM</p>
       
       <!-- Interactive Google maps link -->
       <div class="reveal-child reveal-delay-4">
@@ -1688,7 +1688,7 @@ body{
       <svg style="position:absolute;bottom:8px;left:8px;opacity:.4" width="28" height="28" viewBox="0 0 28 28"><path d="M0 28 L0 0 L28 0" fill="none" stroke="#b8860b" stroke-width="1"/><circle cx="0" cy="0" r="3" fill="#b8860b" opacity=".6"/></svg>
 
       <div class="prog-entry">
-        <div class="prog-time-col"><span class="prog-hour">7:00</span><span class="prog-period">PM</span></div>
+        <div class="prog-time-col"><span class="prog-hour">5:00</span><span class="prog-period">PM</span></div>
         <div class="prog-thread-col"><div class="prog-jewel"></div><div class="prog-thread"></div></div>
         <div class="prog-content-col">
           <div class="prog-title">Doors Open · Arrival</div>
@@ -1696,7 +1696,7 @@ body{
         </div>
       </div>
       <div class="prog-entry">
-        <div class="prog-time-col"><span class="prog-hour">7:30</span><span class="prog-period">PM</span></div>
+        <div class="prog-time-col"><span class="prog-hour">5:30</span><span class="prog-period">PM</span></div>
         <div class="prog-thread-col"><div class="prog-jewel"></div><div class="prog-thread"></div></div>
         <div class="prog-content-col">
           <div class="prog-title">Groom &amp; Bride Entrance</div>
@@ -1711,7 +1711,7 @@ body{
         <div class="prog-candle-line"></div>
       </div>
       <div class="prog-entry">
-        <div class="prog-time-col"><span class="prog-hour">9:00</span><span class="prog-period">PM</span></div>
+        <div class="prog-time-col"><span class="prog-hour">7:00</span><span class="prog-period">PM</span></div>
         <div class="prog-thread-col"><div class="prog-jewel"></div><div class="prog-thread"></div></div>
         <div class="prog-content-col">
           <div class="prog-title">Dance Floor Opens</div>
@@ -1719,7 +1719,7 @@ body{
         </div>
       </div>
       <div class="prog-entry">
-        <div class="prog-time-col"><span class="prog-hour">10:30</span><span class="prog-period">PM</span></div>
+        <div class="prog-time-col"><span class="prog-hour">8:30</span><span class="prog-period">PM</span></div>
         <div class="prog-thread-col"><div class="prog-jewel"></div><div class="prog-thread"></div></div>
         <div class="prog-content-col">
           <div class="prog-title">After-Dinner Party</div>
@@ -1727,7 +1727,7 @@ body{
         </div>
       </div>
       <div class="prog-entry">
-        <div class="prog-time-col"><span class="prog-hour">12:00</span><span class="prog-period">AM</span></div>
+        <div class="prog-time-col"><span class="prog-hour">10:00</span><span class="prog-period">PM</span></div>
         <div class="prog-thread-col"><div class="prog-jewel"></div><div class="prog-thread" style="background:transparent;"></div></div>
         <div class="prog-content-col">
           <div class="prog-title">Grand Send-Off</div>
@@ -2880,7 +2880,7 @@ function typeNames(){
 
 /* ═══ CINEMATIC COUNTDOWN ═══ */
 function startCountdown(){
-  const target=new Date('2026-09-18T19:00:00');
+  const target=new Date('2026-09-18T17:00:00');
   const fillEl=document.getElementById('timeline-fill');
   const indicEl=document.getElementById('timeline-indicator');
   const daysNumEl=document.getElementById('cd-days');
@@ -2912,7 +2912,7 @@ function startCountdown(){
 /* ═══ SAVE DATE ═══ */
 function saveDate(e){
   e.preventDefault();
-  const ics=`BEGIN:VCALENDAR\r\nVERSION:2.0\r\nBEGIN:VEVENT\r\nDTSTART:20260918T190000\r\nDTEND:20260919T000000\r\nSUMMARY:Ahmed & Nada Wedding\r\nLOCATION:Four Seasons Hotel San Stefano, Alexandria, Egypt\r\nEND:VEVENT\r\nEND:VCALENDAR`;
+  const ics=`BEGIN:VCALENDAR\r\nVERSION:2.0\r\nBEGIN:VEVENT\r\nDTSTART:20260918T170000\r\nDTEND:20260918T220000\r\nSUMMARY:Ahmed & Nada Wedding\r\nLOCATION:Four Seasons Hotel San Stefano, Alexandria, Egypt\r\nEND:VEVENT\r\nEND:VCALENDAR`;
   const blob=new Blob([ics],{type:'text/calendar'});const url=URL.createObjectURL(blob);
   const a=document.createElement('a');a.href=url;a.download='nada-ahmed-wedding.ics';
   document.body.appendChild(a);a.click();document.body.removeChild(a);URL.revokeObjectURL(url);
