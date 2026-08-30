@@ -269,6 +269,8 @@ body{
 
 .gold-divider{height:1px;background:linear-gradient(90deg,transparent,var(--gold2),transparent);margin:0;}
 
+.emoji-gold{display:inline-block;filter:url(#emojiGoldTint);}
+
 /* ── RING & RIBBON DIVIDER ── */
 .ring-divider{display:flex;align-items:center;justify-content:center;margin:0;padding:6px 0;}
 .ring-divider svg{width:100%;max-width:220px;height:auto;display:block;}
@@ -1238,6 +1240,10 @@ body{
       <stop offset="55%" stop-color="#3d2600"/>
       <stop offset="100%" stop-color="#2c1a00"/>
     </linearGradient>
+    <filter id="emojiGoldTint" x="-20%" y="-20%" width="140%" height="140%">
+      <feFlood flood-color="#b8860b" result="goldFlood"/>
+      <feComposite in="goldFlood" in2="SourceGraphic" operator="in"/>
+    </filter>
   </defs>
 </svg>
 
@@ -1254,7 +1260,7 @@ body{
 <audio id="bgm" loop preload="metadata">
   <source src="music.m4a" type="audio/mp4">
 </audio>
-<button id="music-btn" onclick="toggleMusic()" title="Toggle music" aria-label="Toggle background music">🔇</button>
+<button id="music-btn" onclick="toggleMusic()" title="Toggle music" aria-label="Toggle background music"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg></button>
 
 <div id="white-flash"></div>
 
@@ -1334,9 +1340,9 @@ body{
       </svg>
     </div>
 
-    <p class="fade-section" style="font-size:clamp(16px,3vw,20px);color:var(--text);animation-delay:.4s;line-height:1.6;margin-top:18px;">Together with their beloved families,<br>cordially invite you to</p>
+    <p class="fade-section" style="font-size:clamp(16px,3vw,20px);color:var(--text);animation-delay:.4s;line-height:1.6;margin-top:18px;">Together with our beloved families,<br>cordially invite you to</p>
     <p class="fade-section" style="font-family:'Cinzel',serif;font-size:clamp(13px,3vw,17px);color:var(--gold);letter-spacing:clamp(2px,1vw,4px);margin:14px 0 10px;animation-delay:.46s;font-weight:700;">WHERE FOREVER BEGINS</p>
-    <p class="fade-section" style="font-size:clamp(15px,2.5vw,18px);color:var(--text);animation-delay:.5s;">As they unite in love.</p>
+    <p class="fade-section" style="font-size:clamp(15px,2.5vw,18px);color:var(--text);animation-delay:.5s;">As we unite in love.</p>
     <p class="fade-section" style="font-style:italic;font-size:clamp(15px,2.5vw,19px);color:var(--brown);max-width:500px;margin:18px auto 0;line-height:1.75;animation-delay:.56s;">"With hearts full of joy and anticipation, we request your presence to share in our very first day of happily ever after."</p>
     <div class="fade-section" style="width:80px;height:1px;background:var(--gold2);margin:28px auto 0;animation-delay:.62s;"></div>
   </section>
@@ -1354,13 +1360,13 @@ body{
     <div style="margin:26px 0 10px;">
       <svg width="120" height="22" viewBox="0 0 120 22">
         <line x1="0" y1="11" x2="44" y2="11" stroke="#b8860b" stroke-width=".8"/>
-        <text x="60" y="16" text-anchor="middle" font-size="14" fill="#b8860b" font-family="serif">💞</text>
+        <g transform="translate(53,4) scale(0.583)"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="#b8860b"/></g>
         <line x1="76" y1="11" x2="120" y2="11" stroke="#b8860b" stroke-width=".8"/>
       </svg>
     </div>
     <div style="font-family:'Cinzel',serif;font-size:clamp(16px,3.5vw,22px);color:var(--dark);letter-spacing:clamp(2px,1.5vw,6px);margin-top:4px;">FIVE O'CLOCK PM</div>
     <p style="font-family:'Cormorant Garamond',serif;font-style:italic;font-size:clamp(14px,2.5vw,17px);color:var(--brown);margin-top:12px;">Four Seasons Hotel San Stefano</p>
-    <div style="margin-top:24px;"><a class="save-date-btn" href="#" onclick="saveDate(event)">📅 &nbsp; Save the Date</a></div>
+    <div style="margin-top:24px;"><a class="save-date-btn" href="#" onclick="saveDate(event)"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:4px"><rect x="3" y="4" width="18" height="18" rx="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg> &nbsp; Save the Date</a></div>
   </section>
 
   <div class="ring-divider">
@@ -1459,7 +1465,7 @@ body{
       
       <!-- Interactive Google maps link -->
       <div class="reveal-child reveal-delay-4">
-        <a class="save-date-btn" href="https://maps.app.goo.gl/VUh5mxBzmfT9YQGs9" target="_blank" style="margin-top:10px;">🗺️ &nbsp; Get Directions</a>
+        <a class="save-date-btn" href="https://maps.app.goo.gl/VUh5mxBzmfT9YQGs9" target="_blank" style="margin-top:10px;"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-right:4px"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg> &nbsp; Get Directions</a>
       </div>
     </div>
   </section>
@@ -1554,23 +1560,6 @@ body{
     <img id="gallery-lightbox-img" src="" alt="" style="max-width:100%;max-height:100%;border-radius:8px;border:1px solid rgba(184,134,11,.4);box-shadow:0 20px 60px rgba(0,0,0,.5);touch-action:pinch-zoom;" />
     <div onclick="event.stopPropagation();galleryNav(1)" style="position:absolute;right:6px;top:50%;transform:translateY(-50%);color:var(--ivory);font-size:clamp(34px,6.8vw,38px);font-family:'Cinzel',serif;line-height:1;cursor:pointer;padding:10px;">&#8250;</div>
   </div>
-
-  <div class="ring-divider">
-<svg viewBox="0 0 220 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-  <line class="rd-line" x1="0" y1="27" x2="76" y2="27"/>
-  <line class="rd-line" x1="144" y1="27" x2="220" y2="27"/>
-  <path class="rd-ribbon-shade" d="M104,20 C98,28 92,34 85,42 L92,45 L100,36 C104,31 107,25 109,20 Z"/>
-  <path class="rd-ribbon-shade" d="M116,20 C122,28 128,34 135,42 L128,45 L120,36 C116,31 113,25 111,20 Z"/>
-  <path class="rd-ribbon" d="M106,19 C100,27 94,33 87,41 L93,44 L101,35 C105,30 108,24 110,19 Z"/>
-  <path class="rd-ribbon" d="M114,19 C120,27 126,33 133,41 L127,44 L119,35 C115,30 112,24 110,19 Z"/>
-  <circle class="rd-ring-shadow" cx="103" cy="27" r="11"/>
-  <circle class="rd-ring" cx="118" cy="27" r="11"/>
-  <circle class="rd-ring" cx="103" cy="27" r="11"/>
-  <path class="rd-ribbon" d="M110,17 C101,9 90,11 91,19 C92,25 101,24 110,18 Z"/>
-  <path class="rd-ribbon" d="M110,17 C119,9 130,11 129,19 C128,25 119,24 110,18 Z"/>
-  <circle class="rd-knot" cx="110" cy="18" r="3.4"/>
-</svg>
-</div>
 
   <div class="ring-divider">
 <svg viewBox="0 0 220 50" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
@@ -1889,7 +1878,7 @@ body{
         <div style="font-family:'Cinzel',serif;font-size:clamp(13px,2.8vw,15px);color:var(--gold);text-align:right;font-weight:bold;">— Ahmed &amp; Nada</div>
       </div>
       <div class="letter-pocket" onclick="toggleLoveLetter()">
-        <div class="letter-seal">💌</div>
+        <div class="letter-seal"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#fffdf5" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 7l10 6 10-6"/></svg></div>
         <div style="position:absolute;bottom:14px;color:var(--ivory);font-size:clamp(10px,2.2vw,12px);letter-spacing:3px;font-family:'Cinzel',serif;text-transform:uppercase;">Click to Read</div>
       </div>
     </div>
@@ -1926,7 +1915,7 @@ body{
         <label style="font-family:'Cinzel',serif;font-size:clamp(11px,2.4vw,13px);color:var(--text);letter-spacing:2px;font-weight:bold;display:block;margin-bottom:6px;">YOUR MESSAGE</label>
         <textarea id="wish-text-input" class="form-control" rows="3" placeholder="Write a sweet message..."></textarea>
       </div>
-      <button class="rsvp-btn" style="margin-top:0;width:100%;padding:13px;" onclick="postWish()">Pin to Wall 📌</button>
+      <button class="rsvp-btn" style="margin-top:0;width:100%;padding:13px;" onclick="postWish()">Pin to Wall <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-2px;margin-left:2px"><path d="M12 17v5"/><path d="M9 10.76a2 2 0 0 1-1.11 1.79l-1.78.9A2 2 0 0 0 5 15.24V16a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1v-.76a2 2 0 0 0-1.11-1.79l-1.78-.9A2 2 0 0 1 15 10.76V7a1 1 0 0 1 1-1 2 2 0 0 0 0-4H8a2 2 0 0 0 0 4 1 1 0 0 1 1 1z"/></svg></button>
       <p id="wish-error" style="color:var(--gold);font-weight:700;font-size:clamp(13px,2.8vw,15px);font-style:italic;margin-top:10px;text-align:center;"></p>
     </div>
     <div class="wishes-board" id="wishes-board"></div>
@@ -1981,16 +1970,16 @@ body{
         <input type="text" id="rsvp-name-input" class="form-control" placeholder="Enter your name"/>
       </div>
       <p id="rsvp-error" style="color:var(--gold);font-weight:700;font-size:clamp(13px,2.8vw,15px);font-style:italic;margin-bottom:10px;text-align:center;"></p>
-      <button class="rsvp-btn" onclick="rsvpYes()">Joyfully Accept 💍</button>
+      <button class="rsvp-btn" onclick="rsvpYes()">Joyfully Accept <svg width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align:-3px;margin-left:2px"><circle cx="12" cy="15" r="6"/><path d="M8.5 9L12 3l3.5 6"/></svg></button>
       <br/>
       <button class="rsvp-btn-outline" onclick="rsvpNo()">Regretfully Decline</button>
     </div>
 
     <div id="rsvp-confirm" style="display:none;margin-top:28px;">
-      <div style="font-size:clamp(44px,8.0vw,48px);margin-bottom:14px;">🎉</div>
+      <div style="margin-bottom:14px;"><svg width="46" height="46" viewBox="0 0 24 24" fill="none" stroke="#b8860b" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v4M12 18v4M4.93 4.93l2.83 2.83M16.24 16.24l2.83 2.83M2 12h4M18 12h4M4.93 19.07l2.83-2.83M16.24 7.76l2.83-2.83"/><circle cx="12" cy="12" r="3" fill="#b8860b" stroke="none"/></svg></div>
       <p style="font-family:'Cinzel',serif;font-size:clamp(20px,4.2vw,23px);color:var(--dark);margin-bottom:8px;">Thank you, <span id="rsvp-confirm-name">friend</span>!</p>
-      <p id="rsvp-confirm-yes-msg" style="font-style:italic;font-size:clamp(17px,3.6vw,19px);color:var(--brown);">We can't wait to celebrate with you on September 18th! 💕</p>
-      <p id="rsvp-confirm-no-msg" style="display:none;font-style:italic;font-size:clamp(17px,3.6vw,19px);color:var(--brown);">We're sorry you can't make it — you'll be in our hearts on the day. 💛</p>
+      <p id="rsvp-confirm-yes-msg" style="font-style:italic;font-size:clamp(17px,3.6vw,19px);color:var(--brown);">We can't wait to celebrate with you on September 18th! ♡</p>
+      <p id="rsvp-confirm-no-msg" style="display:none;font-style:italic;font-size:clamp(17px,3.6vw,19px);color:var(--brown);">We're sorry you can't make it — you'll be in our hearts on the day. ♡</p>
     </div>
   </section>
 
@@ -2062,12 +2051,15 @@ window.addEventListener('DOMContentLoaded',()=>{
 });
 
 /* ═══ OUR STORY: 3D Flip Timeline ═══ */
+const ICON_SPARKLE='<svg viewBox="0 0 24 24" width="1em" height="1em" style="display:inline-block;vertical-align:-0.1em" fill="#b8860b"><path d="M12 2c.8 4.2 2 6.8 6 8-4 1.2-5.2 3.8-6 8-.8-4.2-2-6.8-6-8 4-1.2 5.2-3.8 6-8z"/></svg>';
+const ICON_LETTER='<svg viewBox="0 0 24 24" width="1em" height="1em" style="display:inline-block;vertical-align:-0.1em" fill="none" stroke="#b8860b" stroke-width="1.6"><rect x="2" y="5" width="20" height="14" rx="2"/><path d="M2 7l10 6 10-6"/></svg>';
+const ICON_RING='<span class="emoji-gold">💍</span>';
+const ICON_DOVE='<span class="emoji-gold">🕊️</span>';
 const story=[
-  {icon:"✨",label:"First Glance",date:"Spring 2022",text:"Two souls crossed paths unexpectedly — a moment that quietly rewrote the rest of their story."},
-  {icon:"💌",label:"First Words",date:"Summer 2022",text:"A conversation that started with hello and never quite found its ending."},
-  {icon:"🌙",label:"Midnight Calls",date:"Autumn 2022",text:"Hours dissolved into minutes. They talked until the stars went to sleep."},
-  {icon:"💍",label:"He Asked",date:"February 2024",text:"Under a canopy of roses and candlelight, Ahmed asked Nada to share in a lifetime of dreams."},
-  {icon:"🕊️",label:"Forever",date:"September 2026",text:"And now, we invite you to witness the beginning of our forever together."},
+  {icon:ICON_SPARKLE,label:"First Glance",text:"Long before we knew where life would take us, our paths crossed in brief, unexpected moments — quietly written by fate."},
+  {icon:ICON_LETTER,label:"First Words",text:"When we finally found ourselves in the same chapter, a simple hello began something neither of us had planned, but both were meant to find."},
+  {icon:ICON_RING,label:"He Asked",text:"Our paths crossed again, right on time. Under roses and candlelight, Ahmed asked Nada to share a lifetime of love and forever."},
+  {icon:ICON_DOVE,label:"Forever",text:"What began as unexpected encounters became a story written by fate. Now, we invite you to witness the beginning of our forever."},
 ];
 function buildStory(){
   const container=document.getElementById('story-container');
@@ -2080,7 +2072,6 @@ function buildStory(){
 
     const frontHTML=`
       <div style="font-size:clamp(32px,6.4vw,36px);margin-bottom:8px;">${m.icon}</div>
-      <div style="font-size:clamp(11px,2.4vw,13px);letter-spacing:4px;color:var(--gold);text-transform:uppercase;margin-bottom:6px;font-weight:700;">${m.date}</div>
       <div style="font-family:'Cinzel',serif;font-size:clamp(14px,3.0vw,16px);color:var(--dark);font-weight:bold;">${m.label}</div>
       <div style="font-size:clamp(11px,2.4vw,13px);letter-spacing:1px;color:var(--brown);margin-top:10px;text-transform:uppercase;font-style:italic;">Click to read ♡</div>
     `;
@@ -2178,17 +2169,19 @@ buildStory();
 
 /* ═══ MUSIC ═══ */
 let musicStarted=false,muted=false;const bgm=document.getElementById('bgm');
+const ICON_SOUND_ON='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><path d="M15.54 8.46a5 5 0 0 1 0 7.07"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></svg>';
+const ICON_SOUND_OFF='<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="11 5 6 9 2 9 2 15 6 15 11 19 11 5"/><line x1="23" y1="9" x2="17" y2="15"/><line x1="17" y1="9" x2="23" y2="15"/></svg>';
 function fadeInMusic(){
   const btn=document.getElementById('music-btn');btn.style.display='flex';
-  if(musicStarted){let v=0;const t=setInterval(()=>{v=Math.min(v+.02,.6);bgm.volume=v;if(v>=.6)clearInterval(t);},120);btn.textContent='🔊';muted=false;return;}
-  bgm.volume=0;bgm.play().then(()=>{musicStarted=true;let v=0;const t=setInterval(()=>{v=Math.min(v+.02,.6);bgm.volume=v;if(v>=.6)clearInterval(t);},120);btn.textContent='🔊';muted=false;}).catch(()=>{btn.textContent='🔇';muted=true;musicStarted=false;});
+  if(musicStarted){let v=0;const t=setInterval(()=>{v=Math.min(v+.02,.6);bgm.volume=v;if(v>=.6)clearInterval(t);},120);btn.innerHTML=ICON_SOUND_ON;muted=false;return;}
+  bgm.volume=0;bgm.play().then(()=>{musicStarted=true;let v=0;const t=setInterval(()=>{v=Math.min(v+.02,.6);bgm.volume=v;if(v>=.6)clearInterval(t);},120);btn.innerHTML=ICON_SOUND_ON;muted=false;}).catch(()=>{btn.innerHTML=ICON_SOUND_OFF;muted=true;musicStarted=false;});
 }
 function toggleMusic(){
   const btn=document.getElementById('music-btn');
   btn.setAttribute('aria-label',muted?'Pause background music':'Play background music');
-  if(!musicStarted||bgm.paused){bgm.volume=0.6;bgm.play().then(()=>{musicStarted=true;btn.textContent='🔊';muted=false;}).catch(()=>{});}
-  else if(muted){bgm.muted=false;muted=false;btn.textContent='🔊';}
-  else{bgm.muted=true;muted=true;btn.textContent='🔇';}
+  if(!musicStarted||bgm.paused){bgm.volume=0.6;bgm.play().then(()=>{musicStarted=true;btn.innerHTML=ICON_SOUND_ON;muted=false;}).catch(()=>{});}
+  else if(muted){bgm.muted=false;muted=false;btn.innerHTML=ICON_SOUND_ON;}
+  else{bgm.muted=true;muted=true;btn.innerHTML=ICON_SOUND_OFF;}
 }
 
 /* ═══ CONFETTI ═══ */
@@ -2507,9 +2500,9 @@ function openEnvelope(){
   bgm.play().then(()=>{
     musicStarted=true;muted=false;
     let v=0;const t=setInterval(()=>{v=Math.min(v+.02,.6);bgm.volume=v;if(v>=.6)clearInterval(t);},120);
-    const btn=document.getElementById('music-btn');btn.style.display='flex';btn.textContent='🔊';
+    const btn=document.getElementById('music-btn');btn.style.display='flex';btn.innerHTML=ICON_SOUND_ON;
   }).catch(()=>{
-    const btn=document.getElementById('music-btn');btn.style.display='flex';btn.textContent='🔇';muted=true;musicStarted=false;
+    const btn=document.getElementById('music-btn');btn.style.display='flex';btn.innerHTML=ICON_SOUND_OFF;muted=true;musicStarted=false;
   });
 
   /* Screen brightens to full white as the beam expands */
@@ -2738,7 +2731,7 @@ function escapeHTML(str){const d=document.createElement('div');d.textContent=str
 function renderWishes(){
   const board=document.getElementById('wishes-board');if(!board)return;board.innerHTML='';
   const list = window.__dbWishes || wishes;
-  const defaultWish={name:"Ahmed & Nada",text:"We are so excited to celebrate our love with all of you! Leave your warm wishes right here. 💕"};
+  const defaultWish={name:"Ahmed & Nada",text:"We are so excited to celebrate our love with all of you! Leave your warm wishes right here. ♡"};
   const dCard=document.createElement('div');dCard.className='wish-card';dCard.style.setProperty('--rot','0deg');
   dCard.innerHTML=`<div class="wish-name">${escapeHTML(defaultWish.name)}</div><div class="wish-text">"${escapeHTML(defaultWish.text)}"</div>`;
   board.appendChild(dCard);
@@ -2830,7 +2823,7 @@ async function submitRsvp(attending){
   const err=document.getElementById('rsvp-error');
   const name=nameInput.value.trim();
   if(!name){
-    err.textContent='Please enter your name so we know who to expect 💛';
+    err.textContent='Please enter your name so we know who to expect ♡';
     nameInput.focus();
     return;
   }
